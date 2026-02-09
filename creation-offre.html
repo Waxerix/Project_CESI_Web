@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+
+        <section>
+            <h2>Créer votre entreprise</h2>
+            <div>
+
+                <form method="post">
+                    <label for="company_name">Nom de l'entreprise:</label>
+                    <input type="text" id="company_name" name="company_name" required>
+
+                    <label for="numero_tel">Numéro de téléphone:</label>
+                    <input type="tel" id="numero_tel" name="numero_tel" required>
+
+                    <label for="location">Lieu:</label>
+                    <input type="text" id="location" name="location" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="type">Intitulé de l'offre:</label>
+                    <input type="text" id="type" name="type" required>
+
+                    <label for="secteur">Niveau d'étude:</label>
+                    <select id="secteur" name="secteur" required>
+                        <option value="">Sélectionnez un niveau</option>
+                        <option value="bac">bac</option>
+                        <option value="bac+1">bac+1</option>
+                        <option value="bac+2">bac+2</option>
+                        <option value="bac+3">bac+3</option>
+                        <option value="bac+4">bac+4</option>
+                        <option value="bac+5">bac+5</option>
+                        <option value="bac+6">bac+6</option>
+                        <option value="bac+7">bac+7</option>
+                        <option value="bac+8">bac+8</option>
+                    </select>
+
+                    <label for="type_offre">Type d'offre:</label>
+                    <select id="type_offre" name="type_offre" required>
+                        <option value="">Sélectionnez une type</option>
+                        <option value="stage">Stage</option>
+                        <option value="alternance">Alternance</option>
+                        <option value="Stage-et-alternance">Stage et alternance</option>
+                    </select>
+
+                    <input type="submit" value="Créer l'entreprise">
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+</html>
