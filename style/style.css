@@ -1,0 +1,55 @@
+body{
+    background-color: #FDF0D5;
+    margin: 0px;
+     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+header{
+    background-color: rgb(1, 64, 96);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.logo{
+    width: 137px;
+    height: 115px;
+    border-radius: 32px;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px;
+}
+
+.titre-container{
+    text-align: center;
+    color: white;
+}
+
+.actions-container{
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
+    align-items: flex-end; 
+}
+
+input[type="search"] {
+    width: 450px;
+    border-radius: 25px;
+}
+
+button{
+    border-radius: 25px;
+}
+
+select{
+    border-radius: 25px;
+}
