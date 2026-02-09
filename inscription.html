@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <main>
+        <h1>S'inscrire</h1>
+        <form action="#" method="post" enctype="multipart/form-data"> <!--'POST' pour les données cachées--> 
+            <img src="../img/user.png" alt="Photo de profil">
+            <strong>Photo de profil</strong>
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+        
+            <label for="nom">Nom * :</label>
+            <input type="text" id="nom" name="nom" required>
+        
+            <label for="prenom">Prénom * :</label>
+            <input type="text" id="prenom" name="prenom" required>
+        
+            <label for="email">Email * :</label>
+            <input type="email" id="email" name="email" required>
+        
+            <label for="password">Mot de passe * :</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="status">Status * :</label>
+            <select id="status" name="status" required>
+                <option value="">-Choisir une option-</option>
+                <option value="etudiant">Étudiant</option>
+                <option value="pilote">Pilote</option>
+                <option value="autre">Autre</option>
+            </select>
+
+            <label for="tel">N° tel. :</label>
+            <input type="tel" id="tel" name="tel">
+            
+            <button type="submit">Créez un compte</button>
+        </form>
+    </main>
+</body>
+
