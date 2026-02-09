@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <main>
+
+        <section>
+            <h2>Créer votre entreprise</h2>
+            <div>
+
+                <form method="post">
+                    <label for="company_name">Nom de l'entreprise:</label>
+                    <input type="text" id="company_name" name="company_name" required>
+
+                    <label for="numero_tel">Numéro de téléphone:</label>
+                    <input type="tel" id="numero_tel" name="numero_tel" required>
+
+                    <label for="location">Lieu:</label>
+                    <input type="text" id="location" name="location" required>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="secteur">Secteur d'activité:</label>
+                    <select id="secteur" name="secteur" required>
+                        <option value="">Sélectionnez un secteur</option>
+                        <option value="informatique">Informatique</option>
+                        <option value="sante">Santé</option>
+                        <option value="finance">Finance</option>
+                        <option value="education">Éducation</option>
+                        <option value="autre">Autre</option>
+                    </select>
+
+                    <label for="taille">Taille d'entreprise:</label>
+                    <select id="taille" name="taille" required>
+                        <option value="">Sélectionnez une taille</option>
+                        <option value="startup">Startup</option>
+                        <option value="pm">PME</option>
+                        <option value="grande">Grande entreprise</option>
+                    </select>
+
+                    <label for="type">Type d'entreprise:</label>
+                    <select id="type" name="type" required>
+                        <option value="">Sélectionnez un type</option>
+                        <option value="privée">privée</option>
+                        <option value="public">public</option>
+
+                    </select>
+
+                    <input type="submit" value="Créer l'entreprise">
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+</html>
