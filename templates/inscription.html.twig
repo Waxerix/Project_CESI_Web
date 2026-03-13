@@ -1,0 +1,50 @@
+{# Héritage Twig #}
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+
+<h1>S'inscrire</h1>
+
+<form action="#" method="post" enctype="multipart/form-data"> 
+    {# Photo de profil #}
+    <img src="{{ asset('img/user.png') }}" alt="Photo de profil">
+    <strong>Photo de profil</strong>
+    <input type="file" id="photo" name="photo" accept="image/*" required>
+
+    {# Nom #}
+    <label for="nom">Nom * :</label>
+    <input type="text" id="nom" name="nom" required>
+
+    {# Prénom #}
+    <label for="prenom">Prénom * :</label>
+    <input type="text" id="prenom" name="prenom" required>
+
+    {# Email #}
+    <label for="email">Email * :</label>
+    <input type="email" id="email" name="email" required>
+
+    {# Mot de passe #}
+    <label for="password">Mot de passe * :</label>
+    <input type="password" id="password" name="password" required>
+
+    {# Status #}
+    <label for="status">Status * :</label>
+    <select id="status" name="status" required>
+        <option value="">-Choisir une option-</option>
+        <option value="etudiant">Étudiant</option>
+        <option value="pilote">Pilote</option>
+        <option value="autre">Autre</option>
+    </select>
+
+    {# Téléphone #}
+    <label for="tel">N° tel. :</label>
+    <input type="tel" id="tel" name="tel">
+
+    {# Bouton submit #}
+    <button type="submit">Créez un compte</button>
+</form>
+
+{% endblock %}
