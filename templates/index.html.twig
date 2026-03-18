@@ -1,0 +1,29 @@
+{# Héritage Twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Offres du moment{% endblock %}
+
+{% block content %}
+
+<section>
+    <h2>Les offres du moment...</h2>
+
+    {# Boucle pour les offres #}
+    {% for offre in offres %}
+    <article>
+        <h3>{{ offre.entreprise }}</h3>
+        <p>{{ offre.intitule }}</p>
+
+        <div>
+            <h4>{{ offre.niveau }}</h4>
+            <h4>{{ offre.lieu }}</h4>
+            <h4>{{ offre.type_contrat }}</h4>
+        </div>
+    </article>
+    {% else %}
+    <p>Aucune offre disponible pour le moment.</p>
+    {% endfor %}
+
+</section>
+
+{% endblock %}

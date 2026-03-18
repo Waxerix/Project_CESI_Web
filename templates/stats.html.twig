@@ -1,0 +1,16 @@
+{# Héritage Twig #}
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Graphique des offres{% endblock %}
+
+{% block content %}
+
+<section>
+    <h2>Graphique du nombre d’offres</h2>
+    <div>
+        <img src="{{ asset('img/téléchargé.png') }}" alt="Graphique du nombre d’offres">
+    </div>
+</section>
+
+{% endblock %}
