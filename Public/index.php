@@ -4,11 +4,14 @@
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
 
-require "vendor/autoload.php";
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+require "../vendor/autoload.php";
 
-use App\Controllers\TaskController;
+use App\Controllers\MonController;
 
-$loader = new \Twig\Loader\FilesystemLoader('templates');
+$loader = new \Twig\Loader\FilesystemLoader('../src/View');
 $twig = new \Twig\Environment($loader, [
     'debug' => true
 ]);
@@ -18,17 +21,18 @@ if (isset($_GET['uri'])) {
 } else {
     $uri = '/';
 }
-
-$controller = new TaskController($twig);
+$controller = new MonController($twig);
 
 switch ($uri) {
     case '/':
+        
         // TODO : call the welcomePage method of the controller
-        header('Location: /connexion.html');
+        $controller->welcomePage();
+        
         break;
-    case 'add_task':
-        // TODO : call the addTask method of the controller
-        echo 'Add task action';
+    case 'newUser':
+        // TODO : call the newUser method of the controller
+        $controller->newUser();
         break;
     case 'check_task':
         // TODO : call the checkTask method of the controller

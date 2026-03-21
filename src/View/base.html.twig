@@ -5,18 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {# Bloc Twig pour que chaque page puisse changer le titre #}
     <title>{% block title %}SeSoMate{% endblock %}</title>
 
-    <link rel="stylesheet" href="{{ asset('style/style.css') }}">
+    {# ✅ Chemin direct au lieu de asset() #}
+    <link rel="stylesheet" href="/style/style.css">
 </head>
 
 <body>
 
 <header>
     <div class="logo-container">
-        <a href="{{ path('app_home') }}">
-            <img src="{{ asset('img/logo.png') }}" alt="logo" class="logo">
+        {# ✅ Chemin direct au lieu de path() et asset() #}
+        <a href="/">
+            <img src="/img/logo.png" alt="logo" class="logo">
         </a>
     </div>
 
@@ -50,7 +51,6 @@
 </header>
 
 <main>
-    {# Bloc qui sera remplacé par le contenu de chaque page (connexion, evaluation, index, etc.) #}
     {% block content %}{% endblock %}
 </main>
 
