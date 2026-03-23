@@ -8,7 +8,7 @@
     <title>{% block title %}SeSoMate{% endblock %}</title>
 
     {# ✅ Chemin direct au lieu de asset() #}
-    <link rel="stylesheet" href="/style/style.css">
+    <link rel="stylesheet" href="/Asset/style/style.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     <div class="logo-container">
         {# ✅ Chemin direct au lieu de path() et asset() #}
         <a href="/">
-            <img src="/img/logo.png" alt="logo" class="logo">
+            <img src="/Asset/img/logo.png" alt="logo" class="logo">
         </a>
     </div>
 
@@ -46,9 +46,15 @@
     </div>
 
     <div class="login-container">
-        <button>Sign up</button>
+    <form action="/?uri=inscription" method="post">
+        <button type="submit">Sign up</button>
+    </form>
+    <form action="/?uri=login" method="post">
+        <button type="submit">Log in</button>
+    </form>
     </div>
 </header>
+
 
 <main>
     {% block content %}{% endblock %}

@@ -1,39 +1,36 @@
 {# Héritage Twig #}
 {% extends 'base.html.twig' %}
-
 {# Titre de la page qui remplacera celui du base.html.twig #}
-{% block title %}Connexion{% endblock %}
-
-{% block content %}
-
-<div>
-
-    {# Image de bienvenue #}
-    <img src="{{ asset('img/bienvenue.jpeg') }}" alt="image de bienvenue">
-
-    <section>
-        <h1>Se connecter</h1>
-
-        {# Formulaire de connexion #}
-        <form method="get">
-
-            {# Champ email #}
-            <label for="email-user">Email</label>
-            <input type="email" name="mail-user" id="email-user" required>
-
-            {# Champ mot de passe #}
-            <label for="mdp">Mot de passe</label>
-            <input type="password" name="mdp" id="mdp" required>
-
-            {# Lien mot de passe oublié #}
-            <a href="#">Mot de passe oublié ?</a>
-
-            {# Bouton de connexion #}
-            <input type="submit" value="Connexion">
-
-        </form>
-    </section>
-
-</div>
-
+{% block title %}
+    Connexion
 {% endblock %}
+{% block content %}
+    <div>
+        {# Image de bienvenue #}
+             <img src="/Asset/img/bienvenue.jpeg" alt="Photo de profil">
+                <section>
+                    <h1>
+                        Se connecter
+                    </h1>
+                    {# Formulaire de connexion #}
+                    <form method="get">
+                        {# Champ email #}
+                        <label for="email-user">
+                            Email
+                        </label>
+                        <input type="email" name="mail-user" id="email-user" required>
+                            {# Champ mot de passe #}
+                            <label for="mdp">
+                                Mot de passe
+                            </label>
+                            <input type="password" name="mdp" id="mdp" required>
+                                {# Lien mot de passe oublié #}
+                                <a href="#">
+                                    Mot de passe oublié ?
+                                </a>
+                                {# Bouton de connexion #}
+                                <input type="submit" value="Connexion"></form>
+                            </section>
+                        </div>
+                    {% endblock %}
+                    

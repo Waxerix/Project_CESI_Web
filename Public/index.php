@@ -34,13 +34,13 @@ switch ($uri) {
         // TODO : call the newUser method of the controller
         $controller->newUser();
         break;
-    case 'check_task':
+    case 'inscription':
         // TODO : call the checkTask method of the controller
-        echo 'Check task action';
+        $controller->pageInscription();
         break;
-    case 'history':
+    case 'login':
         // TODO : call the historyPage method of the controller
-        echo 'History page';
+        $controller->loginPage();
         break;
     case 'uncheck_task':
         // TODO : call the uncheckTask method of the controller

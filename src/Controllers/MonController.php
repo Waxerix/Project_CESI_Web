@@ -14,9 +14,9 @@ class MonController extends Controller
     }
     public function welcomePage()
     {
-        
 
-        echo $this->templateEngine->render('inscription.html.twig', [
+
+        echo $this->templateEngine->render('index.html.twig', [
             'roles' => $this->model->getSelectForRole(),
         ]);
     }
@@ -26,4 +26,22 @@ class MonController extends Controller
         header('Location: /?uri=/');
         exit();
     }
+
+    public function pageInscription()
+    {
+
+
+        echo $this->templateEngine->render('inscription.html.twig', [
+            'roles' => $this->model->getSelectForRole(),
+        ]);
+    }
+    public function loginPage()
+    {
+
+
+        echo $this->templateEngine->render('connexion.html.twig', [
+            'roles' => $this->model->getSelectForRole(),
+        ]);
+    }
+    
 }
