@@ -665,3 +665,28 @@ footer {
         height: 180px;
     }
 }
+
+/* --- Bouton Postuler dans les offres --- */
+.offre-actions {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    text-align: right; /* Aligne le bouton à droite */
+}
+
+.btn-postuler {
+    display: inline-block;
+    background-color: var(--secondary-blue);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-postuler:hover {
+    background-color: var(--primary-blue);
+    color: white;
+}

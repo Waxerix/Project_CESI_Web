@@ -1,70 +1,79 @@
 {% extends 'base.html.twig' %}
-   {% block content %}
-        <section class="categories-populaires">
-            <h3>Recherches fréquentes :</h3>
-            <div class="tags-container">
-                <span class="tag">💻 Informatique</span>
-                <span class="tag">📈 Marketing</span>
-                <span class="tag">🎨 Design</span>
-                <span class="tag">🤝 Commerce</span>
-                <span class="tag">⚙️ Ingénierie</span>
-            </div>
+
+{% block content %}
+    <section class="categories-populaires">
+        <h3>Recherches fréquentes :</h3>
+        <div class="tags-container">
+            <span class="tag">💻 Informatique</span>
+            <span class="tag">📈 Marketing</span>
+            <span class="tag">🎨 Design</span>
+            <span class="tag">🤝 Commerce</span>
+            <span class="tag">⚙️ Ingénierie</span>
+        </div>
+    </section>
+
+    <div class="layout-principal">
+        
+        <section class="liste-offres">
+            <h2>Les offres du moment...</h2>
+            
+            {# --- DEBUT DE LA BOUCLE TWIG --- #}
+            {# On parcours la variable "offres_emploi" envoyée par PHP #}
+            {% for offre in offres_emploi %}
+                
+                {# Le modèle (template) d'une offre. Il sera répété pour chaque ligne en base de données #}
+                <article class="offre-card">
+                    
+                    <div class="offre-header">
+                        {# On utilise les noms des colonnes de ta requête SQL #}
+                        <h3>{{ offre.CompanyName|default('Entreprise non précisée') }}</h3>
+                        <p class="offre-title">{{ offre.Title }}</p>
+                    </div>
+
+                    <div class="offre-details">
+                        {# On affiche les informations si elles existent, sinon on ne met rien #}
+                        {% if offre.Duration %}
+                            <h4>{{ offre.Duration }}</h4>
+                        {% endif %}
+                        
+                        {% if offre.Salary %}
+                            <h4>{{ offre.Salary }} €</h4>
+                        {% endif %}
+                    </div>
+                    
+                    {# LE BOUTON POSTULER #}
+                    {# L'URL dynamique utilisera probablement l'ID de l'offre pour savoir à laquelle on postule #}
+                    <div class="offre-actions">
+                        <a href="{{ path('app_postuler', {'id': offre.ID_offer}) }}" class="btn-postuler">Postuler</a>
+                    </div>
+                </article>
+
+            {# Si la requête PHP ne renvoie aucune offre, on affiche ce message #}
+            {% else %}
+                <p>Aucune offre d'emploi disponible pour le moment.</p>
+            {% endfor %}
+            {# --- FIN DE LA BOUCLE TWIG --- #}
+
+            <button class="btn-load-more">Voir plus d'offres</button>
         </section>
 
-        <div class="layout-principal">
-            
-            <section class="liste-offres">
-                <h2>Les offres du moment...</h2>
-                
-                <article>
-                    <h3>TechVision SAS</h3>
-                    <p>Développeur Front-End Junior</p>
-                    <div>
-                        <h4>Bac +3</h4>
-                        <h4>Paris (Hybride)</h4>
-                        <h4>CDI</h4>
-                    </div>
-                </article>
+        {# --- SIDEBAR (inchangée) --- #}
+        <aside class="sidebar">
+            <div class="widget alert-widget">
+                <h3>🔔 Alerte Emploi</h3>
+                <p>Recevez les nouvelles offres correspondant à vos critères directement par e-mail.</p>
+                <input type="email" placeholder="Votre adresse e-mail">
+                <button class="btn-alerte">Créer une alerte</button>
+            </div>
 
-                <article>
-                    <h3>GreenEco Plus</h3>
-                    <p>Chef de Projet Marketing</p>
-                    <div>
-                        <h4>Bac +5</h4>
-                        <h4>Lyon</h4>
-                        <h4>CDD 12 mois</h4>
-                    </div>
-                </article>
-
-                <article>
-                    <h3>Studio CréaWeb</h3>
-                    <p>UX/UI Designer</p>
-                    <div>
-                        <h4>Bac +4</h4>
-                        <h4>Bordeaux (Full Remote)</h4>
-                        <h4>CDI</h4>
-                    </div>
-                </article>
-
-                <button class="btn-load-more">Voir plus d'offres</button>
-            </section>
-
-            <aside class="sidebar">
-                <div class="widget alert-widget">
-                    <h3>🔔 Alerte Emploi</h3>
-                    <p>Recevez les nouvelles offres correspondant à vos critères directement par e-mail.</p>
-                    <input type="email" placeholder="Votre adresse e-mail">
-                    <button class="btn-alerte">Créer une alerte</button>
-                </div>
-
-                <div class="widget info-widget">
-                    <h3>🚀 Pourquoi SeSoMate ?</h3>
-                    <ul>
-                        <li>✓ Plus de 5 000 offres vérifiées</li>
-                        <li>✓ Mise en relation sans intermédiaire</li>
-                        <li>✓ Des entreprises qui recrutent vraiment</li>
-                    </ul>
-                </div>
-            </aside>  
-        </div>
-        {% endblock %}
+            <div class="widget info-widget">
+                <h3>🚀 Pourquoi SeSoMate ?</h3>
+                <ul>
+                    <li>✓ Plus de 5 000 offres vérifiées</li>
+                    <li>✓ Mise en relation sans intermédiaire</li>
+                    <li>✓ Des entreprises qui recrutent vraiment</li>
+                </ul>
+            </div>
+        </aside>  
+    </div>
+{% endblock %}
