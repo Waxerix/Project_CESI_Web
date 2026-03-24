@@ -1,52 +1,59 @@
 <?php
-/**
- * This is the router, the main entry point of the application.
- * It handles the routing and dispatches requests to the appropriate controller methods.
- */
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use App\Controllers\TaskController;
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/templates');
+$twig = new \Twig\Environment($loader);
 
-$loader = new \Twig\Loader\FilesystemLoader('templates');
-$twig = new \Twig\Environment($loader, [
-    'debug' => true
-]);
+$twig->addFunction(new \Twig\TwigFunction('asset', function ($cheminFichier) {
+    $base = '/Project_CESI_Web/'; 
+    return $base . ltrim($cheminFichier, '/');
+}));
 
-if (isset($_GET['uri'])) {
-    $uri = $_GET['uri'];
-} else {
-    $uri = '/';
-}
 
-$controller = new TaskController($twig);
+$twig->addFunction(new \Twig\TwigFunction('path', function ($nomDeLaRoute) {
+  
+    $routes = [
+        'app_home'        => 'index.php',
+        'app_inscription' => 'index.php?page=inscription',
+        'app_mentions'    => 'index.php?page=mentions',
+        'app_connexion'   => 'index.php?page=connexion',
+       
+        ];
 
-switch ($uri) {
-    case '/':
-        $controller->welcomePage();
+    
+    return $routes[$nomDeLaRoute] ?? 'index.php';
+}));
+
+
+$pageDemandee = $_GET['page'] ?? 'home'; 
+
+switch ($pageDemandee) {
+    
+    case 'inscription':
+        
+        echo $twig->render('inscription.html.twig', [
+        ]);
         break;
-    case 'add_task':
-        // TODO : call the addTask method of the controller
-        echo 'Add task action';
+
+    case 'mentions':
+        
+        echo $twig->render('mentions-legales.html.twig', [
+        ]);
         break;
-    case 'check_task':
-        // TODO : call the checkTask method of the controller
-        echo 'Check task action';
+
+     case 'connexion':
+        
+        echo $twig->render('connexion.html.twig', [
+        ]);
         break;
-    case 'history':
-        // TODO : call the historyPage method of the controller
-        echo 'History page';
-        break;
-    case 'uncheck_task':
-        // TODO : call the uncheckTask method of the controller
-        echo 'Uncheck task action';
-        break;
-    case 'about':
-        // TODO : call the aboutPage method of the controller
-        echo 'About page';
-        break;
+
+    case 'home':
     default:
-        // TODO : return a 404 error
-        echo '404 Not Found';
+        
+        echo $twig->render('index.html.twig', [
+        ]);
         break;
+
+    
 }

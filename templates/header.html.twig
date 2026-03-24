@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSMT</title>
-    <link rel="stylesheet" href="./style/style.css">
-</head>
-
-<body>
-    <header>
+    {% block header %}
         <div class="logo-container">
-           <a href="index.html"><img src="./img/logo.png" alt="logo" class="logo"></a>
+           <a href="{{path('app_home')}}"><img src="./img/image.png" alt="logo" class="logo"></a>
         </div>
 
         <div class="container">
@@ -21,7 +11,7 @@
             </div>
 
             <div class="actions-container">
-                <input type="search" placeholder="    Rechercher...">
+                <input type="search" placeholder="      Rechercher...">
 
                 <select name="filtres" id="fil">
                     <option value="Entreprise">Entreprise</option>
@@ -38,9 +28,7 @@
             </div>
         </div>
         <div class="login-container">
-            <button>sign up</button>
+            <a href="{{ path('app_inscription') }}"><button>sign up</button></a>
+            <a href="{{ path('app_connexion') }}"><button>sign in</button></a>
         </div>
-    </header>
-</body>
-
-</html>
+{% endblock %}

@@ -473,3 +473,195 @@ footer {
 .content-card strong {
     color: var(--primary-blue);
 }
+
+.login-wrapper.form-card {
+    display: flex;
+    padding: 0; /* On enlève le padding global pour que l'image touche les bords */
+    overflow: hidden; /* Pour que l'image respecte les bords arrondis de la carte */
+    margin-top: 40px;
+}
+
+/* Zone de l'image (prend la moitié de la place) */
+.login-image {
+    flex: 1;
+    display: none; /* Caché par défaut sur mobile (optionnel mais recommandé) */
+}
+
+.login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* L'image remplit l'espace sans se déformer */
+}
+
+/* Zone du formulaire (prend l'autre moitié de la place) */
+.login-form-section {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Lien "Mot de passe oublié" */
+.forgot-password {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.forgot-password a {
+    color: var(--primary-blue);
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: opacity var(--transition-speed);
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
+
+/* Responsive : On affiche l'image uniquement sur les écrans plus larges */
+@media (min-width: 768px) {
+    .login-image {
+        display: block;
+    }
+}
+
+
+
+/* 1. L'astuce magique pour "sortir" du conteneur <main> de 1100px */
+.split-fullscreen-layout {
+    width: 100vw; /* Force la largeur à 100% de l'écran */
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%); /* Rentre le bloc au centre de l'écran */
+    
+    margin-top: -30px; /* Annule la marge de ton 'main' pour coller au header */
+    
+    display: flex;
+    min-height: calc(100vh - 85px); /* Prend tout l'écran moins la hauteur de ton header */
+    background-color: var(--bg-cream);
+}
+
+/* 2. La zone de l'image (Moitié gauche) */
+.split-image {
+    flex: 1; /* Prend 50% de l'espace. (Mets flex: 1.5; si tu la veux plus grande que le form) */
+    background-color: white; /* Au cas où l'image charge lentement */
+}
+
+/* LE SECRET EST ICI : object-fit */
+.split-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* L'image remplit la zone en coupant ce qui dépasse, sans s'écraser */
+    object-position: center; 
+    display: block;
+}
+
+/* 3. La zone du formulaire (Moitié droite) */
+.split-form {
+    flex: 1; /* Prend les 50% restants */
+    display: flex;
+    align-items: center; /* Centre la carte verticalement */
+    justify-content: center; /* Centre la carte horizontalement */
+    padding: 40px;
+}
+
+/* 4. On limite la taille de la carte pour qu'elle ne soit pas géante */
+.split-form .form-card {
+    width: 100%;
+    max-width: 450px; /* Taille parfaite pour ton formulaire */
+    /* L'ombre, le fond blanc et la bordure s'appliquent automatiquement ! */
+}
+
+/* --- Responsive pour les téléphones --- */
+@media (max-width: 900px) {
+    .split-fullscreen-layout {
+        flex-direction: column; /* Passe en colonne */
+        min-height: auto;
+    }
+    .split-image {
+        height: 30vh; /* L'image prend un tiers de l'écran en haut */
+    }
+    .split-form {
+        padding: 20px;
+    }
+}
+
+/* ==========================================================================
+   PAGE INSCRIPTION (Rendu Image 8)
+   ========================================================================== */
+
+/* Conteneur principal qui sépare l'écran en deux */
+.register-split-container {
+    display: flex;
+    align-items: center; /* Centre verticalement */
+    justify-content: center;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    gap: 200px; /* Espace entre l'image et le formulaire */
+    min-height: calc(100vh - 150px);
+}
+
+/* --- MOITIÉ GAUCHE (Image + Bouton) --- */
+.split-left-upload {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.default-user-icon {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%; /* Garde l'image bien ronde */
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Petite ombre légère (optionnel) */
+}
+
+.split-left-upload h3 {
+    color: var(--text-main);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.standard-file-input {
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* --- MOITIÉ DROITE (Formulaire) --- */
+.split-right-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.split-right-form .form-card {
+    width: 100%;
+    max-width: 450px;
+    /* Les ombres, bordures et fond blanc sont gérés par ta classe .form-card globale ! */
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 900px) {
+    .register-split-container {
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    
+    .split-left-upload {
+        margin-bottom: 30px;
+    }
+    
+    .default-user-icon {
+        width: 180px;
+        height: 180px;
+    }
+}

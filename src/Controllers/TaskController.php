@@ -13,7 +13,7 @@ class TaskController extends Controller {
     public function welcomePage() {
         // TODO: Retrieve the list of tasks from the model
         $tasks = $this->model->getAllTasks();
-        echo $this->templateEngine->render('index.html', ['tasks' => $tasks]);
+        echo $this->templateEngine->render('index.html.twig', ['tasks' => $tasks]);
     }
 
     public function addTask() {

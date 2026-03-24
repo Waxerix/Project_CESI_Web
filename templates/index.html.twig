@@ -1,50 +1,5 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SeSoMate - Offres d'emploi</title>
-    <link rel="stylesheet" href="../style/style.css">
-</head>
-
-<body>
-    <header>
-        <div class="logo-container">
-            <a href="index.html"><img src="../img/image.png" alt="logo" class="logo"></a>
-        </div>
-
-        <div class="container">
-            <div class="titre-container">
-                <h1>SeSoMate</h1>
-                <h2>Trouvez les meilleures offres du moment</h2>
-            </div>
-
-            <div class="actions-container">
-                <input type="search" placeholder="Rechercher un poste, une entreprise...">
-
-                <select name="filtres" id="fil">
-                    <option value="">Filtres</option>
-                    <option value="Entreprise">Entreprise</option>
-                    <option value="Offre">Offre</option>
-                    <option value="Wishlist">Wishlist</option>
-                </select>
-
-                <select name="tri" id="tri">
-                    <option value="">Trier par</option>
-                    <option value="Intitulé">Intitulé</option>
-                    <option value="Salaire">Salaire</option>
-                    <option value="Date">Date</option>
-                </select>
-            </div>
-        </div>
-        
-        <div class="login-container">
-             <a href="../templates/inscription.html"><button>sign up</button></a>
-        </div>
-    </header>
-
-    <main>
+{% extends 'base.html.twig' %}
+   {% block content %}
         <section class="categories-populaires">
             <h3>Recherches fréquentes :</h3>
             <div class="tags-container">
@@ -110,21 +65,6 @@
                         <li>✓ Des entreprises qui recrutent vraiment</li>
                     </ul>
                 </div>
-            </aside>
-            
+            </aside>  
         </div>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2026 SeSoMate. Tous droits réservés.</p>
-            <div class="footer-links">
-                <a href="../templates/mentions-legales.html">Mentions légales</a>
-                <a href="#">Contact</a>
-                <a href="#">À propos</a>
-            </div>
-        </div>
-    </footer>
-</body>
-
-</html>
+        {% endblock %}
