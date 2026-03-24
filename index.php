@@ -4,7 +4,7 @@
  * It handles the routing and dispatches requests to the appropriate controller methods.
  */
 
-require "vendor/autoload.php";
+require_once __DIR__ . '/vendor/autoload.php';
 
 use App\Controllers\TaskController;
 
@@ -23,8 +23,7 @@ $controller = new TaskController($twig);
 
 switch ($uri) {
     case '/':
-        // TODO : call the welcomePage method of the controller
-        echo 'Welcome page';
+        $controller->welcomePage();
         break;
     case 'add_task':
         // TODO : call the addTask method of the controller

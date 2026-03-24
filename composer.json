@@ -5,7 +5,7 @@
     "license": "Apache-2.0",
     "autoload": {
         "psr-4": {
-            "ProjetWeb\\Sesomate\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [
@@ -13,5 +13,7 @@
             "name": "equipe 3"
         }
     ],
-    "require": {}
+    "require": {
+        "twig/twig": "^3.23"
+    }
 }

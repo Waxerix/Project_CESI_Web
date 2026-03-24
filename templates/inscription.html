@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeSoMate - Inscription</title>
+    <link rel="stylesheet" href="/style/style.css"> 
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+           <a href="index.html"><img src="../img/image.png" alt="logo" class="logo"></a>
+        </div>
+
+        <div class="container">
+            <div class="titre-container">
+                <h1>SeSoMate</h1>
+                <h2>Trouvez les meilleures offres du moment</h2>
+            </div>
+
+            <div class="actions-container">
+                <input type="search" placeholder="Rechercher un poste, une entreprise...">
+
+                <select name="filtres" id="fil">
+                    <option value="">Filtres</option>
+                    <option value="Entreprise">Entreprise</option>
+                    <option value="Offre">Offre</option>
+                    <option value="Wishlist">Wishlist</option>
+                </select>
+
+                <select name="tri" id="tri">
+                    <option value="">Trier par</option>
+                    <option value="Intitulé">Intitulé</option>
+                    <option value="Salaire">Salaire</option>
+                    <option value="Date">Date</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="login-container">
+            <a href="inscription.html"><button>Sign up</button></a>
+        </div>
+    </header>
+
+    <main class="main-centered">
+        <section class="form-section">
+            <h2 class="page-title">S'inscrire</h2>
+            
+            <div class="form-card">
+                <form action="#" method="post" enctype="multipart/form-data"> 
+                    
+                    <div class="profile-upload-group">
+                        <img src="./img/user.png" alt="Photo de profil" class="profile-preview">
+                        <div class="upload-controls">
+                            <label for="photo" class="upload-label">Photo de profil * :</label>
+                            <input type="file" id="photo" name="photo" accept="image/*" required class="file-input">
+                        </div>
+                    </div>
+
+                    <div class="input-group row-group">
+                        <div class="half-width">
+                            <label for="nom">Nom * :</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="half-width">
+                            <label for="prenom">Prénom * :</label>
+                            <input type="text" id="prenom" name="prenom" required>
+                        </div>
+                    </div>
+                
+                    <div class="input-group">
+                        <label for="email">Email * :</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                
+                    <div class="input-group">
+                        <label for="password">Mot de passe * :</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <div class="input-group row-group">
+                        <div class="half-width">
+                            <label for="status">Statut * :</label>
+                            <select id="status" name="status" required>
+                                <option value="">- Choisir une option -</option>
+                                <option value="etudiant">Étudiant</option>
+                                <option value="pilote">Pilote</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="half-width">
+                            <label for="tel">N° de téléphone :</label>
+                            <input type="tel" id="tel" name="tel">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Créer un compte</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 SeSoMate. Tous droits réservés.</p>
+            <div class="footer-links">
+                <a href="../templates/mentions-legales.html">Mentions légales</a>
+                <a href="#">Contact</a>
+                <a href="#">À propos</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

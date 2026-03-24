@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeSoMate - Offres d'emploi</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+
+<body>
+    <header>
+        <div class="logo-container">
+            <a href="index.html"><img src="../img/image.png" alt="logo" class="logo"></a>
+        </div>
+
+        <div class="container">
+            <div class="titre-container">
+                <h1>SeSoMate</h1>
+                <h2>Trouvez les meilleures offres du moment</h2>
+            </div>
+
+            <div class="actions-container">
+                <input type="search" placeholder="Rechercher un poste, une entreprise...">
+
+                <select name="filtres" id="fil">
+                    <option value="">Filtres</option>
+                    <option value="Entreprise">Entreprise</option>
+                    <option value="Offre">Offre</option>
+                    <option value="Wishlist">Wishlist</option>
+                </select>
+
+                <select name="tri" id="tri">
+                    <option value="">Trier par</option>
+                    <option value="Intitulé">Intitulé</option>
+                    <option value="Salaire">Salaire</option>
+                    <option value="Date">Date</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="login-container">
+             <a href="../templates/inscription.html"><button>sign up</button></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="categories-populaires">
+            <h3>Recherches fréquentes :</h3>
+            <div class="tags-container">
+                <span class="tag">💻 Informatique</span>
+                <span class="tag">📈 Marketing</span>
+                <span class="tag">🎨 Design</span>
+                <span class="tag">🤝 Commerce</span>
+                <span class="tag">⚙️ Ingénierie</span>
+            </div>
+        </section>
+
+        <div class="layout-principal">
+            
+            <section class="liste-offres">
+                <h2>Les offres du moment...</h2>
+                
+                <article>
+                    <h3>TechVision SAS</h3>
+                    <p>Développeur Front-End Junior</p>
+                    <div>
+                        <h4>Bac +3</h4>
+                        <h4>Paris (Hybride)</h4>
+                        <h4>CDI</h4>
+                    </div>
+                </article>
+
+                <article>
+                    <h3>GreenEco Plus</h3>
+                    <p>Chef de Projet Marketing</p>
+                    <div>
+                        <h4>Bac +5</h4>
+                        <h4>Lyon</h4>
+                        <h4>CDD 12 mois</h4>
+                    </div>
+                </article>
+
+                <article>
+                    <h3>Studio CréaWeb</h3>
+                    <p>UX/UI Designer</p>
+                    <div>
+                        <h4>Bac +4</h4>
+                        <h4>Bordeaux (Full Remote)</h4>
+                        <h4>CDI</h4>
+                    </div>
+                </article>
+
+                <button class="btn-load-more">Voir plus d'offres</button>
+            </section>
+
+            <aside class="sidebar">
+                <div class="widget alert-widget">
+                    <h3>🔔 Alerte Emploi</h3>
+                    <p>Recevez les nouvelles offres correspondant à vos critères directement par e-mail.</p>
+                    <input type="email" placeholder="Votre adresse e-mail">
+                    <button class="btn-alerte">Créer une alerte</button>
+                </div>
+
+                <div class="widget info-widget">
+                    <h3>🚀 Pourquoi SeSoMate ?</h3>
+                    <ul>
+                        <li>✓ Plus de 5 000 offres vérifiées</li>
+                        <li>✓ Mise en relation sans intermédiaire</li>
+                        <li>✓ Des entreprises qui recrutent vraiment</li>
+                    </ul>
+                </div>
+            </aside>
+            
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 SeSoMate. Tous droits réservés.</p>
+            <div class="footer-links">
+                <a href="../templates/mentions-legales.html">Mentions légales</a>
+                <a href="#">Contact</a>
+                <a href="#">À propos</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
