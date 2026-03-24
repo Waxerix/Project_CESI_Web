@@ -32,7 +32,7 @@ try {
     die("Erreur de connexion à la base de données : " . $e->getMessage());
 }
 
-// --- 3. LE ROUTEUR (Distribution du trafic) ---
+
 $pageDemandee = $_GET['page'] ?? 'home'; 
 
 switch ($pageDemandee) {
@@ -47,6 +47,10 @@ switch ($pageDemandee) {
 
     case 'connexion':
         echo $twig->render('connexion.html.twig', []);
+        break;
+
+    case 'postuler':
+        echo $twig->render('formulaire-postuler.html.twig', []);
         break;
 
     case 'home':

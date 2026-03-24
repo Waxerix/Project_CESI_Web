@@ -8,8 +8,6 @@ class JobOfferModel {
     public function __construct(PDO $pdo) {
         $this->pdo = $pdo;
     }
-
-    
     public function getAllOffers() {
         
         $sql = "SELECT j.ID_offer, j.Title, j.Duration, j.Salary, c.Name as CompanyName 

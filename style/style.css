@@ -690,3 +690,122 @@ footer {
     background-color: var(--primary-blue);
     color: white;
 }
+
+.offre-recap {
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+.offre-recap h2 {
+    color: var(--primary-blue);
+    margin: 0 0 5px 0;
+    font-size: 1.5rem;
+}
+
+.offre-recap p {
+    margin: 0;
+    font-weight: bold;
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+
+.file-input-styled {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed var(--primary-blue);
+    border-radius: 10px;
+    background-color: #fafafa;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+
+.form-card textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    background-color: #fafafa;
+    transition: border-color var(--transition-speed);
+    resize: vertical; 
+}
+
+.form-card textarea:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    background-color: white;
+}
+
+.apply-container {
+    max-width: 1200px; /* Plus large que le main-centered */
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* La grille qui sépare l'écran en deux */
+.apply-split-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes de taille égale */
+    gap: 40px;
+    align-items: start; /* Permet aux deux cartes de s'aligner par le haut */
+}
+
+/* --- Typographie spécifique aux détails de l'offre --- */
+.offer-title {
+    margin-top: 0 !important;
+    border-bottom: none !important; /* Annule le style par défaut de ta content-card si besoin */
+    padding-bottom: 0 !important;
+    margin-bottom: 5px !important;
+}
+
+.company-name {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+/* Les petits badges (Salaire, Durée) */
+.offer-badges {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.offer-badges .badge {
+    background-color: var(--bg-cream);
+    color: var(--primary-blue);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 1px solid rgba(1, 64, 96, 0.1);
+}
+
+.offer-description h4 {
+    color: var(--primary-blue);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.offer-description p {
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* --- Responsive pour les mobiles et tablettes --- */
+@media (max-width: 900px) {
+    .apply-split-layout {
+        grid-template-columns: 1fr; /* Passe en une seule colonne */
+    }
+    
+    .offer-details-col {
+        margin-bottom: 20px;
+    }
+}
