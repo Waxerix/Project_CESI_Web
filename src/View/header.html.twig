@@ -1,0 +1,34 @@
+
+    {% block header %}
+        <div class="logo-container">
+           <a href="{{path('app_home')}}"><img src="Asset/img/image.png" alt="logo" class="logo"></a>
+        </div>
+
+        <div class="container">
+            <div class="titre-container">
+                <h1>SeSoMate</h1>
+                <h2>Trouvez les meilleurs offres du moment</h2>
+            </div>
+
+            <div class="actions-container">
+                <input type="search" placeholder="Rechercher...">
+
+                <select name="filtres" id="fil">
+                    <option value="Entreprise">Entreprise</option>
+                    <option value="Offre">Offre</option>
+                    <option value="Wishlist">Wishlist</option>
+                </select>
+
+                <select name="tri" id="tri">
+                    <option value="Tri">Tri</option>
+                    <option value="Intitulé">Intitulé</option>
+                    <option value="Salaire">Salaire</option>
+                    <option value="Date">Date</option>
+                </select>
+            </div>
+        </div>
+        <div class="login-container">
+            <a href="{{ path('app_inscription') }}"><button>sign up</button></a>
+            <a href="{{ path('app_connexion') }}"><button>sign in</button></a>
+        </div>
+{% endblock %}
