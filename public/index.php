@@ -1,11 +1,9 @@
 <?php
-// index.php
 
-require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/src/Controllers/HomeController.php';
+require_once '../vendor/autoload.php';
+require_once '../src/Controllers/HomeController.php';
 
-// --- 1. INITIALISATION DE TWIG ---
-$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/templates');
+$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../src/View');
 $twig = new \Twig\Environment($loader);
 
 $twig->addFunction(new \Twig\TwigFunction('path', function ($nomDeLaRoute, $parametres = []) {
@@ -55,8 +53,6 @@ switch ($pageDemandee) {
 
     case 'home':
     default:
-        // On inclut et on appelle le Contrôleur
-        require_once __DIR__ . '/src/Controllers/HomeController.php';
         $controller = new HomeController($twig, $pdo);
         $controller->index();
         break;
