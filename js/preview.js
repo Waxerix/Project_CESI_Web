@@ -1,19 +1,26 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const photoInput = document.getElementById('photo');
-    const profilePreview = document.getElementById('profile-preview');
-
-    if (photoInput && profilePreview) {
-        photoInput.addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    // Remplace simplement l'image par défaut par la nouvelle !
-                    profilePreview.src = e.target.result;
-                }
-                reader.readAsDataURL(file);
-            }
-        });
+const fileInput = document.getElementById('file-upload');
+  const uploadCircle = document.querySelector('.upload-circle');
+  const plusSign = document.querySelector('.plus-sign');
+  const uploadText = document.querySelector('.upload-text');
+ 
+  fileInput.addEventListener('change', function () {
+    const file = this.files[0];
+ 
+    // Vérification que c'est bien une image
+    if (!file || !file.type.startsWith('image/')) {
+      alert('Veuillez sélectionner un fichier image valide (jpg, png, gif...)');
+      this.value = '';
+      return;
     }
-});
+ 
+    // Remplace le rond par la photo
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      uploadCircle.style.backgroundImage = `url('${e.target.result}')`;
+      uploadCircle.style.backgroundSize = 'cover';
+      uploadCircle.style.backgroundPosition = 'center';
+      plusSign.style.display = 'none';
+      uploadText.textContent = 'Modifier la photo';
+    };
+    reader.readAsDataURL(file);
+  });
