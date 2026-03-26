@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+
+<h1>S'inscrire</h1>
+
+<form action="/?uri=newUser" method="post" enctype="multipart/form-data">
+
+    {# Photo de profil #}
+    <img src="/Asset/img/user.png" alt="Photo de profil">
+    <strong>Photo de profil</strong>
+    <input type="file" id="photo" name="photo" accept="image/*" required>
+
+    {# Nom #}
+    <label for="nom">Nom * :</label>
+    <input type="text" id="nom" name="nom" required>
+
+    {# Prénom #}
+    <label for="prenom">Prénom * :</label>
+    <input type="text" id="prenom" name="prenom" required>
+
+    {# Email #}
+    <label for="email">Email * :</label>
+    <input type="email" id="email" name="email" required>
+
+    {# Mot de passe #}
+    <label for="password">Mot de passe * :</label>
+    <input type="password" id="password" name="password" required>
+
+    {# Rôle #}
+    <label for="utilisateur">Rôle * :</label>
+    <select id="utilisateur" name="utilisateur" required>
+    <option value="">Sélectionnez un rôle</option>
+    {% for role in roles %}
+        {# ✅ Même casse partout : Status avec S majuscule #}
+        <option value="{{ role.Status }}">{{ role.Status }}</option>
+    {% endfor %}
+    </select>
+
+    {# Téléphone #}
+    <label for="tel">N° tel. :</label>
+    <input type="tel" id="tel" name="tel">
+
+    {# Bouton submit #}
+    <button type="submit">Créer un compte</button>
+
+</form>
+
+{% endblock %}

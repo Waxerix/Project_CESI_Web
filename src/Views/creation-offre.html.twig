@@ -1,0 +1,70 @@
+{# Héritage Twig #}
+{% extends 'base.html.twig' %}
+
+{# Titre de la page #}
+{% block title %}Créer une offre{% endblock %}
+
+{% block content %}
+
+<section>
+    <h2>Créer une offre</h2>
+
+    <div>
+
+        {# Formulaire de création d'offre #}
+        <form method="post">
+
+            {# Nom entreprise #}
+            <label for="company_name">Nom de l'entreprise :</label>
+            <input type="text" id="company_name" name="company_name" required>
+
+            {# Téléphone #}
+            <label for="numero_tel">Numéro de téléphone :</label>
+            <input type="tel" id="numero_tel" name="numero_tel" required>
+
+            {# Lieu #}
+            <label for="location">Lieu :</label>
+            <input type="text" id="location" name="location" required>
+
+            {# Email #}
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            {# Intitulé de l'offre #}
+            <label for="type">Intitulé de l'offre :</label>
+            <input type="text" id="type" name="type" required>
+
+            {# Niveau d'étude #}
+            <label for="secteur">Niveau d'étude :</label>
+            <select id="secteur" name="secteur" required>
+                <option value="">Sélectionnez un niveau</option>
+                <option value="bac">Bac</option>
+                <option value="bac+1">Bac+1</option>
+                <option value="bac+2">Bac+2</option>
+                <option value="bac+3">Bac+3</option>
+                <option value="bac+4">Bac+4</option>
+                <option value="bac+5">Bac+5</option>
+                <option value="bac+6">Bac+6</option>
+                <option value="bac+7">Bac+7</option>
+                <option value="bac+8">Bac+8</option>
+            </select>
+
+            {# Type d'offre #}
+            <label for="type_offre">Type d'offre :</label>
+            <select id="type_offre" name="type_offre" required>
+                <option value="">Sélectionnez un type</option>
+                <option value="stage">Stage</option>
+                <option value="alternance">Alternance</option>
+                <option value="Stage-et-alternance">Stage et alternance</option>
+            </select>
+
+            {# Bouton submit #}
+            <input type="submit" value="Créer l'offre">
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

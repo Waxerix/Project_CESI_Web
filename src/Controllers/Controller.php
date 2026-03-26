@@ -18,4 +18,7 @@ abstract class Controller {
      * @var  \Twig\Environment null
      */
     protected $templateEngine = null;
+
+    protected $pdo = null;
+    
 }
