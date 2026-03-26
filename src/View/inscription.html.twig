@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <main class="main-register">
+       
+        <form action="#" method="post" enctype="multipart/form-data" class="register-split-container">
+            
+            <div class="split-left-upload">
+               
+                <img src="Asset/img/user.png" alt="Icône utilisateur par défaut" id="profile-preview" class="default-user-icon">
+                
+                <h3>Choisir une photo de profil</h3>
+                
+               
+                <input type="file" id="photo" name="photo" accept="image/*" required class="standard-file-input">
+            </div>
+
+            <div class="split-right-form">
+                <div class="form-card">
+                    <h2 class="page-title">S'inscrire</h2>
+                    
+                    <div class="input-group row-group">
+                        <div class="half-width">
+                            <label for="nom">Nom * :</label>
+                            <input type="text" id="nom" name="nom" required>
+                        </div>
+                        <div class="half-width">
+                            <label for="prenom">Prénom * :</label>
+                            <input type="text" id="prenom" name="prenom" required>
+                        </div>
+                    </div>
+                
+                    <div class="input-group">
+                        <label for="email">Email * :</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                
+                    <div class="input-group">
+                        <label for="password">Mot de passe * :</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+
+                    <div class="input-group row-group">
+                        <div class="half-width">
+                            <label for="status">Statut * :</label>
+                            <select id="status" name="status" required>
+                                <option value="">- Choisir -</option>
+                                <option value="etudiant">Étudiant</option>
+                                <option value="pilote">Pilote</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="half-width">
+                            <label for="tel">Téléphone :</label>
+                            <input type="tel" id="tel" name="tel">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Créer un compte</button>
+                </div>
+            </div>
+
+        </form>
+    </main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="preview.js" defer></script>
+{% endblock %}
