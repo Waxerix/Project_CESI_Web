@@ -1,35 +1,36 @@
+{# Héritage Twig #}
 {% extends 'base.html.twig' %}
-
-{% block content %}
-    <div class="split-fullscreen-layout">
-        
-        <div class="split-image">
-            <img src="Asset/img/bienvenue.png" alt="image de bienvenue">
-        </div>
-
-        <div class="split-form">
-            <div class="form-card">
-                <h1 class="page-title">Se connecter</h1>
-                
-                <form method="post">
-                    <div class="input-group">
-                        <label for="email-user">Email</label>
-                        <input type="email" name="mail-user" id="email-user" required>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="mdp">Mot de passe</label>
-                        <input type="password" name="mdp" id="mdp" required>
-                    </div>
-
-                    <div class="forgot-password">
-                        <a href="" style="color: var(--primary-blue); text-decoration: none; font-size: 0.9rem; float: right; margin-top: -10px; margin-bottom: 20px;">Mot de passe oublié ?</a>
-                    </div>
-                    
-                    <div style="clear: both;"></div> <input type="submit" value="Connexion" class="btn-submit">
-                </form>
-            </div>
-        </div>
-
-    </div>
+{# Titre de la page qui remplacera celui du base.html.twig #}
+{% block title %}
+    Connexion
 {% endblock %}
+{% block content %}
+    <div>
+        {# Image de bienvenue #}
+             <img src="/Asset/img/bienvenue.jpeg" alt="Photo de profil">
+                <section>
+                    <h1>
+                        Se connecter
+                    </h1>
+                    {# Formulaire de connexion #}
+                    <form method="get">
+                        {# Champ email #}
+                        <label for="email-user">
+                            Email
+                        </label>
+                        <input type="email" name="mail-user" id="email-user" required>
+                            {# Champ mot de passe #}
+                            <label for="mdp">
+                                Mot de passe
+                            </label>
+                            <input type="password" name="mdp" id="mdp" required>
+                                {# Lien mot de passe oublié #}
+                                <a href="#">
+                                    Mot de passe oublié ?
+                                </a>
+                                {# Bouton de connexion #}
+                                <input type="submit" value="Connexion"></form>
+                            </section>
+                        </div>
+                    {% endblock %}
+                    

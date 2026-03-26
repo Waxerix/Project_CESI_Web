@@ -20,8 +20,5 @@
             "name": "mathis",
             "email": "mathisboulenger@gmail.com"
         }
-    ],
-    "require": {
-        "twig/twig": "^3.23"
-    }
+    ]
 }

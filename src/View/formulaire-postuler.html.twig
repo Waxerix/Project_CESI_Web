@@ -1,63 +1,43 @@
+{# Héritage Twig #}
 {% extends 'base.html.twig' %}
 
+{# Titre de la page #}
+{% block title %}Postuler à une offre{% endblock %}
+
 {% block content %}
-    
-    <main class="apply-container">
 
-        <h1 class="page-title">Postuler à cette offre</h1>
+<section>
+    <h2>Postuler à cette offre</h2>
 
-        <div class="apply-split-layout">
-            
-            <aside class="offer-details-col">
-                
-                <div class="content-card">
-                    
-                    <h2 class="offer-title">{{ offre.Title|default('Intitulé du poste') }}</h2>
-                    <h3 class="company-name">{{ offre.CompanyName|default('Nom de l\'entreprise') }}</h3>
-                    
-                    <div class="offer-badges">
-                        {% if offre.Duration %}
-                            <span class="badge">{{ offre.Duration }}</span>
-                        {% endif %}
-                        {% if offre.Salary %}
-                            <span class="badge">{{ offre.Salary }} €</span>
-                        {% endif %}
-                    </div>
+    <div>
+        <h2>Nom de l'entreprise</h2>
+        <p>Intitulé de l'offre</p>
 
-                    <div class="offer-description">
-                        <h4>À propos du poste :</h4>
-                       
-                        <p>{{ offre.Description|default('Description de l\'offre indisponible.')|nl2br }}</p>
-                    </div>
-                </div>
-            </aside>
+        {# IMPORTANT : enctype nécessaire pour upload de fichiers #}
+        <form method="post" enctype="multipart/form-data">
 
-            <section class="apply-form-col">
-                <div class="form-card">
-                    <h2 style="margin-top: 0; margin-bottom: 20px; color: var(--primary-blue);">Votre candidature</h2>
-                    
-                    <form method="post" enctype="multipart/form-data">
-                        
-                        <div class="input-group">
-                            <label for="CV">Votre CV (PDF, DOCX) * :</label>
-                            <input type="file" id="CV" name="CV" accept=".pdf,.docx,.doc" required class="file-input-styled">
-                        </div>
+            {# Upload CV #}
+            <label for="CV">Votre CV :</label>
+            <input type="file" id="CV" name="CV" accept=".pdf,.docx,.doc" required>
 
-                        <div class="input-group">
-                            <label for="lettre-motivation">Lettre de motivation * :</label>
-                            <input type="file" id="lettre-motivation" name="lettre-motivation" accept=".pdf,.docx,.doc" required class="file-input-styled">
-                        </div>
+            {# Upload lettre de motivation #}
+            <label for="lettre-motivation">Lettre de motivation :</label>
+            <input type="file"
+                   id="lettre-motivation"
+                   name="lettre-motivation"
+                   accept=".pdf,.docx,.doc"
+                   required>
 
-                        <div class="input-group">
-                            <label for="commentaire">Vous voulez nous dire quelque chose ? (Optionnel)</label>
-                            <textarea id="commentaire" name="commentaire" rows="5"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn-submit">Envoyer ma candidature</button>
-                    </form>
-                </div>
-            </section>
+            {# Commentaire optionnel #}
+            <label for="commentaire">Vous voulez nous dire quelque chose ?</label>
+            <input type="text" id="commentaire" name="commentaire">
 
-        </div>
-    </main>
+            {# Bouton envoyer (manquait dans ton HTML) #}
+            <input type="submit" value="Envoyer la candidature">
+
+        </form>
+    </div>
+
+</section>
+
 {% endblock %}
