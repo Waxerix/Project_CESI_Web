@@ -6,14 +6,12 @@ const fileInput = document.getElementById('file-upload');
   fileInput.addEventListener('change', function () {
     const file = this.files[0];
  
-    // Vérification que c'est bien une image
     if (!file || !file.type.startsWith('image/')) {
       alert('Veuillez sélectionner un fichier image valide (jpg, png, gif...)');
       this.value = '';
       return;
     }
  
-    // Remplace le rond par la photo
     const reader = new FileReader();
     reader.onload = function (e) {
       uploadCircle.style.backgroundImage = `url('${e.target.result}')`;
