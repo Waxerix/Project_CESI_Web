@@ -50,7 +50,7 @@ class FileDatabase implements Database
         }
     }
 
-    // ✅ Corrigé : User_ au lieu de User
+    
     public function getUserById(int $id): ?array
     {
         try {
@@ -68,7 +68,7 @@ class FileDatabase implements Database
         }
     }
 
-    // ✅ Colonnes alignées avec ta table : ID_user, Email, Password, ID_profil, ID_role
+    
     public function insertUser(string $email, string $password, string $status): void
     {
         try {

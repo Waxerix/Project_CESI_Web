@@ -11,7 +11,7 @@ require "../vendor/autoload.php";
 
 use App\Controllers\MonController;
 
-$loader = new \Twig\Loader\FilesystemLoader('../src/View');
+$loader = new \Twig\Loader\FilesystemLoader('../src/Views');
 $twig = new \Twig\Environment($loader, [
     'debug' => true
 ]);
