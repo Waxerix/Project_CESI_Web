@@ -10,7 +10,7 @@ class JobOfferModel {
     }
     public function getAllOffers() {
         
-        $sql = "SELECT j.ID_offer, j.Title, j.Duration, j.Salary, c.Name as CompanyName 
+        $sql = "SELECT j.ID_offer, j.Category, j.Title, j.Duration, j.Salary, c.Name as CompanyName 
                 FROM Job_offer j 
                 LEFT JOIN Company c ON j.ID_company = c.ID_company 
                 ORDER BY j.ID_offer DESC"; 

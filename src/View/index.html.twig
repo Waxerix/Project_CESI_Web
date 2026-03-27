@@ -3,13 +3,13 @@
 {% block content %}
     <section class="categories-populaires">
         <h3>Recherches fréquentes :</h3>
+        {% for offre in offres_emploi %}
         <div class="tags-container">
-            <span class="tag">💻 Informatique</span>
-            <span class="tag">📈 Marketing</span>
-            <span class="tag">🎨 Design</span>
-            <span class="tag">🤝 Commerce</span>
-            <span class="tag">⚙️ Ingénierie</span>
+            <span class="tag">
+                <h4>{{ offre.Category }}<h4>
+            </span>
         </div>
+        {% endfor %}
     </section>
 
     <div class="layout-principal">
@@ -29,7 +29,10 @@
                     </div>
 
                     <div class="offre-details">
-                        
+                        {% if offre.Category %}
+                            <h4>{{ offre.Category }}</h4>
+                        {% endif %}
+
                         {% if offre.Duration %}
                             <h4>{{ offre.Duration }}</h4>
                         {% endif %}
