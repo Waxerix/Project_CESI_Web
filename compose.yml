@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - .:/var/www/sesomate.local/Project_CESI_Web
+      - .:/var/www/html
     depends_on:
       - db
  
