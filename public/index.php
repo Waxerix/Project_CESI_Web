@@ -24,7 +24,7 @@ $twig->addFunction(new \Twig\TwigFunction('path', function ($nomDeLaRoute, $para
 
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=sesomate;charset=utf8', 'root', '');
+    $pdo = new PDO('mysql:host=localhost;dbname=projet_web;charset=utf8', 'phpmyadmin', '_Mathis2006_');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur de connexion à la base de données : " . $e->getMessage());
