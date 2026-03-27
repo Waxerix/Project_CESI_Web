@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : sam. 21 mars 2026 à 14:25
+-- Généré le : ven. 27 mars 2026 à 12:52
 -- Version du serveur : 8.0.45-0ubuntu0.24.04.1
 -- Version de PHP : 8.3.6
 
@@ -35,6 +35,16 @@ CREATE TABLE `Apply` (
   `comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Déchargement des données de la table `Apply`
+--
+
+INSERT INTO `Apply` (`ID_user`, `ID_offer`, `CV`, `ML`, `comment`) VALUES
+(7, 1, 'cv_mathis.pdf', 'Motivé et passionné par le dev', 'Disponible immédiatement'),
+(8, 1, 'cv_lou.pdf', 'Bonne expérience en PHP', NULL),
+(9, 2, 'cv_seohyun.pdf', 'Compétences en Python et SQL', 'Très motivé'),
+(10, 3, 'cv_shahineze.pdf', 'Ingénierie énergétique', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -50,6 +60,15 @@ CREATE TABLE `Company` (
   `Date_` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Déchargement des données de la table `Company`
+--
+
+INSERT INTO `Company` (`ID_company`, `Name`, `Email`, `Phone_Number`, `Description`, `Date_`) VALUES
+(1, 'TechCorp', 'contact@techcorp.com', '0102030405', 'Entreprise spécialisée en développement web', '2026-01-01'),
+(2, 'DataSolutions', 'hr@datasolutions.com', '0203040506', 'Analyse de données et IA', '2026-02-01'),
+(3, 'GreenEnergy', 'jobs@greenenergy.com', '0304050607', 'Solutions écologiques innovantes', '2026-03-01');
+
 -- --------------------------------------------------------
 
 --
@@ -59,6 +78,18 @@ CREATE TABLE `Company` (
 CREATE TABLE `Date_` (
   `Date_` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `Date_`
+--
+
+INSERT INTO `Date_` (`Date_`) VALUES
+('2026-01-01'),
+('2026-02-01'),
+('2026-03-01'),
+('2026-04-01'),
+('2026-05-01'),
+('2026-06-01');
 
 -- --------------------------------------------------------
 
@@ -72,6 +103,16 @@ CREATE TABLE `Evaluate` (
   `Rate` int DEFAULT NULL,
   `Comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `Evaluate`
+--
+
+INSERT INTO `Evaluate` (`ID_user`, `ID_company`, `Rate`, `Comment`) VALUES
+(7, 1, 4, 'Bonne entreprise'),
+(8, 1, 5, 'Super expérience'),
+(9, 2, 3, 'Correct'),
+(10, 3, 5, 'Excellent environnement');
 
 -- --------------------------------------------------------
 
@@ -90,6 +131,35 @@ CREATE TABLE `Job_offer` (
   `Date__2` date DEFAULT NULL,
   `ID_company` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `Job_offer`
+--
+
+INSERT INTO `Job_offer` (`ID_offer`, `Title`, `Description`, `Salary`, `Duration`, `Date_`, `Date__1`, `Date__2`, `ID_company`) VALUES
+(1, 'Développeur Web', 'Création de sites web en PHP', 2000.00, '6 mois', '2026-03-01', '2026-04-01', '2026-06-01', 1),
+(2, 'Data Analyst', 'Analyse de données Python', 2200.00, '6 mois', '2026-02-01', '2026-03-01', '2026-05-01', 2),
+(3, 'Ingénieur Énergie', 'Optimisation énergétique', 2500.00, '12 mois', '2026-01-01', '2026-02-01', '2026-06-01', 3),
+(4, 'Développeur Front-End', 'HTML CSS JavaScript React', 1800.00, '6 mois', '2026-03-01', '2026-04-01', '2026-06-01', 1),
+(5, 'Développeur Back-End', 'PHP Laravel API REST', 2000.00, '6 mois', '2026-02-01', '2026-03-01', '2026-05-01', 1),
+(6, 'Full Stack Developer', 'Développement complet web', 2100.00, '6 mois', '2026-01-01', '2026-02-01', '2026-06-01', 1),
+(7, 'UX/UI Designer', 'Maquettes Figma et UX design', 1700.00, '4 mois', '2026-03-01', '2026-04-01', '2026-05-01', 1),
+(8, 'Dev Mobile', 'Application Android / iOS', 2000.00, '6 mois', '2026-02-01', '2026-03-01', '2026-06-01', 1),
+(9, 'Data Scientist', 'Machine Learning et IA', 2300.00, '6 mois', '2026-01-01', '2026-02-01', '2026-06-01', 2),
+(10, 'Data Engineer', 'Pipeline de données', 2200.00, '6 mois', '2026-02-01', '2026-03-01', '2026-05-01', 2),
+(11, 'Analyste BI', 'Power BI / Tableau', 2100.00, '5 mois', '2026-03-01', '2026-04-01', '2026-06-01', 2),
+(12, 'Développeur Python', 'Scripts et automatisation', 2000.00, '6 mois', '2026-01-01', '2026-02-01', '2026-05-01', 2),
+(13, 'Ingénieur IA', 'Deep Learning', 2400.00, '6 mois', '2026-02-01', '2026-03-01', '2026-06-01', 2),
+(14, 'Ingénieur Énergie Solaire', 'Optimisation panneaux solaires', 2200.00, '6 mois', '2026-01-01', '2026-02-01', '2026-06-01', 3),
+(15, 'Technicien Énergies', 'Maintenance installations', 1800.00, '6 mois', '2026-02-01', '2026-03-01', '2026-05-01', 3),
+(16, 'Chargé de projet environnement', 'Gestion projets écologiques', 2000.00, '6 mois', '2026-03-01', '2026-04-01', '2026-06-01', 3),
+(17, 'Consultant RSE', 'Stratégie développement durable', 2100.00, '6 mois', '2026-01-01', '2026-02-01', '2026-05-01', 3),
+(18, 'Ingénieur thermique', 'Étude énergétique bâtiments', 2300.00, '6 mois', '2026-02-01', '2026-03-01', '2026-06-01', 3),
+(19, 'DevOps', 'CI/CD Docker Kubernetes', 2300.00, '6 mois', '2026-03-01', '2026-04-01', '2026-06-01', 1),
+(20, 'Cybersecurity Analyst', 'Sécurité des systèmes', 2400.00, '6 mois', '2026-02-01', '2026-03-01', '2026-06-01', 2),
+(21, 'Testeur QA', 'Tests logiciels automatisés', 1800.00, '4 mois', '2026-01-01', '2026-02-01', '2026-04-01', 1),
+(22, 'Product Owner', 'Gestion produit agile', 2100.00, '6 mois', '2026-03-01', '2026-04-01', '2026-06-01', 2),
+(23, 'Scrum Master', 'Organisation agile', 2200.00, '6 mois', '2026-02-01', '2026-03-01', '2026-05-01', 1);
 
 -- --------------------------------------------------------
 
@@ -115,7 +185,8 @@ INSERT INTO `Profil` (`ID_profil`, `Name`, `Lastname`, `Phone_number`) VALUES
 (12, 'Shahineze', 'Kadiri', '0766023865'),
 (13, 'Galaad', 'Goutier', '0667676767'),
 (14, 'Inès ', 'Lancelevée ', '0769566600'),
-(15, 'Nathan', 'Bocquet', '0651452909');
+(15, 'Nathan', 'Bocquet', '0651452909'),
+(18, 'Raphaël', 'Linard', '0786771822');
 
 -- --------------------------------------------------------
 
@@ -161,7 +232,8 @@ INSERT INTO `User_` (`ID_user`, `Email`, `Password`, `ID_profil`, `status`) VALU
 (10, 'shahineze.kadiri@viacesi.fr', '$2y$10$GaDympBANJDf6FwEcSijs.wpw.sa/EB2Oi/DtrF2KBU9jmkzQNM26', 12, 'étudiant'),
 (11, 'galaad.goutier@gmail.com', '$2y$10$eYxcemE/Yva8S0LFpuPrCeww/N.HXTxhMokm2YB3OqPzDd7xFYQIe', 13, 'étudiant'),
 (12, 'ines.lance76@gmail.com', '$2y$10$wzZXdAHLYvjOR/uB5IpgqebdqHMBaUrB80ZntOdWA41swf4IKrndK', 14, 'pilote'),
-(13, 'nathan.bocquetp@gmail.com', '$2y$10$/1//aA8woz58k4AaBXZVF.foeXL29i95yYhU.uD/Fzin90j4pjwGO', 15, 'étudiant');
+(13, 'nathan.bocquetp@gmail.com', '$2y$10$/1//aA8woz58k4AaBXZVF.foeXL29i95yYhU.uD/Fzin90j4pjwGO', 15, 'étudiant'),
+(16, 'raphael.linard@viacesi.fr', '$2y$10$ucP/ey7JejhnXzDxSFsBRewqZCy2iV6QFwchTW4BBCbYiX3ocL8rK', 18, 'étudiant');
 
 -- --------------------------------------------------------
 
@@ -173,6 +245,16 @@ CREATE TABLE `Wishlist` (
   `ID_user` int NOT NULL,
   `ID_offer` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `Wishlist`
+--
+
+INSERT INTO `Wishlist` (`ID_user`, `ID_offer`) VALUES
+(7, 1),
+(8, 1),
+(9, 2),
+(10, 3);
 
 --
 -- Index pour les tables déchargées
@@ -251,25 +333,25 @@ ALTER TABLE `Wishlist`
 -- AUTO_INCREMENT pour la table `Company`
 --
 ALTER TABLE `Company`
-  MODIFY `ID_company` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_company` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `Job_offer`
 --
 ALTER TABLE `Job_offer`
-  MODIFY `ID_offer` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_offer` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT pour la table `Profil`
 --
 ALTER TABLE `Profil`
-  MODIFY `ID_profil` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID_profil` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT pour la table `User_`
 --
 ALTER TABLE `User_`
-  MODIFY `ID_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ID_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Contraintes pour les tables déchargées
