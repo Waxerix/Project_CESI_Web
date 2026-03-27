@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - .:/var/www/html
+      - .:/var/www/Project_CESI_Web
     depends_on:
       - db
  
