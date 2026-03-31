@@ -8,7 +8,7 @@ class HomeController
     private $pdo;
     
 
-    public function __construct($twig, $pdo, $connection = null)
+    public function __construct($twig, $pdo)
     {
         $this->twig = $twig;
         $this->pdo = $pdo;

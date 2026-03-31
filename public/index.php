@@ -45,9 +45,9 @@ $router->get('/postuler/:id', function ($id) use ($twig, $pdo) {
     $controller = new ApplyFormController($twig, $pdo);
     $controller->printApplyForm($id);
 });
-$router->post('/postuler/:id', function () use ($twig,$pdo){
+$router->post('/postuler/:id', function ($id) use ($twig,$pdo){
     $controller = new ApplyFormController($twig, $pdo);
-    $controller->storeCandidacy();
+    $controller->storeCandidacy($id);
 });
 $router->get('/wishlist', function () use ($twig, $pdo) {
     $controller = new WishlistController($twig, $pdo);
