@@ -13,12 +13,16 @@ class ApplyFormController extends Controller
         $this->jobModel = new JobOfferModel($pdo);
     }
 
-    public function storeCandidacy(): void
+    public function storeCandidacy()
     {
         $userId = $_SESSION['user_id'] ?? null;
         $offerId = $_POST['offer_id'] ?? null;
         $comment = $_POST['comment'] ?? null;
+        $LM = $_FILES['LM'] ?? null;
+        $CV = $_FILES['CV'] ?? null;
         if ($this->Model->createCandidacy($userId, $offerId, $comment)) {
+            $this->Model->storeFile($LM);
+            $this->Model->storeFile($CV);
             header('Location: /');
             exit;
         } else {

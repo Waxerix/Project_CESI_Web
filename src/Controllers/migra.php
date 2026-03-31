@@ -1,9 +1,9 @@
 <?php
 // migrate_passwords.php — à supprimer après utilisation !
 require_once __DIR__ . '/../../vendor/autoload.php';
-require_once __DIR__ . '/../../src/core/Database.php';
+use App\Core\Database;
 
-$db  = new App\core\Database();
+$db  = new Database();
 $pdo = $db->connect();
 
 $users = $pdo->query('SELECT ID_user, Password FROM User_')->fetchAll();
