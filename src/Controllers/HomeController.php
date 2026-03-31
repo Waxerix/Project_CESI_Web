@@ -1,23 +1,33 @@
 <?php
 
 require_once __DIR__ . '/../Models/JobOfferModel.php';
-
-class HomeController {
+use App\Models\AccessModel;
+class HomeController
+{
     private $twig;
     private $pdo;
+    
 
-    public function __construct($twig, $pdo) {
+    public function __construct($twig, $pdo, $connection = null)
+    {
         $this->twig = $twig;
         $this->pdo = $pdo;
+
     }
 
-    public function index() {
+    public function index()
+    {
+        $access = new AccessModel($this->pdo);
+        $user = $access->curentUser(); // démarre la session proprement
+
         $jobOfferModel = new JobOfferModel($this->pdo);
-        
         $offres = $jobOfferModel->getAllOffers();
 
         echo $this->twig->render('index.html.twig', [
-            'offres_emploi' => $offres
+            'offres_emploi' => $offres,
+            'user' => $user['pseudo'],
+            'user_admin' => $user['admin'] ?? false,
         ]);
     }
+
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\core;
 
 use PDO;
 use PDOException;
@@ -11,10 +11,10 @@ class FileDatabase implements Database
 
     public function __construct()
     {
-        $host = 'localhost';
+        $host = 'db';
         $dbname = 'projet_web';
-        $username = 'phpmyadmin';
-        $password = '_Mathis2006_';
+        $username = 'dev';
+        $password = 'dev';
 
         try {
             $this->pdo = new PDO(

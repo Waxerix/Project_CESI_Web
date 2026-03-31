@@ -31,7 +31,7 @@
                     <div class="offre-details">
                         
                         {% if offre.Duration %}
-                            <h4>{{ offre.Duration }}</h4>
+                            <h4>{{ offre.Duration }} mois</h4>
                         {% endif %}
                         
                         {% if offre.Salary %}
@@ -41,7 +41,7 @@
                     
                    
                     <div class="offre-actions">
-                        <a href="{{ path('app_postuler', {'id': offre.ID_offer}) }}" class="btn-postuler">Postuler</a>
+                        <a href="/postuler/{{ offre.ID_offer }}" class="btn-postuler">Postuler</a>
                     </div>
                 </article>
 
