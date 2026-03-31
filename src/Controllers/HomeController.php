@@ -21,7 +21,8 @@ class HomeController
         $user = $access->curentUser(); // démarre la session proprement
 
         $jobOfferModel = new JobOfferModel($this->pdo);
-        $offres = $jobOfferModel->getAllOffers();
+        
+        $offres = $jobOfferModel->getBestOffer();
 
         echo $this->twig->render('index.html.twig', [
             'offres_emploi' => $offres,
