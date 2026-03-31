@@ -14,7 +14,7 @@ class HomeController {
     public function index() {
         $jobOfferModel = new JobOfferModel($this->pdo);
         
-        $offres = $jobOfferModel->getAllOffers();
+        $offres = $jobOfferModel->getBestOffer();
 
         echo $this->twig->render('index.html.twig', [
             'offres_emploi' => $offres
