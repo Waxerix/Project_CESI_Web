@@ -368,6 +368,13 @@ footer {
     border-top: 5px solid var(--primary-blue); /* Touche de rappel de couleur */
 }
 
+.form-card h2{
+    margin-top: 0; 
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+}
+
+
 .input-group {
     margin-bottom: 20px;
 }
