@@ -24,7 +24,7 @@ $twig->addFunction(new \Twig\TwigFunction('path', function ($nomDeLaRoute, $para
 
 
 try {
-    $pdo = new PDO('mysql:host=localhost;dbname=projet_web;charset=utf8', 'phpmyadmin', '_Mathis2006_');
+    $pdo = new PDO('mysql:host=db;dbname=projet_web;charset=utf8', 'dev', 'dev');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Erreur de connexion à la base de données : " . $e->getMessage());
@@ -53,7 +53,7 @@ switch ($pageDemandee) {
 
     case 'home':
     default:
-        $controller = new HomeController($twig, $pdo);
-        $controller->index();
+        $controller = new \App\Controllers\UserController($twig, $pdo);
+        $controller->userSearch();
         break;
 }
