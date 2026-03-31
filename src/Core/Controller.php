@@ -1,5 +1,5 @@
 <?php
-namespace App\Controllers;
+namespace App\Core;
 
 /**
  * The base controller class for all controllers in the application.
@@ -10,14 +10,14 @@ abstract class Controller {
      *
      * @var Model null
      */
-    protected $model = null;
+    protected $Model = null;
 
     /**
      * The template engine used by the controller.
      *
      * @var  \Twig\Environment null
      */
-    protected $templateEngine = null;
+    protected $twig = null;
 
     protected $pdo = null;
     

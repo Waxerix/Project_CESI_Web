@@ -1,12 +1,12 @@
 <?php
 
 require_once __DIR__ . '/../Models/JobOfferModel.php';
-
+use App\Models\AccessModel;
 class HomeController
 {
     private $twig;
     private $pdo;
-    private $connection;
+    
 
     public function __construct($twig, $pdo, $connection = null)
     {
@@ -17,8 +17,8 @@ class HomeController
 
     public function index()
     {
-        $access = new AccessController($this->twig, $this->pdo);
-        $user = $access->utilisateurCourant(); // démarre la session proprement
+        $access = new AccessModel($this->pdo);
+        $user = $access->curentUser(); // démarre la session proprement
 
         $jobOfferModel = new JobOfferModel($this->pdo);
         $offres = $jobOfferModel->getAllOffers();
@@ -26,7 +26,7 @@ class HomeController
         echo $this->twig->render('index.html.twig', [
             'offres_emploi' => $offres,
             'user' => $user['pseudo'],
-            'user_admin' => $user['admin'],
+            'user_admin' => $user['admin'] ?? false,
         ]);
     }
 

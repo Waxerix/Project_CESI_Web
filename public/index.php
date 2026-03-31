@@ -2,29 +2,14 @@
 
 require_once '../vendor/autoload.php';
 require_once '../src/Controllers/HomeController.php';
-require_once '../src/Controllers/AccessController.php';
-
-use App\core\router;
-use App\core\Database;
+use App\Controllers\ConnexionController;
+use App\Core\Router;
+use App\Core\Database;
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../src/View');
 $twig   = new \Twig\Environment($loader);
 
-$twig->addFunction(new \Twig\TwigFunction('path', function (string $nomDeLaRoute, array $parametres = []) {
-    $routes = [
-        'app_home'        => '/',
-        'app_inscription' => '/inscription',
-        'app_mentions'    => '/mentions',
-        'app_connexion'   => '/connexion',
-        'app_postuler'    => '/postuler',
-    ];
 
-    $url = $routes[$nomDeLaRoute] ?? '/';
-    if (!empty($parametres['id'])) {
-        $url .= '?id=' . urlencode($parametres['id']);
-    }
-    return $url;
-}));
 
 $db  = new Database();
 $pdo = $db->connect();
@@ -36,22 +21,25 @@ $router->get('/', function () use ($twig, $pdo) {
     $controller->index();
 });
 
-// FIX : méthode renommée afficherConnexion() — gère GET et POST en interne
+// FIX : méthode renommée printConnexion() — gère GET et POST en interne
 $router->get('/connexion', function () use ($twig, $pdo) {
-    $controller = new AccessController($twig, $pdo);
-    $controller->afficherConnexion();
+    $controller = new ConnexionController($twig, $pdo);
+    $controller->printConnexion();
 });
 
 $router->post('/connexion', function () use ($twig, $pdo) {
-    $controller = new AccessController($twig, $pdo);
-    $controller->afficherConnexion();
+    $controller = new ConnexionController($twig, $pdo);
+    $controller->printConnexion();
 });
 
 $router->get('/deconnexion', function () use ($twig, $pdo) {
-    $controller = new AccessController($twig, $pdo);
-    $controller->deconnecter();
+    $controller = new ConnexionController($twig, $pdo);
+    $controller->deconnect();
     header('Location: /');
     exit;
+});
+$router->get('/postuler/:id', function ($id) use ($twig) {
+    $twig->render('formulaire-postuler.html.twig', ['id' => $id]);
 });
 
 $router->run();
