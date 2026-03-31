@@ -16,19 +16,17 @@ class HomeController
     }
 
     public function index()
-    {
-        $access = new AccessModel($this->pdo);
-        $user = $access->curentUser(); // démarre la session proprement
+{
+    $access = new AccessModel($this->pdo);
+    $user = $access->curentUser(); 
 
-        $jobOfferModel = new JobOfferModel($this->pdo);
-        
-        $offres = $jobOfferModel->getBestOffer();
+    $jobOfferModel = new JobOfferModel($this->pdo);
+    $offres = $jobOfferModel->getBestOffer();
 
-        echo $this->twig->render('index.html.twig', [
-            'offres_emploi' => $offres,
-            'user' => $user['pseudo'],
-            'user_admin' => $user['admin'] ?? false,
-        ]);
-    }
+    echo $this->twig->render('index.html.twig', [
+        'offres_emploi' => $offres,
+        'user' => $user, 
+    ]);
+}
 
 }

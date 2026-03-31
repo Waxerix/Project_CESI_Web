@@ -146,13 +146,16 @@ class AccessModel extends Model
         return false;
     }
 
-    public function curentUser(): array
+    public function curentUser(): ?array
     {
-        $this->startSession();
+        if (!$this->isConnect()){
+            return null;
+        }
+
         return [
-            'id' => $_SESSION['user_id'] ?? null,
-            'pseudo' => $_SESSION['user_pseudo'] ?? null,
-            'admin' => $_SESSION['user_admin'] ?? false,
+            'id' => $_SESSION['user_id'],
+            'pseudo' => $_SESSION['user_pseudo'],
+            'admin' => $_SESSION['user_admin'],
         ];
     }
 
