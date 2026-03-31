@@ -2,58 +2,56 @@
 
 require_once '../vendor/autoload.php';
 require_once '../src/Controllers/HomeController.php';
+require_once '../src/Controllers/AccessController.php';
+
+use App\core\router;
+use App\core\Database;
 
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../src/View');
-$twig = new \Twig\Environment($loader);
+$twig   = new \Twig\Environment($loader);
 
-$twig->addFunction(new \Twig\TwigFunction('path', function ($nomDeLaRoute, $parametres = []) {
+$twig->addFunction(new \Twig\TwigFunction('path', function (string $nomDeLaRoute, array $parametres = []) {
     $routes = [
-        'app_home'        => 'index.php',
-        'app_inscription' => 'index.php?page=inscription',
-        'app_mentions'    => 'index.php?page=mentions',
-        'app_connexion'   => 'index.php?page=connexion',
-        'app_postuler'    => 'index.php?page=postuler',
+        'app_home'        => '/',
+        'app_inscription' => '/inscription',
+        'app_mentions'    => '/mentions',
+        'app_connexion'   => '/connexion',
+        'app_postuler'    => '/postuler',
     ];
 
-    $url = $routes[$nomDeLaRoute] ?? 'index.php';
-    if (!empty($parametres) && isset($parametres['id'])) {
-        $url .= '&id=' . $parametres['id'];
+    $url = $routes[$nomDeLaRoute] ?? '/';
+    if (!empty($parametres['id'])) {
+        $url .= '?id=' . urlencode($parametres['id']);
     }
     return $url;
 }));
 
+$db  = new Database();
+$pdo = $db->connect();
 
-try {
-    $pdo = new PDO('mysql:host=db;dbname=projet_web;charset=utf8', 'dev', 'dev');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Erreur de connexion à la base de données : " . $e->getMessage());
-}
+$router = new Router($_GET['url'] ?? '');
 
+$router->get('/', function () use ($twig, $pdo) {
+    $controller = new HomeController($twig, $pdo);
+    $controller->index();
+});
 
-$pageDemandee = $_GET['page'] ?? 'home'; 
+// FIX : méthode renommée afficherConnexion() — gère GET et POST en interne
+$router->get('/connexion', function () use ($twig, $pdo) {
+    $controller = new AccessController($twig, $pdo);
+    $controller->afficherConnexion();
+});
 
-switch ($pageDemandee) {
-    
-    case 'inscription':
-        echo $twig->render('inscription.html.twig', []);
-        break;
+$router->post('/connexion', function () use ($twig, $pdo) {
+    $controller = new AccessController($twig, $pdo);
+    $controller->afficherConnexion();
+});
 
-    case 'mentions':
-        echo $twig->render('mentions-legales.html.twig', []);
-        break;
+$router->get('/deconnexion', function () use ($twig, $pdo) {
+    $controller = new AccessController($twig, $pdo);
+    $controller->deconnecter();
+    header('Location: /');
+    exit;
+});
 
-    case 'connexion':
-        echo $twig->render('connexion.html.twig', []);
-        break;
-
-    case 'postuler':
-        echo $twig->render('formulaire-postuler.html.twig', []);
-        break;
-
-    case 'home':
-    default:
-        $controller = new HomeController($twig, $pdo);
-        $controller->index();
-        break;
-}
+$router->run();

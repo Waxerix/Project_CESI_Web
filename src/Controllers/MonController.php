@@ -30,9 +30,9 @@ class MonController extends Controller
     public function pageInscription()
     {
 
-
+        
         echo $this->templateEngine->render('inscription.html.twig', [
-            'roles' => $this->model->getSelectForRole(),
+            'roles' => $this->connection->getAllRole(),
         ]);
     }
     public function loginPage()
