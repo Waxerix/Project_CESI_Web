@@ -14,7 +14,7 @@ class FileDatabase implements Database
         $host = 'localhost';
         $dbname = 'projet_web';
         $username = 'phpmyadmin';
-        $password = '_Mathis2006_';
+        $password = 'Nams25050614!!';
 
         try {
             $this->pdo = new PDO(

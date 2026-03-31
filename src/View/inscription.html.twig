@@ -2,16 +2,14 @@
 
 {% block content %}
     <main class="main-register">
-       
         <form action="#" method="post" enctype="multipart/form-data" class="register-split-container">
-            
             <div class="split-left-upload">
-               
-                <img src="Asset/img/user.png" alt="Icône utilisateur par défaut" id="profile-preview" class="default-user-icon">
+                {# image de base #}
+                <img src="/Asset/img/user.png" alt="Icône utilisateur" id="profile-preview" class="default-user-icon">
                 
                 <h3>Choisir une photo de profil</h3>
                 
-               
+                {# permettre tous les images en utilisant accept="image/*" #}
                 <input type="file" id="photo" name="photo" accept="image/*" required class="standard-file-input">
             </div>
 
@@ -59,12 +57,16 @@
                     <button type="submit" class="btn-submit">Créer un compte</button>
                 </div>
             </div>
-
         </form>
     </main>
+
+    {# 
+       Pour résoudre le problème d'affichage du script dans l'onglet Network (Inspecter), 
+       on place-le tout en bas à l'intérieur du bloc de contenu, et non à l'extérieur.
+    #}
+    <script src="/js/preview.js"></script>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="preview.js" defer></script>
 {% endblock %}

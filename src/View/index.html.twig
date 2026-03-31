@@ -17,19 +17,16 @@
         <section class="liste-offres">
             <h2>Les offres du moment...</h2>
             
-           
             {% for offre in offres_emploi %}
                
                 <article class="offre-card">
                     
                     <div class="offre-header">
-                        
                         <h3>{{ offre.CompanyName|default('Entreprise non précisée') }}</h3>
                         <p class="offre-title">{{ offre.Title }}</p>
                     </div>
 
                     <div class="offre-details">
-                        
                         {% if offre.Duration %}
                             <h4>{{ offre.Duration }}</h4>
                         {% endif %}
@@ -39,13 +36,16 @@
                         {% endif %}
                     </div>
                     
-                   
                     <div class="offre-actions">
                         <a href="{{ path('app_postuler', {'id': offre.ID_offer}) }}" class="btn-postuler">Postuler</a>
+                        
+                        {# --- AJOUT DU BOUTON WISHLIST --- #}
+                        <a href="{{ path('app_wishlist_add', {'id': offre.ID_offer}) }}" class="btn-wishlist" style="margin-left: 10px; text-decoration: none; border: 1px solid #e0e0e0; padding: 8px 12px; border-radius: 5px; background-color: #fff;">
+                            ❤️ Favoris
+                        </a>
                     </div>
                 </article>
 
-            
             {% else %}
                 <p>Aucune offre d'emploi disponible pour le moment.</p>
             {% endfor %}
