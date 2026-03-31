@@ -1,43 +1,68 @@
-{# Héritage Twig #}
 {% extends 'base.html.twig' %}
-
-{# Titre de la page #}
-{% block title %}Postuler à une offre{% endblock %}
-
 {% block content %}
-
-<section>
-    <h2>Postuler à cette offre</h2>
-
-    <div>
-        <h2>Nom de l'entreprise</h2>
-        <p>Intitulé de l'offre</p>
-
-        {# IMPORTANT : enctype nécessaire pour upload de fichiers #}
-        <form method="post" enctype="multipart/form-data">
-
-            {# Upload CV #}
-            <label for="CV">Votre CV :</label>
-            <input type="file" id="CV" name="CV" accept=".pdf,.docx,.doc" required>
-
-            {# Upload lettre de motivation #}
-            <label for="lettre-motivation">Lettre de motivation :</label>
-            <input type="file"
-                   id="lettre-motivation"
-                   name="lettre-motivation"
-                   accept=".pdf,.docx,.doc"
-                   required>
-
-            {# Commentaire optionnel #}
-            <label for="commentaire">Vous voulez nous dire quelque chose ?</label>
-            <input type="text" id="commentaire" name="commentaire">
-
-            {# Bouton envoyer (manquait dans ton HTML) #}
-            <input type="submit" value="Envoyer la candidature">
-
-        </form>
-    </div>
-
-</section>
-
-{% endblock %}
+    <h1 class="page-title">
+        Postuler à cette offre
+    </h1>
+    <div class="apply-split-layout">
+        <aside class="offer-details-col">
+            <div class="content-card">
+                <h2 class="offer-title">
+                    {{ offre.Title }}
+                </h2>
+                <h3 class="company-name">
+                    {{ offre.CompanyName }}
+                </h3>
+                <div class="offer-badges">
+                    {% if offre.Duration %}
+                        <span class="badge">
+                            {{ offre.Duration }} mois
+                        </span>
+                    {% endif %}
+                    {% if offre.Salary %}
+                        <span class="badge">
+                            {{ offre.Salary }}
+                            €
+                        </span>
+                    {% endif %}
+                </div>
+                <div class="offer-description">
+                    <h4>
+                        À propos du poste :
+                    </h4>
+                    <p>
+                        {{ offre.Description }}
+                    </p>
+                </div>
+            </div>
+        </aside>
+        <section class="apply-form-col">
+            <div class="form-card">
+                <h2>
+                    Votre candidature
+                </h2>
+                <form method="post" enctype="multipart/form-data">
+                    <div class="input-group">
+                        <label for="CV">
+                            Votre CV (PDF, DOCX) * :
+                        </label>
+                        <input type="file" id="CV" name="CV" accept=".pdf,.docx,.doc" required class="file-input-styled"></div>
+                        <div class="input-group">
+                            <label for="lettre-motivation">
+                                Lettre de motivation * :
+                            </label>
+                            <input type="file" id="lettre-motivation" name="lettre-motivation" accept=".pdf,.docx,.doc" required class="file-input-styled"></div>
+                            <div class="input-group">
+                                <label for="commentaire">
+                                    Vous voulez nous dire quelque chose ? (Optionnel)
+                                </label>
+                                <textarea id="commentaire" name="commentaire" rows="5"></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit">
+                                Envoyer ma candidature
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        {% endblock %}
+        
