@@ -1,6 +1,6 @@
 <?php
-
-require_once __DIR__ . '/../Models/JobOfferModel.php';
+namespace App\Controllers;
+use App\Models\JobOfferModel;
 use App\Models\AccessModel;
 class HomeController
 {

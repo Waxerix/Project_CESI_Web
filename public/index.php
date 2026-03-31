@@ -1,8 +1,9 @@
 <?php
 
 require_once '../vendor/autoload.php';
-require_once '../src/Controllers/HomeController.php';
+use App\Controllers\HomeController;
 use App\Controllers\ConnexionController;
+use App\Controllers\ApplyFormController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -38,8 +39,10 @@ $router->get('/deconnexion', function () use ($twig, $pdo) {
     header('Location: /');
     exit;
 });
-$router->get('/postuler/:id', function ($id) use ($twig) {
-    $twig->render('formulaire-postuler.html.twig', ['id' => $id]);
+
+$router->get('/postuler/:id', function ($id) use ($twig, $pdo) {
+    $controller = new ApplyFormController($twig, $pdo);
+    $controller->printApplyForm($id);
 });
 
 $router->run();

@@ -1,91 +1,18 @@
 <?php
 namespace App\Models;
-use PDO;
+use App\Core\Model;
 
 define('COOKIE_DUREE', 7 * 24 * 3600);
 define('COOKIE_NOM', 'remember_token');
-class AccessModel
+class AccessModel extends Model
 {
-    private $pdo;
 
     public function __construct($pdo)
     {
         $this->pdo = $pdo;
     }
 
-    public function getUserById($id)
-    {
-        $stmt = $this->pdo->prepare('SELECT * FROM User_ WHERE ID_user = :id');
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-    public function getUserByUsername($username)
-    {
-        $stmt = $this->pdo->prepare('SELECT * FROM User_ WHERE Email = :username');
-        $stmt->bindValue(':username', $username);
-        $stmt->execute();
-        return $stmt->fetch();
-    }
-    public function getUserByUsernameAndPassword($username, $password)
-    {
-        $stmt = $this->pdo->prepare('SELECT * FROM User_ WHERE Email = :username');
-        $stmt->bindValue(':username', $username);
-        $stmt->execute();
-        $user = $stmt->fetch();
-
-        if ($user && password_verify($password, $user['Password'])) {
-            return $user;
-        }
-        return false;
-    }
-
-    public function createUser($email, $password, $admin = 0)
-    {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt = $this->pdo->prepare('INSERT INTO User_ (Email, Password, ID_role) VALUES (:email, :password, :admin)');
-        $stmt->bindValue(':email', $email);
-        $stmt->bindValue(':password', $hashedPassword);
-        $stmt->bindValue(':admin', $admin, PDO::PARAM_INT);
-        return $stmt->execute();
-    }
-    public function deleteUser($id)
-    {
-        $stmt = $this->pdo->prepare('DELETE FROM User_ WHERE ID_user = :id');
-        $stmt->bindValue(':id', $id);
-        return $stmt->execute();
-    }
-    public function updateUser($id, $email, $password = null, $admin = null)
-    {
-        $fields = [];
-        if ($email) {
-            $fields[] = 'Email = :email';
-        }
-        if ($password) {
-            $fields[] = 'Password = :password';
-        }
-        if ($admin !== null) {
-            $fields[] = 'ID_role = :admin';
-        }
-        if (empty($fields)) {
-            return false; // Rien à mettre à jour
-        }
-
-        $sql = 'UPDATE User_ SET ' . implode(', ', $fields) . ' WHERE ID_user = :id';
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':id', $id);
-        if ($email) {
-            $stmt->bindValue(':email', $email);
-        }
-        if ($password) {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $stmt->bindValue(':password', $hashedPassword);
-        }
-        if ($admin !== null) {
-            $stmt->bindValue(':admin', $admin, PDO::PARAM_INT);
-        }
-        return $stmt->execute();
-    }
+    
     public function startSession(): void
     {
         if (session_status() === PHP_SESSION_NONE) {
