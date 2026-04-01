@@ -146,10 +146,9 @@ class AccessModel extends Model
         return false;
     }
 
-    public function curentUser(): array
+    public function currentUser(): array
     {
         $this->startSession();
-        print_r($_SESSION);
         
         return [
             'id' => $_SESSION['user_id'] ?? null,

@@ -25,6 +25,18 @@ class CandidacyModel extends Model
     }
     public function createCandidacy(int $userId, int $offerId, string $comment): bool
     {
+        $verif = $this->pdo->prepare(
+            'SELECT COUNT(*) FROM Apply WHERE ID_user = :userId AND ID_offer = :offerId'
+        );
+        $verif->bindValue(':userId', $userId, \PDO::PARAM_INT);
+        $verif->bindValue(':offerId', $offerId, \PDO::PARAM_INT);
+        $verif->execute();
+        $count = $verif->fetchColumn();
+
+        if ($count > 0) {
+            return false; // L'utilisateur a déjà postulé à cette offre
+        }
+
         $stmt = $this->pdo->prepare(
             'INSERT INTO Apply (ID_user, ID_offer, Comment)
              VALUES (:userId, :offerId, :comment)'
