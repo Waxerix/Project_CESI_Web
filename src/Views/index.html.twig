@@ -22,11 +22,6 @@
             </span>
         </div>
     </section>
-    {% if flash %}
-        <script>
-    alert("{{ flash }}");
-</script>
-    {% endif %}
     <div class="layout-principal">
         <section class="liste-offres">
             <h2>
@@ -111,5 +106,8 @@
                 </div>
             </aside>
         </div>
+        {% if flash %}
+            <script src="../js/message_p.js"></script>
+        {% endif %}
     {% endblock %}
     
