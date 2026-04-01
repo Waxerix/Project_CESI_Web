@@ -191,7 +191,7 @@ main {
 .tag {
     background-color: white;
     color: var(--primary-blue);
-    padding: 6px 15px;
+    padding: 1px 15px;
     border-radius: 20px;
     font-size: 0.9rem;
     cursor: pointer;
@@ -401,6 +401,13 @@ footer {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border-top: 5px solid var(--primary-blue);
 }
+
+.form-card h2{
+    margin-top: 0; 
+    margin-bottom: 20px;
+    color: var(--primary-blue);
+}
+
 
 .input-group {
     margin-bottom: 20px;
@@ -816,4 +823,122 @@ footer {
     .offer-details-col {
         margin-bottom: 20px;
     }
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-profile-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none; 
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: transform var(--transition-speed);
+}
+
+.user-profile-link:hover {
+    transform: scale(1.05);
+}
+
+.user-profile-link img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dashboard-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+
+.dashboard-header {
+    margin-bottom: 30px;
+}
+
+.dashboard-header h1 {
+    color: var(--primary-blue);
+}
+
+.dashboard-header h2 {
+    color: var(--text-muted);
+    font-weight: normal;
+    font-size: 1.2rem;
+    margin-top: 5px;
+}
+
+/* Titres de sections */
+.dashboard-section-title {
+    color: var(--primary-blue);
+    font-size: 1.4rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.admin-title {
+    color: var(--secondary-blue);
+    border-bottom-color: var(--secondary-blue);
+}
+
+/* Grille des cartes */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Style des cartes cliquables */
+.dashboard-card {
+    background-color: var(--card-bg);
+    padding: 25px 20px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: var(--text-main);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid var(--primary-blue);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Variante pour les cartes d'administration */
+.admin-card {
+    border-top: 4px solid var(--secondary-blue);
+    background-color: #f8fbff;
+}
+
+/* Contenu des cartes */
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.dashboard-card h4 {
+    margin: 0 0 10px 0;
+    color: var(--primary-blue);
+    font-size: 1.2rem;
+}
+
+.dashboard-card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
 }

@@ -63,4 +63,5 @@ class ConnexionController extends Controller
     {
         return $this->Model->curentUser();
     }
+
 }

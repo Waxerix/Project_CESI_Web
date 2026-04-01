@@ -1,82 +1,46 @@
 {% block header %}
     <div class="logo-container">
         <a href="/">
-            <img src="../Asset/img/image.png" alt="logo" class="logo"></a>
+            <img src="../Asset/img/image.png" alt="logo" class="logo">
+        </a>
+    </div>
+
+    <div class="container">
+        <div class="titre-container">
+            <h1>SeSoMate</h1>
+            <h2>Trouvez les meilleurs offres du moment</h2>
         </div>
 
-        <div class="container">
-            <div class="titre-container">
-                <h1>
-                    SeSoMate
-                </h1>
-                <h2>
-                    Trouvez les meilleurs offres du moment
-                </h2>
-            </div>
+        <div class="actions-container">
+            <input type="search" placeholder="Rechercher...">
+            <select name="filtres" id="fil">
+                <option value="Entreprise">Entreprise</option>
+                <option value="Offre">Offre</option>
+                <option value="Wishlist">Wishlist</option>
+            </select>
 
-            <div class="actions-container">
-                <form action="/search" method="post" enctype="multipart/form-data">
-                <input type="search" name="search" id="search" placeholder="Rechercher...">
-                <input type="submit" value="🔎" class="btn-submit">
+                <select name="tri" id="tri">
+                <option value="Tri">Tri</option>
+                <option value="Intitulé">Intitulé</option>
+                <option value="Salaire">Salaire</option>
+                <option value="Date">Date</option>
+            </select>
+        </div>
+    </div>
 
-                    <select name="filter" id="filter">
-                        <option value="Entreprise">
-                            Entreprise
-                        </option>
-                        <option value="Offer">
-                            Offre
-                        </option>
-                        <option value="Student">
-                            Etudiant
-                        </option>
-                        <option value="Pilote">
-                            Pilote
-                        </option>
-                        <option value="Wishlist">
-                            Wishlist
-                        </option>
-                    </select>
-
-                    <select name="tri" id="tri">
-                        <option value="Tri">
-                            Tri
-                        </option>
-                        <option value="Intitulé">
-                            Intitulé
-                        </option>
-                        <option value="Salaire">
-                            Salaire
-                        </option>
-                        <option value="Date">
-                            Date
-                        </option>
-                    </select>
-
-                </div>
-                </form>
-            </div>
-            <div class="login-container">
-                <div class="login-container">
-                    {% if user is not null and user_admin is true %}
-                        <a href="/inscription">
-                            <button>
-                                sign up
-                            </button>
-                        </a>
-                    {% endif %}
-                    {% if user is null %}
-                        <a href="/connexion">
-                            <button>
-                                sign in
-                            </button>
-                        </a>
-                    {% else %}
-                        <a href="/deconnexion">
-                            <button>
-                                sign out
-                            </button>
-                        </a>
-                    {% endif %}
-                </div>
-            {% endblock %}
-            
+    <div class="login-container">
+    {% if user %}
+        <a href="/deconnexion">
+            <button>Sign out</button>
+        </a>
+    <a href="/espace-compte" class="user-profile-link">
+            <img src="/Asset/img/default-avatar.png" alt="Profil">
+            <span>{{ user.pseudo }}</span>
+        </a>
+    {% else %}
+        <a href="/connexion">
+            <button>Sign in</button>
+        </a>
+    {% endif %}
+</div>
+{% endblock %}
