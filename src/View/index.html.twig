@@ -3,12 +3,14 @@
 {% block content %}
     <section class="categories-populaires">
         <h3>Recherches fréquentes :</h3>
-        {% for offre in offres_emploi %}
+        {% for category in category %}
+            {% if category %}
         <div class="tags-container">
             <span class="tag">
-                {{ offre.Category }}
+                {{ category }}
             </span>
         </div>
+            {% endif %}
         {% endfor %}
     </section>
 

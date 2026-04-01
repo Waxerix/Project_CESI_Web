@@ -23,8 +23,12 @@ class HomeController
     $jobOfferModel = new JobOfferModel($this->pdo);
     $offres = $jobOfferModel->getBestOffer();
 
+    $allCategory = array_column($offres, 'Category');
+    $UniqueCategory = array_unique($allCategory);
+
     echo $this->twig->render('index.html.twig', [
         'offres_emploi' => $offres,
+        'category' => $UniqueCategory,
         'user' => $user, 
     ]);
 }
