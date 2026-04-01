@@ -11,9 +11,9 @@ class CandidacyModel extends Model
     public function storeFile($file): ?string
     {
         $targetDir = __DIR__ . '/../../public/uploads/';
-        if (!is_dir($targetDir)) {
-            mkdir($targetDir, 0755, true);
-        }
+        
+        mkdir($targetDir, 0755, true);
+        
 
         $filename = uniqid() . '_' . basename($file['name']);
         $targetFile = $targetDir . $filename;
