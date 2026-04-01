@@ -178,7 +178,11 @@ INSERT INTO `Profil` (`ID_profil`, `Name`, `Lastname`, `Phone_number`) VALUES
 (6, 'Admin', 'Root', '0600000006');
 
 -- --------------------------------------------------------
-
+CREATE TABLE `Promotion`(
+  `ID_promotion` int NOT NULL,
+  `Name` varchar(50) DEFAULT NULL,
+  `ID_pilote` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 --
 -- Structure de la table `Remember_tokens`
 --
@@ -219,7 +223,10 @@ INSERT INTO `Role` (`ID_role`, `Status`) VALUES
 (3, 'ADMIN');
 
 -- --------------------------------------------------------
-
+CREATE TABLE `Study`(
+  `ID_Promotion` int NOT NULL,
+  `ID_user` int NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 --
 -- Structure de la table `User_`
 --
@@ -287,7 +294,9 @@ INSERT INTO `Wishlist` (`ID_user`, `ID_offer`) VALUES
 --
 -- Index pour les tables déchargées
 --
-
+ALTER TABLE `Study`
+  ADD PRIMARY KEY (`ID_user`,`ID_Promotion`),
+  ADD KEY `ID_Promotion` (`ID_Promotion`);
 --
 -- Index pour la table `Allowed`
 --
@@ -319,8 +328,8 @@ ALTER TABLE `Evaluate`
 -- Index pour la table `Job_offer`
 --
 ALTER TABLE `Job_offer`
-  ADD PRIMARY KEY (`ID_offer`);
-
+  ADD PRIMARY KEY (`ID_offer`),
+  ADD KEY `ID_company` (`ID_company`);
 --
 -- Index pour la table `Profil`
 --
@@ -348,6 +357,9 @@ ALTER TABLE `User_`
   ADD KEY `ID_profil` (`ID_profil`),
   ADD KEY `ID_role` (`ID_role`);
 
+ALTER TABLE `Promotion`
+  ADD PRIMARY KEY (`ID_promotion`),
+  ADD KEY `ID_pilote` (`ID_pilote`);
 --
 -- Index pour la table `Utility`
 --
@@ -364,7 +376,8 @@ ALTER TABLE `Wishlist`
 --
 -- AUTO_INCREMENT pour les tables déchargées
 --
-
+ALTER TABLE `Promotion`
+  MODIFY `ID_promotion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `Company`
 --
@@ -407,10 +420,14 @@ ALTER TABLE `User_`
 ALTER TABLE `Utility`
   MODIFY `ID_utility` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
+ALTER TABLE `Study`
+  ADD CONSTRAINT `Study_ibfk_1` FOREIGN KEY (`ID_user`) REFERENCES `User_` (`ID_user`),
+  ADD CONSTRAINT `Study_ibfk_2` FOREIGN KEY (`ID_Promotion`) REFERENCES `Promotion` (`ID_promotion`);
 --
 -- Contraintes pour les tables déchargées
 --
-
+ALTER TABLE `Promotion`
+  ADD CONSTRAINT `Promotion_ibfk_1` FOREIGN KEY (`ID_pilote`) REFERENCES `User_` (`ID_user`);
 --
 -- Contraintes pour la table `Allowed`
 --
@@ -445,9 +462,7 @@ ALTER TABLE `User_`
   ADD CONSTRAINT `User__ibfk_1` FOREIGN KEY (`ID_profil`) REFERENCES `Profil` (`ID_profil`),
   ADD CONSTRAINT `User__ibfk_2` FOREIGN KEY (`ID_role`) REFERENCES `Role` (`ID_role`);
 
-ALTER TABLE `Job_offer`
-  ADD PRIMARY KEY (`ID_offer`),
-  ADD KEY `ID_company` (`ID_company`);
+
 --
 -- Contraintes pour la table `Wishlist`
 --
