@@ -17,13 +17,13 @@ class SearchController extends Controller{
         $this->PiloteModel = new PiloteModel($this->pdo);
     }
 
-    public function userSearch() {
+    public function search() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['filter']=== 'Student'){
                 try {
                     $users = $this->StudentModel->searchStudent($_POST['search']);
 
-                    echo $this->twig->render('user-gestion.html.twig', [
+                    echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
                         'search'=> $_POST['search']
                     ]);
@@ -36,7 +36,7 @@ class SearchController extends Controller{
                 try {
                     $users = $this->PiloteModel->searchPilote($_POST['search']);
 
-                    echo $this->twig->render('user-gestion.html.twig', [
+                    echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
                         'search' => $_POST['search']
                     ]);
@@ -47,5 +47,22 @@ class SearchController extends Controller{
                 }
             }
         }
+    }
+
+    public function showUser($id){
+        $sql = "
+            SELECT * FROM User_ u 
+            INNER JOIN Profil p ON u.ID_profil = p.ID_profil
+            INNER JOIN Role r ON u.ID_role = r.ID_role
+            WHERE ID_user= :id ;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $id, \PDO::PARAM_STR);
+        $stmt->execute();
+        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+        echo $this->twig->render('user-informations.html.twig', [
+            'user' => $user
+        ]);
+
+
     }
 }

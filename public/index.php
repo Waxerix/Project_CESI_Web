@@ -47,6 +47,10 @@ $router->post('/inscription', function () use ($twig,$pdo){
 });
 $router->post('/search', function () use ($twig,$pdo){
     $controller=new SearchController($twig,$pdo);
-    $controller->userSearch();
+    $controller->search();
+});
+$router->get('/utilisateur/:id', function ($id) use ($twig,$pdo) {
+    $controller=new SearchController($twig,$pdo);
+    $controller->showUser($id);
 });
 $router->run();

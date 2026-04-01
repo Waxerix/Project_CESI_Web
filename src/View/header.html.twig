@@ -1,7 +1,7 @@
 {% block header %}
     <div class="logo-container">
         <a href="/">
-            <img src="Asset/img/image.png" alt="logo" class="logo"></a>
+            <img src="../Asset/img/image.png" alt="logo" class="logo"></a>
         </div>
 
         <div class="container">
@@ -17,6 +17,7 @@
             <div class="actions-container">
                 <form action="/search" method="post" enctype="multipart/form-data">
                 <input type="search" name="search" id="search" placeholder="Rechercher...">
+                <input type="submit" value="🔎" class="btn-submit">
 
                     <select name="filter" id="filter">
                         <option value="Entreprise">
@@ -51,7 +52,6 @@
                         </option>
                     </select>
 
-                    <input type="submit" value="rechercher" class="btn-submit">
                 </div>
                 </form>
             </div>
