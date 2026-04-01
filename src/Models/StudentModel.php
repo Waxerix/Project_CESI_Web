@@ -148,13 +148,18 @@ class StudentModel extends Model{
             $idProfil = $stmt->fetchColumn();
 
             if ($idProfil) {
+                $tables = ['Apply', 'Wishlist','Evaluate']; // ajoutez toutes les tables liées
+                foreach ($tables as $table) {
+                    $stmt = $this->pdo->prepare("DELETE FROM $table WHERE ID_user = :id");
+                    $stmt->execute([':id' => $idUser]);
+                }
                 // 2. Supprimer l'utilisateur d'abord (table dépendante)
                 $stmtUser = $this->pdo->prepare("DELETE FROM User_ WHERE ID_user = :id");
                 $stmtUser->execute(['id' => $idUser]);
 
                 // 3. Supprimer le profil (table parente)
                 $stmtProfil = $this->pdo->prepare("DELETE FROM Profil WHERE ID_profil = :id_profil");
-                $stmtProfil.execute(['id_profil' => $idProfil]);
+                $stmtProfil->execute(['id_profil' => $idProfil]);
             }
 
             $this->pdo->commit();
@@ -166,5 +171,26 @@ class StudentModel extends Model{
             }
             throw $e;
         }
+    }
+
+    public function isStudent(int $idUser){
+        $sql = "
+            SELECT
+                r.ID_role
+            FROM User_ u
+            INNER JOIN Profil p ON u.ID_profil = p.ID_profil
+            INNER JOIN Role r ON u.ID_role = r.ID_role  -- Jointure avec la table Role
+            WHERE 
+                u.ID_user = :id
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $idUser, \PDO::PARAM_STR);
+        $stmt->execute();
+        $result=$stmt->fetch();
+        if ($result[0] == 1){
+            return True;
+        }
+        return False;
+
     }
 }

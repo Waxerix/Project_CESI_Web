@@ -3,7 +3,9 @@
 require_once '../vendor/autoload.php';
 use App\Controllers\HomeController;
 use App\Controllers\ConnexionController;
-use App\Controllers\SearchController;
+use App\Controllers\UserSearchController;
+use App\Controllers\UserController;
+use App\Controllers\AccountController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -52,12 +54,22 @@ $router->get('/espace-compte', function () use ($twig, $pdo) {
 $router->post('/inscription', function () use ($twig,$pdo){
     $controller=new InscriptionController($twig,$pdo);
 });
-$router->post('/search', function () use ($twig,$pdo){
-    $controller=new SearchController($twig,$pdo);
+
+$router->get('/admin/utilisateurs', function () use ($twig,$pdo){
+    $controller=new UserSearchController($twig,$pdo);
     $controller->search();
 });
+$router->post('/admin/utilisateurs/results', function () use ($twig,$pdo){
+    $controller=new UserSearchController($twig,$pdo);
+    $controller->result();
+});
+$router->post('/admin/utilisateurs/delete/:id', function ($id) use ($twig,$pdo) {
+    $controller=new UserController($twig,$pdo);
+    $controller->deleteUser($id);
+});
 $router->get('/utilisateur/:id', function ($id) use ($twig,$pdo) {
-    $controller=new SearchController($twig,$pdo);
+    $controller=new UserSearchController($twig,$pdo);
     $controller->showUser($id);
 });
+
 $router->run();

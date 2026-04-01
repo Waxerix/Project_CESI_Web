@@ -28,8 +28,12 @@
         <aside class="sidebar">
             <div class="widget alert-widget">
                 <h3>Options</h3>
-                <a href="/connexion">Modifier le compte</a>
-                <a href="/">Supprimer le compte</a>
+                <form action="" method="post">
+                    <button type="submit" class="btn-supprimer">Modifier le compte</button>
+                </form>
+                <form action="/admin/utilisateurs/delete/{{ user.ID_user }}" method="post" onsubmit="return confirm('Supprimer cet utilisateur ?')">
+                    <button type="submit" class="btn-supprimer onsubmit="return confirm('Supprimer cet utilisateur ?')">Supprimer le compte</button>
+                </form>
             </div>
         </aside>  
             {% else %}

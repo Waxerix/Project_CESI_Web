@@ -148,13 +148,13 @@ class PiloteModel extends Model{
             $idProfil = $stmt->fetchColumn();
 
             if ($idProfil) {
-                // 2. Supprimer l'utilisateur d'abord (table dépendante)
+                // 1. Supprimer l'utilisateur d'abord (table dépendante)
                 $stmtUser = $this->pdo->prepare("DELETE FROM User_ WHERE ID_user = :id");
                 $stmtUser->execute(['id' => $idUser]);
 
-                // 3. Supprimer le profil (table parente)
+                // 2. Supprimer le profil (table parente)
                 $stmtProfil = $this->pdo->prepare("DELETE FROM Profil WHERE ID_profil = :id_profil");
-                $stmtProfil.execute(['id_profil' => $idProfil]);
+                $stmtProfil->execute(['id_profil' => $idProfil]);
             }
 
             $this->pdo->commit();
@@ -166,5 +166,24 @@ class PiloteModel extends Model{
             }
             throw $e;
         }
+    }
+
+    public function isPilote(int $idUser){
+        $sql = "
+            SELECT
+                ID_role
+            FROM User_
+            WHERE 
+                ID_user = :id
+        ";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $idUser, \PDO::PARAM_STR);
+        $stmt->execute();
+        $result=$stmt->fetch();
+        if ($result[0] == 2){
+            return True;
+        }
+        return False;
+
     }
 }

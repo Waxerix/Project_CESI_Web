@@ -6,7 +6,7 @@ use App\Core\Controller;
 use App\Models\StudentModel;
 use App\Models\PiloteModel;
 
-class SearchController extends Controller{
+class UserSearchController extends Controller{
     private $StudentModel;
     private $PiloteModel;
 
@@ -18,6 +18,14 @@ class SearchController extends Controller{
     }
 
     public function search() {
+        $users = $this->StudentModel->searchStudent('')+$this->PiloteModel->searchPilote('');
+        echo $this->twig->render('user-search.html.twig', [
+                        'users' => $users,
+                        'search'=> ''
+                    ]);
+    }
+
+    public function result() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['filter']=== 'Student'){
                 try {

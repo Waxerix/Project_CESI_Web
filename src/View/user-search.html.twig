@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+            <div class="container">
+                <form action="/admin/utilisateurs/results" method="post" enctype="multipart/form-data">
+                        <input type="search" name="search" id="search" placeholder="Rechercher...">
+
+                            <select name="filter" id="filter">
+                                <option value="Student">Etudiant</option>
+                                <option value="Pilote">Pilote</option>
+                            </select>
+                </form>
+            </div>
     <div class="layout-principal">
-        
         <section class="liste-offres">
             <h2>Résultats pour la recherche '{{search}}'</h2>
             
@@ -39,16 +48,18 @@
 
         <aside class="sidebar">
             <div class="widget alert-widget">
-                <h3>📊 Statistiques</h3>
-                <p>Gérez les accès et les informations des membres de la plateforme SeSoMate.</p>
+                <h3>Options :</h3>
+                <form action="/admin/utilisateurs/create" method="post">
+                    <button type="submit" class="btn-supprimer">Créer un compte</button>
+                </form>
             </div>
 
             <div class="widget info-widget">
                 <h3>Rôles disponibles</h3>
                 <ul>
                     <li>✓ Admin : Gestion totale</li>
-                    <li>✓ User : Consultation</li>
-                    <li>✓ Guest : Accès limité</li>
+                    <li>✓ Pilote : Gestion de sa promotion</li>
+                    <li>✓ Etudiant : Accès limité</li>
                 </ul>
             </div>
         </aside>  
