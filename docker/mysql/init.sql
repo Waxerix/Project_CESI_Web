@@ -218,9 +218,9 @@ CREATE TABLE `Role` (
 --
 
 INSERT INTO `Role` (`ID_role`, `Status`) VALUES
-(1, 'CANDIDATE'),
-(2, 'RECRUITER'),
-(3, 'ADMIN');
+(1, 'Etudiant'),
+(2, 'Pilote'),
+(3, 'Admin');
 
 -- --------------------------------------------------------
 CREATE TABLE `Study`(

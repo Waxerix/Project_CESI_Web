@@ -12,8 +12,10 @@ class CandidacyModel extends Model
     }
     public function storeFile($file): ?string
     {
-        $targetDir = __DIR__ . '/../../public/uploads/';
-
+        $targetDir = __DIR__ . '/../../public/uploads/' . $_SESSION["user_pseudo"] . '/';
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
 
         $filename = uniqid() . '_' . basename($file['name']);
         $targetFile = $targetDir . $filename;
@@ -51,5 +53,5 @@ class CandidacyModel extends Model
     public function getErreur(): int
     {
         return $this->erreur;
-    }   
+    }
 }

@@ -18,6 +18,8 @@ $twig   = new \Twig\Environment($loader);
 $db  = new Database();
 $pdo = $db->connect();
 
+$ConnexionController = new ConnexionController($twig, $pdo);
+
 $router = new Router($_GET['url'] ?? '');
 
 $router->get('/', function () use ($twig, $pdo) {
@@ -25,27 +27,27 @@ $router->get('/', function () use ($twig, $pdo) {
     $controller->index();
 });
 // FIX : méthode renommée printConnexion() — gère GET et POST en interne
-$router->get('/connexion', function () use ($twig, $pdo) {
-    $controller = new ConnexionController($twig, $pdo);
-    $controller->printConnexion();
+$router->get('/connexion', function () use ($ConnexionController) {
+    $ConnexionController->printConnexion();
 });
 
-$router->post('/connexion', function () use ($twig, $pdo) {
-    $controller = new ConnexionController($twig, $pdo);
-    $controller->printConnexion();
+$router->post('/connexion', function () use ($ConnexionController) {
+    $ConnexionController->printConnexion();
 });
 
-$router->get('/deconnexion', function () use ($twig, $pdo) {
-    $controller = new ConnexionController($twig, $pdo);
-    $controller->deconnect();
+$router->get('/deconnexion', function () use ($ConnexionController) {
+    $ConnexionController->deconnect();
     header('Location: /');
     exit;
 });
-$router->get('/postuler/:id', function ($id) use ($twig, $pdo) {
+$router->get('/postuler/:id', function ($id) use ($twig, $pdo, $ConnexionController) {
+    $ConnexionController->needConnexion();
     $controller = new ApplyFormController($twig, $pdo);
+
     $controller->printApplyForm($id);
 });
-$router->post('/postuler/:id', function ($id) use ($twig,$pdo){
+$router->post('/postuler/:id', function ($id) use ($twig,$pdo, $ConnexionController) {
+    $ConnexionController->needConnexion();
     $controller = new ApplyFormController($twig, $pdo);
     $controller->storeCandidacy($id);
 });

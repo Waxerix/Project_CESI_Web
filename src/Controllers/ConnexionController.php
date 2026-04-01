@@ -39,7 +39,7 @@ class ConnexionController extends Controller
 
     public function needConnexion(string $redirection = '/connexion'): void
     {
-        if (!$this->Model->isConnecte()) {
+        if (!$this->Model->isConnect()) {
             header('Location: ' . $redirection);
             exit;
         }
