@@ -34,10 +34,16 @@ class ApplyFormController extends Controller
             exit;
         } else {
             $offre = $this->jobModel->getOfferById($offerId);
+            $erreur = $this->Model->getErreur();
+            if($erreur === 1) {
+                $erreurMessage = 'Vous avez déjà postulé à cette offre.';
+            } else {
+                $erreurMessage = 'Une erreur est survenue lors de la soumission de votre candidature.';
+            }
             echo $this->twig->render('formulaire-postuler.html.twig', [
                 'offre' => $offre,
                 'user' => $user['pseudo'],
-                'erreur' => 'Une erreur est survenue lors de la soumission de votre candidature.',
+                'erreur' => $erreurMessage,
             ]);
         }
 
