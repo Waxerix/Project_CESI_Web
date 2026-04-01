@@ -23,11 +23,18 @@
                         {% endif %}
                     </div>
                 </article>
+
+        </section>
+        <aside class="sidebar">
+            <div class="widget alert-widget">
+                <h3>Options</h3>
+                <a href="/connexion">Modifier le compte</a>
+                <a href="/">Supprimer le compte</a>
+            </div>
+        </aside>  
             {% else %}
                 <p>Aucun utilisateur trouvé dans la base de données.</p>
             {% endif %}
-
-        </section>
  
     </div>
 {% endblock %}
