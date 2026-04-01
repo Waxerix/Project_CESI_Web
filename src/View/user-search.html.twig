@@ -1,18 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <section class="categories-populaires">
-        <h3>Filtres utilisateurs :</h3>
-        <div class="tags-container">
-            <span class="tag">👤 Pilotes</span>
-            <span class="tag">🎓 étudiants</span>
-        </div>
-    </section>
-
     <div class="layout-principal">
         
         <section class="liste-offres">
-            <h2>Liste des Utilisateurs</h2>
+            <h2>Résultats pour la recherche '{{search}}'</h2>
             
             {% for user in users %}
                 <article class="offre-card">
@@ -35,7 +27,7 @@
                     </div>
                     
                     <div class="offre-actions">
-                        <a href="{{ path('app_user_profile', {'id': user.ID_user}) }}" class="btn-postuler">Voir le profil</a>
+                        <a href="/utilisateur/{{ user.ID_user }}" class="btn-postuler">Voir le profil</a>
                     </div>
                 </article>
             {% else %}

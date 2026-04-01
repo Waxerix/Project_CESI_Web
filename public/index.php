@@ -3,8 +3,7 @@
 require_once '../vendor/autoload.php';
 use App\Controllers\HomeController;
 use App\Controllers\ConnexionController;
-use App\Controllers\ApplyFormController;
-use App\Controllers\AccountController;
+use App\Controllers\SearchController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -50,5 +49,15 @@ $router->get('/espace-compte', function () use ($twig, $pdo) {
     $controller = new AccountController($twig, $pdo);
     $controller->index();
 });
-
+$router->post('/inscription', function () use ($twig,$pdo){
+    $controller=new InscriptionController($twig,$pdo);
+});
+$router->post('/search', function () use ($twig,$pdo){
+    $controller=new SearchController($twig,$pdo);
+    $controller->search();
+});
+$router->get('/utilisateur/:id', function ($id) use ($twig,$pdo) {
+    $controller=new SearchController($twig,$pdo);
+    $controller->showUser($id);
+});
 $router->run();

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block content %}
     <main class="main-register">
-        <form action="#" method="post" enctype="multipart/form-data" class="register-split-container">
+        <form action="/inscription" method="post" enctype="multipart/form-data" class="register-split-container">
             <div class="split-left-upload">
                 <img src="Asset/img/user.png" alt="Icône utilisateur par défaut" id="profile-preview" class="default-user-icon">
                     <h3>
@@ -15,15 +15,15 @@
                             </h2>
                             <div class="input-group row-group">
                                 <div class="half-width">
-                                    <label for="nom">
+                                    <label for="lastname">
                                         Nom * :
                                     </label>
-                                    <input type="text" id="nom" name="nom" required></div>
+                                    <input type="text" id="lastname" name="lastname" required></div>
                                     <div class="half-width">
-                                        <label for="prenom">
+                                        <label for="firstname">
                                             Prénom * :
                                         </label>
-                                        <input type="text" id="prenom" name="prenom" required></div>
+                                        <input type="text" id="firstname" name="firstname" required></div>
                                     </div>
                                     <div class="input-group">
                                         <label for="email">
@@ -40,7 +40,7 @@
                                                     <label for="utilisateur">
                                                         Rôle * :
                                                     </label>
-                                                    <select id="utilisateur" name="utilisateur" required>
+                                                    <select id="Role" name="Role" required>
                                                         <option value="">
                                                             -Choisir-
                                                         </option>
@@ -53,10 +53,10 @@
                                                     </select>
                                                 </div>
                                                 <div class="half-width">
-                                                    <label for="tel">
+                                                    <label for="phone">
                                                         Téléphone :
                                                     </label>
-                                                    <input type="tel" id="tel" name="tel"></div>
+                                                    <input type="phone" id="phone" name="phone"></div>
                                                 </div>
                                                 <button type="submit" class="btn-submit">
                                                     Créer un compte
