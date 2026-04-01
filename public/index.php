@@ -4,6 +4,8 @@ require_once '../vendor/autoload.php';
 use App\Controllers\HomeController;
 use App\Controllers\ConnexionController;
 use App\Controllers\SearchController;
+use App\Controllers\AccountController;
+use App\Controllers\ApplyFormController;
 use App\Core\Router;
 use App\Core\Database;
 
