@@ -294,4 +294,5 @@ class AccessController
         $stmt->bindValue(':hash', $tokenHash);
         $stmt->execute();
     }
+
 }

@@ -4,6 +4,7 @@ require_once '../vendor/autoload.php';
 use App\Controllers\HomeController;
 use App\Controllers\ConnexionController;
 use App\Controllers\ApplyFormController;
+use App\Controllers\AccountController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -43,6 +44,11 @@ $router->get('/deconnexion', function () use ($twig, $pdo) {
 $router->get('/postuler/:id', function ($id) use ($twig, $pdo) {
     $controller = new ApplyFormController($twig, $pdo);
     $controller->printApplyForm($id);
+});
+
+$router->get('/espace-compte', function () use ($twig, $pdo) {
+    $controller = new AccountController($twig, $pdo);
+    $controller->index();
 });
 
 $router->run();
