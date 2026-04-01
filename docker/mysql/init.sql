@@ -63,9 +63,7 @@ CREATE TABLE `Apply` (
 -- Déchargement des données de la table `Apply`
 --
 
-INSERT INTO `Apply` (`ID_user`, `ID_offer`, `CV`, `ML`, `Comment`) VALUES
-(1, 1, NULL, NULL, 'Très motivé'),
-(1, 2, NULL, NULL, 'Expérience en gestion');
+
 
 -- --------------------------------------------------------
 
@@ -239,12 +237,12 @@ CREATE TABLE `User_` (
 --
 
 INSERT INTO `User_` (`ID_user`, `Email`, `Password`, `ID_profil`, `ID_role`) VALUES
-(1, 'mathis@mail.com', '1234', 1, 1),
-(2, 'lou@mail.com', '1234', 2, 1),
-(3, 'nathan@mail.com', '1234', 3, 1),
-(4, 'ines@mail.com', '1234', 4, 2),
-(5, 'seo@mail.com', '1234', 5, 2),
-(6, 'admin@mail.com', 'admin', 6, 3);
+(1, 'mathis@mail.com', '$2y$10$bUihwu/wK1pXLBX.zd/9z.ZVZH6zyz1scTBHVfEF46zULNd6m9RMe', 1, 1),
+(2, 'lou@mail.com', '$2y$10$r0ldpp4H8WyLuQARr5YNCusYnJjen4xdd9Frsg4QUM4aq.HFut7mq', 2, 1),
+(3, 'nathan@mail.com', '$2y$10$d4TljyZn7wyueltn3cZYD.1QZS6B6ERhbZX0GyCsCJ1zTUGfKIRW.', 3, 1),
+(4, 'ines@mail.com', '$2y$10$tgTbvbhf0uKXEyPSe.t5YOYvMurByQf5JgRoYS1G5ou9KTkdIbwVK', 4, 2),
+(5, 'seo@mail.com', '$2y$10$qn/hrIxwT6nDCF9IHl8pP.MHOXukGg7XKdseuloDmj6F8PBU3slei', 5, 2),
+(6, 'admin@mail.com', '$2y$10$xzlurJpQ2vcJTAc5459Pc.l.j5uHuSIsbz0J3CUh/zUiSc8OWB4J6', 6, 3);
 
 -- --------------------------------------------------------
 
