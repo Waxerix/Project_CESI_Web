@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    {# 
+       Utilisation de la classe 'main-centered' pour centrer le formulaire 
+       comme dans votre code original.
+    #}
+    <main class="main-centered">
+        <section class="form-section">
+            <h2 class="page-title">Créer votre entreprise</h2>
+            
+            <div class="form-card">
+                {# 
+                   L'attribut 'action' doit pointer vers la route du contrôleur 
+                   que nous allons créer (ex: /company/store).
+                #}
+                <form action="/company/store" method="post">
+                    
+                    <div class="input-group">
+                        <label for="company_name">Nom de l'entreprise :</label>
+                        <input type="text" id="company_name" name="name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="numero_tel">Numéro de téléphone :</label>
+                        <input type="tel" id="numero_tel" name="phone" maxlength="10" required>
+                    </div>
+
+                    {# 
+                       Note : Votre table SQL n'a pas de colonne 'location', 
+                       'secteur' 또는 'taille'. Vous pourrez les ajouter plus tard. 
+                       Pour l'instant, nous gardons les champs pour le design.
+                    #}
+                    <div class="input-group">
+                        <label for="email">Email de contact :</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="input-group row-group">
+                        <div class="half-width">
+                            <label for="secteur">Secteur d'activité :</label>
+                            <select id="secteur" name="secteur">
+                                <option value="">Sélectionnez un secteur</option>
+                                <option value="informatique">Informatique</option>
+                                <option value="sante">Santé</option>
+                                <option value="finance">Finance</option>
+                                <option value="education">Éducation</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="half-width">
+                            <label for="taille">Taille d'entreprise :</label>
+                            <select id="taille" name="taille">
+                                <option value="">Sélectionnez une taille</option>
+                                <option value="startup">Startup</option>
+                                <option value="pm">PME</option>
+                                <option value="grande">Grande entreprise</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="description">Description :</label>
+                        <textarea id="description" name="description" rows="4" style="width: 100%; border: 1px solid #ccc; border-radius: 4px; padding: 10px;"></textarea>
+                    </div>
+
+                    <input type="submit" value="Créer l'entreprise" class="btn-submit">
+                </form>
+            </div>
+        </section>
+    </main>
+{% endblock %}

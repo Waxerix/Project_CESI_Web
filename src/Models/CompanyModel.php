@@ -1,0 +1,46 @@
+<?php
+namespace App\Models;
+
+use App\Core\Model;
+use PDO;
+
+class CompanyModel extends Model {
+
+    /**
+     * Constructeur : Reçoit l'instance PDO pour les requêtes
+     */
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+
+    /**
+     * Insère une nouvelle entreprise dans la table 'Company'
+     * @param array $data Les données provenant du formulaire
+     * @return bool Succès ou échec de l'insertion
+     */
+    public function create($data) {
+        // Préparation de la requête SQL
+        // On utilise CURDATE() pour la colonne Create_date afin d'avoir la date du jour
+        $sql = "INSERT INTO Company (Name, Email, Phone_Number, Description, Create_date) 
+                VALUES (:name, :email, :phone, :description, CURDATE())";
+        
+        $stmt = $this->pdo->prepare($sql);
+
+        // Exécution avec protection contre les injections SQL
+        return $stmt->execute([
+            'name'        => $data['name'],
+            'email'       => $data['email'],
+            'phone'       => $data['phone'],
+            'description' => $data['description']
+        ]);
+    }
+
+    /**
+     * Récupère toutes les entreprises (Optionnel, utile pour une liste)
+     */
+    public function getAll() {
+        $sql = "SELECT * FROM Company ORDER BY Create_date DESC";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}

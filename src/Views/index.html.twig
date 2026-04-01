@@ -1,7 +1,7 @@
-
 {% extends 'base.html.twig' %}
 
 {% block content %}
+    {# Section des catégories populaires #}
     <section class="categories-populaires">
         <h3>Recherches fréquentes :</h3>
         <div class="tags-container">
@@ -15,18 +15,20 @@
 
     <div class="layout-principal">
         
+        {# Section de la liste des offres #}
         <section class="liste-offres">
             <h2>Les offres du moment...</h2>
             
             {% for offre in offres_emploi %}
-               
                 <article class="offre-card">
                     
+                    {# En-tête de l'offre #}
                     <div class="offre-header">
                         <h3>{{ offre.CompanyName|default('Entreprise non précisée') }}</h3>
                         <p class="offre-title">{{ offre.Title }}</p>
                     </div>
 
+                    {# Détails de l'offre (Durée, Salaire, Catégorie) #}
                     <div class="offre-details">
                         {% if offre.Duration %}
                             <h4>{{ offre.Duration }} mois</h4>
@@ -35,18 +37,27 @@
                         {% if offre.Salary %}
                             <h4>{{ offre.Salary }} €</h4>
                         {% endif %}
+
                         {% if offre.Category %}
                             <h4>{{ offre.Category }}</h4>
                         {% endif %}
                     </div>
                     
+                    {# Actions de l'offre (Postuler et Favoris) #}
                     <div class="offre-actions">
                         <a href="/postuler/{{ offre.ID_offer }}" class="btn-postuler">Postuler</a>
                         
-                        {# --- AJOUT DU BOUTON WISHLIST --- #}
-                        <a href="/wishlist/add/{{ offre.ID_offer }}" class="btn-wishlist" style="margin-left: 10px; text-decoration: none; border: 1px solid #e0e0e0; padding: 8px 12px; border-radius: 5px; background-color: #fff;">
-                            ❤️ Favoris
-                        </a>
+                        {# 
+                           BOUTON WISHLIST MODIFIÉ :
+                           - type="button" pour éviter le rechargement de la page
+                           - classe 'active' ajoutée dynamiquement si l'offre est déjà en favoris
+                           - data-id pour transmettre l'ID de l'offre au JavaScript
+                        #}
+                        <button type="button" 
+                                class="btn-wishlist {% if offre.is_fav %}active{% endif %}" 
+                                data-id="{{ offre.ID_offer }}">
+                            <span class="heart-icon">❤️</span> Favoris
+                        </button>
                     </div>
                 </article>
 
@@ -54,11 +65,10 @@
                 <p>Aucune offre d'emploi disponible pour le moment.</p>
             {% endfor %}
             
-
             <button class="btn-load-more">Voir plus d'offres</button>
         </section>
 
-        
+        {# Barre latérale (Sidebar) #}
         <aside class="sidebar">
             <div class="widget alert-widget">
                 <h3>🔔 Alerte Emploi</h3>
@@ -77,4 +87,12 @@
             </div>
         </aside>  
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {# 
+       Inclusion du fichier JavaScript pour la gestion de la wishlist.
+       Vérifiez que le chemin correspond à votre structure de dossier.
+    #}
+    <script src="/Asset/js/wishlist.js"></script>
 {% endblock %}
