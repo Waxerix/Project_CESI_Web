@@ -24,7 +24,6 @@ $router->get('/', function () use ($twig, $pdo) {
     $controller = new HomeController($twig, $pdo);
     $controller->index();
 });
-
 // FIX : méthode renommée printConnexion() — gère GET et POST en interne
 $router->get('/connexion', function () use ($twig, $pdo) {
     $controller = new ConnexionController($twig, $pdo);
@@ -42,7 +41,6 @@ $router->get('/deconnexion', function () use ($twig, $pdo) {
     header('Location: /');
     exit;
 });
-
 $router->get('/postuler/:id', function ($id) use ($twig, $pdo) {
     $controller = new ApplyFormController($twig, $pdo);
     $controller->printApplyForm($id);

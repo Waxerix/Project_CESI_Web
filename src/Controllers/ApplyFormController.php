@@ -30,12 +30,13 @@ class ApplyFormController extends Controller
         if ($this->Model->createCandidacy($userId, $offerId, $comment)) {
             $this->Model->storeFile($LM);
             $this->Model->storeFile($CV);
+            $_SESSION['flash'] = 'Votre candidature a bien été envoyée !';
             header('Location: /');
             exit;
         } else {
             $offre = $this->jobModel->getOfferById($offerId);
             $erreur = $this->Model->getErreur();
-            if($erreur === 1) {
+            if ($erreur === 1) {
                 $erreurMessage = 'Vous avez déjà postulé à cette offre.';
             } else {
                 $erreurMessage = 'Une erreur est survenue lors de la soumission de votre candidature.';
