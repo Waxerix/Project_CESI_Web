@@ -3,13 +3,13 @@ namespace App\Models;
 
 use App\Core\Model;
 
-class StudentModel extends Model{
+class PiloteModel extends Model{
 
     public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
 
-    public function searchStudent(string $search){
+    public function searchPilote(string $search){
         $search = trim($search);
 
         if (empty($search)) {
@@ -30,7 +30,7 @@ class StudentModel extends Model{
             INNER JOIN Profil p ON u.ID_profil = p.ID_profil
             INNER JOIN Role r ON u.ID_role = r.ID_role  -- Jointure avec la table Role
             WHERE 
-                r.ID_role = 1  -- Filtre pour ne prendre que les étudiants
+                r.ID_role = 2  -- Filtre pour ne prendre que les étudiants
                 AND (
                     p.Name LIKE :search1
                     OR p.Lastname LIKE :search2
@@ -48,7 +48,7 @@ class StudentModel extends Model{
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function createStudent(string $email, string $password, string $name, string $lastname, string $phone) {
+    public function createPilote(string $email, string $password, string $name, string $lastname, string $phone) {
         try {
             // 1. Démarrer une transaction pour garantir l'intégrité des données
             $this->pdo->beginTransaction();
@@ -65,7 +65,7 @@ class StudentModel extends Model{
             $idProfil = $this->pdo->lastInsertId();
 
             // 3. Insérer dans la table User_
-            // On utilise ID_role = 1 pour "etudiant" comme vu précédemment
+            // On utilise ID_role = 2 pour "pilote" comme vu précédemment
             $stmtUser = $this->pdo->prepare("INSERT INTO User_ (Email, Password, ID_profil, ID_role) VALUES (:email, :password, :id_profil, :id_role)");
             
             // Hachage du mot de passe pour la sécurité
@@ -75,7 +75,7 @@ class StudentModel extends Model{
                 'email'     => $email,
                 'password'  => $hashedPassword,
                 'id_profil' => $idProfil,
-                'id_role'   => 1 // ID correspondant à 'etudiant' dans ta table Role
+                'id_role'   => 2 // ID correspondant à 'pilote' dans ta table Role
             ]);
 
             // 4. Valider la transaction
@@ -92,7 +92,7 @@ class StudentModel extends Model{
     }
 
 
-    public function updateStudent(int $idUser, string $email, string $name, string $lastname, string $phone, ?string $newPassword = null) {
+    public function updatePilote(int $idUser, string $email, string $name, string $lastname, string $phone, ?string $newPassword = null) {
         try {
             $this->pdo->beginTransaction();
 
@@ -138,7 +138,7 @@ class StudentModel extends Model{
         }
     }
 
-    public function deleteStudent(int $idUser) {
+    public function deletePilote(int $idUser) {
         try {
             $this->pdo->beginTransaction();
 

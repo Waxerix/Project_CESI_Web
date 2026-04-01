@@ -3,6 +3,7 @@
 require_once '../vendor/autoload.php';
 require_once '../src/Controllers/HomeController.php';
 use App\Controllers\ConnexionController;
+use App\Controllers\SearchController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -41,5 +42,11 @@ $router->get('/deconnexion', function () use ($twig, $pdo) {
 $router->get('/postuler/:id', function ($id) use ($twig) {
     $twig->render('formulaire-postuler.html.twig', ['id' => $id]);
 });
-
+$router->post('/inscription', function () use ($twig,$pdo){
+    $controller=new InscriptionController($twig,$pdo);
+});
+$router->post('/search', function () use ($twig,$pdo){
+    $controller=new SearchController($twig,$pdo);
+    $controller->userSearch();
+});
 $router->run();

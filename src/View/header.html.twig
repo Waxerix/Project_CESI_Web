@@ -15,14 +15,21 @@
             </div>
 
             <div class="actions-container">
-                <input type="search" placeholder="Rechercher...">
+                <form action="/search" method="post" enctype="multipart/form-data">
+                <input type="search" name="search" id="search" placeholder="Rechercher...">
 
-                    <select name="filtres" id="fil">
+                    <select name="filter" id="filter">
                         <option value="Entreprise">
                             Entreprise
                         </option>
-                        <option value="Offre">
+                        <option value="Offer">
                             Offre
+                        </option>
+                        <option value="Student">
+                            Etudiant
+                        </option>
+                        <option value="Pilote">
+                            Pilote
                         </option>
                         <option value="Wishlist">
                             Wishlist
@@ -43,7 +50,10 @@
                             Date
                         </option>
                     </select>
+
+                    <input type="submit" value="rechercher" class="btn-submit">
                 </div>
+                </form>
             </div>
             <div class="login-container">
                 <div class="login-container">
