@@ -61,21 +61,4 @@ class UserController extends Controller{
             }
         }
     }
-
-    public function showUser($id){
-        $sql = "
-            SELECT * FROM User_ u 
-            INNER JOIN Profil p ON u.ID_profil = p.ID_profil
-            INNER JOIN Role r ON u.ID_role = r.ID_role
-            WHERE ID_user= :id ;";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':id', $id, \PDO::PARAM_STR);
-        $stmt->execute();
-        $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-        echo $this->twig->render('user-informations.html.twig', [
-            'user' => $user
-        ]);
-
-
-    }
 }

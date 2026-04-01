@@ -189,21 +189,27 @@ main {
 }
 
 .tag {
-    background-color: white;
+    display: inline-block;
+    padding: 6px 16px; 
+    background-color: rgba(255, 255, 255, 0.8); 
     color: var(--primary-blue);
-    padding: 1px 15px;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    border: 1px solid rgba(1, 64, 96, 0.2); 
+    border-radius: 50px; 
+    font-size: 0.85rem;
+    font-weight: 600; 
+    text-decoration: none;
     cursor: pointer;
-    border: 1px solid transparent;
+    box-shadow: none; 
     transition: all var(--transition-speed);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+
 .tag:hover {
-    border-color: var(--primary-blue);
     background-color: var(--primary-blue);
     color: white;
+    border-color: var(--primary-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(1, 64, 96, 0.15); 
 }
 
 /* --- LAYOUT 2 COLONNES --- */
