@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : ven. 27 mars 2026 à 14:48
+-- Généré le : mer. 01 avr. 2026 à 08:51
 -- Version du serveur : 8.0.45-0ubuntu0.24.04.1
 -- Version de PHP : 8.3.6
 
@@ -18,8 +18,32 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `projet_web`
+-- Base de données : `sesomate`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Allowed`
+--
+
+CREATE TABLE `Allowed` (
+  `ID_role` int NOT NULL,
+  `ID_utility` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `Allowed`
+--
+
+INSERT INTO `Allowed` (`ID_role`, `ID_utility`) VALUES
+(2, 1),
+(3, 1),
+(1, 2),
+(3, 2),
+(2, 3),
+(3, 3),
+(3, 4);
 
 -- --------------------------------------------------------
 
@@ -30,20 +54,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `Apply` (
   `ID_user` int NOT NULL,
   `ID_offer` int NOT NULL,
-  `CV` varchar(255) DEFAULT NULL,
-  `ML` varchar(255) DEFAULT NULL,
-  `comment` text
+  `CV` blob,
+  `ML` blob,
+  `Comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `Apply`
 --
 
-INSERT INTO `Apply` (`ID_user`, `ID_offer`, `CV`, `ML`, `comment`) VALUES
-(1, 1, 'cv1.pdf', 'lettre1', 'motivé'),
-(1, 7, 'cv1.pdf', 'lettre4', 'passion IA'),
-(2, 2, 'cv2.pdf', 'lettre2', 'serieux'),
-(3, 6, 'cv3.pdf', 'lettre3', 'data lover');
+INSERT INTO `Apply` (`ID_user`, `ID_offer`, `CV`, `ML`, `Comment`) VALUES
+(1, 1, NULL, NULL, 'Très motivé'),
+(1, 2, NULL, NULL, 'Expérience en gestion');
 
 -- --------------------------------------------------------
 
@@ -54,9 +76,9 @@ INSERT INTO `Apply` (`ID_user`, `ID_offer`, `CV`, `ML`, `comment`) VALUES
 CREATE TABLE `Company` (
   `ID_company` int NOT NULL,
   `Name` varchar(50) DEFAULT NULL,
-  `Create_date` date DEFAULT NULL,
   `Email` varchar(50) DEFAULT NULL,
   `Phone_Number` varchar(10) DEFAULT NULL,
+  `Creation_date` varchar(50) DEFAULT NULL,
   `Description` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -64,11 +86,10 @@ CREATE TABLE `Company` (
 -- Déchargement des données de la table `Company`
 --
 
-INSERT INTO `Company` (`ID_company`, `Name`, `Create_date`, `Email`, `Phone_Number`, `Description`) VALUES
+INSERT INTO `Company` (`ID_company`, `Name`, `Creation_date`, `Email`, `Phone_Number`, `Description`) VALUES
 (1, 'TechCorp', '2020-01-01', 'contact@techcorp.com', '0102030405', 'Entreprise web'),
 (2, 'DataSolutions', '2019-05-10', 'hr@data.com', '0203040506', 'Data & IA'),
 (3, 'GreenEnergy', '2018-03-15', 'contact@green.com', '0304050607', 'Energie renouvelable');
-
 -- --------------------------------------------------------
 
 --
@@ -87,10 +108,8 @@ CREATE TABLE `Evaluate` (
 --
 
 INSERT INTO `Evaluate` (`ID_user`, `ID_company`, `Rate`, `Comment`) VALUES
-(1, 1, 5, 'Top'),
-(1, 3, 5, 'Excellent'),
-(2, 1, 4, 'Bien'),
-(3, 2, 3, 'Correct');
+(1, 1, 5, 'Super entreprise'),
+(2, 2, 4, 'Bonne expérience');
 
 -- --------------------------------------------------------
 
@@ -102,9 +121,9 @@ CREATE TABLE `Job_offer` (
   `ID_offer` int NOT NULL,
   `Title` text,
   `Description` text,
+  `Category` varchar(50) DEFAULT NULL,
   `Salary` decimal(10,2) DEFAULT NULL,
   `Duration` int DEFAULT NULL,
-  `Category` varchar(50) DEFAULT NULL,
   `Create_date` date DEFAULT NULL,
   `Start_date` date DEFAULT NULL,
   `ID_company` int DEFAULT NULL
@@ -135,7 +154,6 @@ INSERT INTO `Job_offer` (`ID_offer`, `Title`, `Description`, `Salary`, `Duration
 (18, 'QA Tester', 'Tests logiciels', 1800.00, 4, 'Informatique', '2026-01-01', '2026-02-01', 1),
 (19, 'Product Owner', 'Agile', 2200.00, 6, 'Management', '2026-03-01', '2026-04-01', 2),
 (20, 'Scrum Master', 'Gestion agile', 2300.00, 6, 'Management', '2026-02-01', '2026-03-01', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -164,6 +182,27 @@ INSERT INTO `Profil` (`ID_profil`, `Name`, `Lastname`, `Phone_number`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Remember_tokens`
+--
+
+CREATE TABLE `Remember_tokens` (
+  `ID_token` int NOT NULL,
+  `Token` varchar(255) DEFAULT NULL,
+  `Expires` varchar(50) DEFAULT NULL,
+  `ID_user` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `Remember_tokens`
+--
+
+INSERT INTO `Remember_tokens` (`ID_token`, `Token`, `Expires`, `ID_user`) VALUES
+(1, 'token123', '2026-01-01', 1),
+(2, 'token456', '2026-01-01', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Role`
 --
 
@@ -177,9 +216,9 @@ CREATE TABLE `Role` (
 --
 
 INSERT INTO `Role` (`ID_role`, `Status`) VALUES
-(1, 'etudiant'),
-(2, 'recruteur'),
-(3, 'admin');
+(1, 'CANDIDATE'),
+(2, 'RECRUITER'),
+(3, 'ADMIN');
 
 -- --------------------------------------------------------
 
@@ -210,6 +249,27 @@ INSERT INTO `User_` (`ID_user`, `Email`, `Password`, `ID_profil`, `ID_role`) VAL
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `Utility`
+--
+
+CREATE TABLE `Utility` (
+  `ID_utility` int NOT NULL,
+  `Utility_name` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `Utility`
+--
+
+INSERT INTO `Utility` (`ID_utility`, `Utility_name`) VALUES
+(1, 'POST_JOB'),
+(2, 'APPLY_JOB'),
+(3, 'DELETE_JOB'),
+(4, 'MANAGE_USERS');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Wishlist`
 --
 
@@ -224,14 +284,18 @@ CREATE TABLE `Wishlist` (
 
 INSERT INTO `Wishlist` (`ID_user`, `ID_offer`) VALUES
 (1, 1),
-(1, 2),
-(2, 3),
-(3, 4),
-(1, 5);
+(1, 2);
 
 --
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `Allowed`
+--
+ALTER TABLE `Allowed`
+  ADD PRIMARY KEY (`ID_role`,`ID_utility`),
+  ADD KEY `ID_utility` (`ID_utility`);
 
 --
 -- Index pour la table `Apply`
@@ -257,14 +321,20 @@ ALTER TABLE `Evaluate`
 -- Index pour la table `Job_offer`
 --
 ALTER TABLE `Job_offer`
-  ADD PRIMARY KEY (`ID_offer`),
-  ADD KEY `ID_company` (`ID_company`);
+  ADD PRIMARY KEY (`ID_offer`);
 
 --
 -- Index pour la table `Profil`
 --
 ALTER TABLE `Profil`
   ADD PRIMARY KEY (`ID_profil`);
+
+--
+-- Index pour la table `Remember_tokens`
+--
+ALTER TABLE `Remember_tokens`
+  ADD PRIMARY KEY (`ID_token`),
+  ADD KEY `ID_user` (`ID_user`);
 
 --
 -- Index pour la table `Role`
@@ -277,9 +347,14 @@ ALTER TABLE `Role`
 --
 ALTER TABLE `User_`
   ADD PRIMARY KEY (`ID_user`),
-  ADD UNIQUE KEY `Email` (`Email`),
   ADD KEY `ID_profil` (`ID_profil`),
   ADD KEY `ID_role` (`ID_role`);
+
+--
+-- Index pour la table `Utility`
+--
+ALTER TABLE `Utility`
+  ADD PRIMARY KEY (`ID_utility`);
 
 --
 -- Index pour la table `Wishlist`
@@ -296,19 +371,25 @@ ALTER TABLE `Wishlist`
 -- AUTO_INCREMENT pour la table `Company`
 --
 ALTER TABLE `Company`
-  MODIFY `ID_company` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID_company` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Job_offer`
 --
 ALTER TABLE `Job_offer`
-  MODIFY `ID_offer` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID_offer` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Profil`
 --
 ALTER TABLE `Profil`
-  MODIFY `ID_profil` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_profil` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `Remember_tokens`
+--
+ALTER TABLE `Remember_tokens`
+  MODIFY `ID_token` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `Role`
@@ -320,11 +401,24 @@ ALTER TABLE `Role`
 -- AUTO_INCREMENT pour la table `User_`
 --
 ALTER TABLE `User_`
-  MODIFY `ID_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `Utility`
+--
+ALTER TABLE `Utility`
+  MODIFY `ID_utility` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `Allowed`
+--
+ALTER TABLE `Allowed`
+  ADD CONSTRAINT `Allowed_ibfk_1` FOREIGN KEY (`ID_role`) REFERENCES `Role` (`ID_role`),
+  ADD CONSTRAINT `Allowed_ibfk_2` FOREIGN KEY (`ID_utility`) REFERENCES `Utility` (`ID_utility`);
 
 --
 -- Contraintes pour la table `Apply`
@@ -341,10 +435,10 @@ ALTER TABLE `Evaluate`
   ADD CONSTRAINT `Evaluate_ibfk_2` FOREIGN KEY (`ID_company`) REFERENCES `Company` (`ID_company`);
 
 --
--- Contraintes pour la table `Job_offer`
+-- Contraintes pour la table `Remember_tokens`
 --
-ALTER TABLE `Job_offer`
-  ADD CONSTRAINT `Job_offer_ibfk_1` FOREIGN KEY (`ID_company`) REFERENCES `Company` (`ID_company`);
+ALTER TABLE `Remember_tokens`
+  ADD CONSTRAINT `Remember_tokens_ibfk_1` FOREIGN KEY (`ID_user`) REFERENCES `User_` (`ID_user`);
 
 --
 -- Contraintes pour la table `User_`
@@ -353,6 +447,9 @@ ALTER TABLE `User_`
   ADD CONSTRAINT `User__ibfk_1` FOREIGN KEY (`ID_profil`) REFERENCES `Profil` (`ID_profil`),
   ADD CONSTRAINT `User__ibfk_2` FOREIGN KEY (`ID_role`) REFERENCES `Role` (`ID_role`);
 
+ALTER TABLE `Job_offer`
+  ADD PRIMARY KEY (`ID_offer`),
+  ADD KEY `ID_company` (`ID_company`);
 --
 -- Contraintes pour la table `Wishlist`
 --
