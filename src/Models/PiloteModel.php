@@ -177,10 +177,10 @@ class PiloteModel extends Model{
                 ID_user = :id
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':id', $idUser, \PDO::PARAM_STR);
+        $stmt->bindParam(':id', $idUser, \PDO::PARAM_INT);
         $stmt->execute();
-        $result=$stmt->fetch();
-        if ($result[0] == 2){
+        $result=$stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($result && $result['ID_role'] == 2){
             return True;
         }
         return False;

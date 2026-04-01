@@ -51,9 +51,6 @@ $router->get('/espace-compte', function () use ($twig, $pdo) {
     $controller = new AccountController($twig, $pdo);
     $controller->index();
 });
-$router->post('/inscription', function () use ($twig,$pdo){
-    $controller=new InscriptionController($twig,$pdo);
-});
 
 $router->get('/admin/utilisateurs', function () use ($twig,$pdo){
     $controller=new UserSearchController($twig,$pdo);
@@ -65,7 +62,15 @@ $router->post('/admin/utilisateurs/results', function () use ($twig,$pdo){
 });
 $router->post('/admin/utilisateurs/delete/:id', function ($id) use ($twig,$pdo) {
     $controller=new UserController($twig,$pdo);
-    $controller->deleteUser($id);
+    $controller->userDelete($id);
+});
+$router->get('/admin/utilisateurs/create', function () use ($twig,$pdo) {
+    $controller=new UserController($twig,$pdo);
+    $controller->createMenu();
+});
+$router->post('/inscription', function () use ($twig,$pdo) {
+    $controller=new UserController($twig,$pdo);
+    $controller->userCreate();
 });
 $router->get('/utilisateur/:id', function ($id) use ($twig,$pdo) {
     $controller=new UserSearchController($twig,$pdo);

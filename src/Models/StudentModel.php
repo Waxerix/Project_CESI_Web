@@ -176,18 +176,16 @@ class StudentModel extends Model{
     public function isStudent(int $idUser){
         $sql = "
             SELECT
-                r.ID_role
-            FROM User_ u
-            INNER JOIN Profil p ON u.ID_profil = p.ID_profil
-            INNER JOIN Role r ON u.ID_role = r.ID_role  -- Jointure avec la table Role
+                ID_role
+            FROM User_
             WHERE 
-                u.ID_user = :id
+                ID_user = :id
         ";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(':id', $idUser, \PDO::PARAM_STR);
+        $stmt->bindParam(':id', $idUser, \PDO::PARAM_INT);
         $stmt->execute();
-        $result=$stmt->fetch();
-        if ($result[0] == 1){
+        $result=$stmt->fetch(\PDO::FETCH_ASSOC);
+        if ($result && $result['ID_role'] == 1){
             return True;
         }
         return False;

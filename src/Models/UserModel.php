@@ -1,21 +1,21 @@
 <?php
+namespace App\Models;
 
-class user_{
-    private $pdo;
+use App\Core\Model;
 
+
+class UserModel extends Model{
    
-    public function __construct(PDO $pdo) {
+    public function __construct(\PDO $pdo) {
         $this->pdo = $pdo;
     }
-    public function getAuth($Email){
-        $res = $this->pdo->prepare("SELECT * FROM User_ WHERE Email=$Email");
-        if($res!=false){
-        $res->execute();
-        return $res->fetch(PDO::FETCH_ASSOC);
+   
+    public function rolesList(){
+        $sql = "SELECT Status FROM Role";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
-    else{
-        echo"adresse mail non existante";
-        exit;
-    }
-}
 }
