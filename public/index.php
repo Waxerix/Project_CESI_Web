@@ -8,6 +8,7 @@ use App\Controllers\UserController;
 use App\Controllers\AccountController;
 use App\Controllers\ApplyFormController;
 use App\Controllers\WishlistController;
+use App\Controllers\OfferController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -27,6 +28,11 @@ $router = new Router($_GET['url'] ?? '');
 
 $router->get('/', function () use ($twig, $pdo) {
     $controller = new HomeController($twig, $pdo);
+    $controller->index();
+});
+
+$router->get('/offer', function () use ($twig, $pdo) {
+    $controller = new OfferController($twig, $pdo);
     $controller->index();
 });
 // FIX : méthode renommée printConnexion() — gère GET et POST en interne
