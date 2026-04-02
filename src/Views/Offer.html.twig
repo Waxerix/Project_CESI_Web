@@ -42,10 +42,16 @@
     <section class="liste-offres">
         
         <p class="result-count">
-            {{ offer|length }} offres trouvées
+            {{ offers|length }} offres trouvées
         </p>
 
-        {% for offer in offer %}
+        {# Setup pagination #}
+        {% set per_page = 10 %}
+        {% set total_pages = (offers|length / per_page)|round(0, 'ceil') %}
+        {% set current_page = current_page is defined ? current_page : 1 %}
+        {% set paged_offers = offers|slice((current_page - 1) * per_page, per_page) %}
+
+        {% for offer in paged_offers %}
             <article>
                 <div class="offre-header">
                     <h3>{{ offer.CompanyName|default('Entreprise non précisée') }}</h3>
@@ -68,6 +74,30 @@
                 <p>Essayez de modifier vos filtres ou de faire une recherche plus large.</p>
             </div>
         {% endfor %}
+
+        {% if total_pages > 1 %}
+            <nav class="pagination">
+                {% if current_page > 1 %}
+                    <a href="?q={{ app.request.query.get('q') }}&category={{ app.request.query.get('category') }}&min_salary={{ app.request.query.get('min_salary') }}&duration={{ app.request.query.get('duration') }}&page={{ current_page - 1 }}" class="pagination-btn">&laquo; Précédent</a>
+                {% else %}
+                    <span class="pagination-btn disabled">&laquo; Précédent</span>
+                {% endif %}
+
+                {% for page in 1..total_pages %}
+                    {% if page == current_page %}
+                        <span class="pagination-btn active">{{ page }}</span>
+                    {% else %}
+                        <a href="?q={{ app.request.query.get('q') }}&category={{ app.request.query.get('category') }}&min_salary={{ app.request.query.get('min_salary') }}&duration={{ app.request.query.get('duration') }}&page={{ page }}" class="pagination-btn">{{ page }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if current_page < total_pages %}
+                    <a href="?q={{ app.request.query.get('q') }}&category={{ app.request.query.get('category') }}&min_salary={{ app.request.query.get('min_salary') }}&duration={{ app.request.query.get('duration') }}&page={{ current_page + 1 }}" class="pagination-btn">Suivant &raquo;</a>
+                {% else %}
+                    <span class="pagination-btn disabled">Suivant &raquo;</span>
+                {% endif %}
+            </nav>
+        {% endif %}
 
     </section>
 

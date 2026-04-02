@@ -23,10 +23,12 @@ class WishlistController extends Controller {
         $id_user = 1; 
         // Vérifie bien que la méthode s'appelle getAllByUserId dans le modèle
         $offres = $this->Model->getAllByUserId($id_user);
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
         echo $this->twig->render('wishlist.html.twig', [
             'offres' => $offres,
-            'page_title' => 'Ma Wish-list'
+            'page_title' => 'Ma Wish-list',
+            'current_page' => $currentPage
         ]);
     }
 
