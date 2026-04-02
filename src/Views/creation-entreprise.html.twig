@@ -14,7 +14,17 @@
 
                 <div class="input-group">
                     <label for="numero_tel">Numéro de téléphone :</label>
-                    <input type="tel" id="numero_tel" name="phone" maxlength="10" required>
+                    {# 숫자가 아닌 문자는 입력 즉시 삭제하고, 10자리 숫자가 아니면 제출을 막습니다 #}
+                    <input 
+                        type="tel" 
+                        id="numero_tel" 
+                        name="phone" 
+                        maxlength="10" 
+                        required
+                        pattern="[0-9]{10}" 
+                        title="Veuillez entrer 10 chiffres (ex: 0102030405)"
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                    >
                 </div>
 
                 <div class="input-group">
