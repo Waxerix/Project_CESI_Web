@@ -13,6 +13,12 @@ class WishlistController extends Controller {
         $this->Model = new WishlistModel($this->pdo);
     }
 
+    protected function redirect(string $url): void
+    {
+    header('Location: ' . $url);
+    exit();
+    }
+
     public function index() {
         $id_user = 1; 
         // Vérifie bien que la méthode s'appelle getAllByUserId dans le modèle
@@ -29,8 +35,7 @@ class WishlistController extends Controller {
         if ($id_offer) {
             $this->Model->add($id_user, $id_offer);
         }
-        header('Location: /wishlist');
-        exit();
+        $this->redirect('/wishlist');
     }
 
     public function delete($id_offer) {
@@ -38,7 +43,6 @@ class WishlistController extends Controller {
         if ($id_offer) {
             $this->Model->remove($id_user, $id_offer);
         }
-        header('Location: /wishlist');
-        exit();
+        $this->redirect('/wishlist');
     }
 }
