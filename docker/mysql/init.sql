@@ -162,6 +162,7 @@ CREATE TABLE `Profil` (
   `ID_profil` int NOT NULL,
   `Name` varchar(50) DEFAULT NULL,
   `Lastname` varchar(50) DEFAULT NULL,
+  `Photo_path` varchar(255) DEFAULT NULL,
   `Phone_number` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -169,13 +170,13 @@ CREATE TABLE `Profil` (
 -- Déchargement des données de la table `Profil`
 --
 
-INSERT INTO `Profil` (`ID_profil`, `Name`, `Lastname`, `Phone_number`) VALUES
-(1, 'Mathis', 'Boulenger', '0600000001'),
-(2, 'Lou', 'Dutertre', '0600000002'),
-(3, 'Nathan', 'Bocquet', '0600000003'),
-(4, 'Ines', 'Lancelevee', '0600000004'),
-(5, 'Seohyun', 'Nam', '0600000005'),
-(6, 'Admin', 'Root', '0600000006');
+INSERT INTO `Profil` (`ID_profil`, `Name`, `Lastname`, `Photo_path`, `Phone_number`) VALUES
+(1, 'Mathis', 'Boulenger', NULL, '0600000001'),
+(2, 'Lou', 'Dutertre', NULL, '0600000002'),
+(3, 'Nathan', 'Bocquet', NULL, '0600000003'),
+(4, 'Ines', 'Lancelevee', NULL, '0600000004'),
+(5, 'Seohyun', 'Nam', NULL, '0600000005'),
+(6, 'Admin', 'Root', NULL, '0600000006');
 
 -- --------------------------------------------------------
 CREATE TABLE `Promotion`(

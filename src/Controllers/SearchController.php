@@ -6,6 +6,7 @@ use App\Core\Controller;
 use App\Models\UserModel;
 use App\Models\StudentModel;
 use App\Models\PiloteModel;
+use App\Models\AccessModel;
 
 class SearchController extends Controller{
     private $StudentModel;
@@ -18,18 +19,22 @@ class SearchController extends Controller{
         $this->UserModel = new UserModel($this->pdo);
         $this->StudentModel = new StudentModel($this->pdo);
         $this->PiloteModel = new PiloteModel($this->pdo);
+        $this->Model = new AccessModel($this->pdo);
     }
 
     public function searchUser() {
+        $Access = $this->Model->currentUser();
         $users = $this->StudentModel->searchStudent('')+$this->PiloteModel->searchPilote('');
         echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
                         'roles' => $this->UserModel->rolesList(),
+                        'user' => $Access,
                         'search'=> ''
                     ]);
     }
 
     public function resultUser() {
+        $Access = $this->Model->currentUser();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['filter']=== 'Etudiant'){
                 try {
@@ -37,6 +42,7 @@ class SearchController extends Controller{
 
                     echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
+                        'user' => $Access,
                         'roles' => $this->UserModel->rolesList(),
                         'search'=> $_POST['search']
                     ]);
@@ -51,6 +57,7 @@ class SearchController extends Controller{
 
                     echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
+                        'user' => $Access,
                         'search' => $_POST['search']
                     ]);
                     exit;
@@ -63,6 +70,7 @@ class SearchController extends Controller{
     }
 
     public function showUser($id){
+        $Access = $this->Model->currentUser();
         $sql = "
             SELECT * FROM User_ u 
             INNER JOIN Profil p ON u.ID_profil = p.ID_profil
@@ -73,7 +81,8 @@ class SearchController extends Controller{
         $stmt->execute();
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
         echo $this->twig->render('user-informations.html.twig', [
-            'user' => $user
+            'user' => $Access,
+            'users' => $user
         ]);
 
 

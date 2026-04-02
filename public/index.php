@@ -8,6 +8,7 @@ use App\Controllers\UserController;
 use App\Controllers\AccountController;
 use App\Controllers\ApplyFormController;
 use App\Controllers\WishlistController;
+use App\Controllers\OfferController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -27,6 +28,11 @@ $router = new Router($_GET['url'] ?? '');
 
 $router->get('/', function () use ($twig, $pdo) {
     $controller = new HomeController($twig, $pdo);
+    $controller->index();
+});
+
+$router->get('/offer', function () use ($twig, $pdo) {
+    $controller = new OfferController($twig, $pdo);
     $controller->index();
 });
 // FIX : méthode renommée printConnexion() — gère GET et POST en interne
@@ -85,6 +91,16 @@ $router->post('/admin/utilisateurs/delete/:id', function ($id) use ($twig,$pdo,$
     $ConnexionController->needAdmin();
     $controller=new UserController($twig,$pdo);
     $controller->userDelete($id);
+});
+$router->post('/admin/utlisateur/modify/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
+    $ConnexionController->needAdmin();
+    $controller=new UserController($twig,$pdo);
+    $controller->userModify($id);
+});
+$router->post('/admin/utlisateur/modified/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
+    $ConnexionController->needAdmin();
+    $controller=new UserController($twig,$pdo);
+    $controller->userModified($id);
 });
 $router->get('/admin/utilisateurs/create', function () use ($twig,$pdo,$ConnexionController) {
     $ConnexionController->needAdmin();
