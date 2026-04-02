@@ -6,31 +6,35 @@ class HomeController
 {
     private $twig;
     private $pdo;
-    
 
-    public function __construct($twig, $pdo, $connection = null)
+
+    public function __construct($twig, $pdo)
     {
         $this->twig = $twig;
         $this->pdo = $pdo;
 
     }
+    public function index(){
 
-    public function index()
-{
-    $access = new AccessModel($this->pdo);
-    $user = $access->curentUser(); 
+        $access = new AccessModel($this->pdo);
+        $user = $access->currentUser(); // démarre la session proprement
 
-    $jobOfferModel = new JobOfferModel($this->pdo);
-    $offres = $jobOfferModel->getBestOffer();
+        $jobOfferModel = new JobOfferModel($this->pdo);
 
-    $allCategory = array_column($offres, 'Category');
+        $offres = $jobOfferModel->getBestOffer();
+        $allCategory = array_column($offres, 'Category');
     $UniqueCategory = array_unique($allCategory);
-
-    echo $this->twig->render('index.html.twig', [
-        'offres_emploi' => $offres,
-        'category' => $UniqueCategory,
-        'user' => $user, 
-    ]);
-}
-
+        $flash = null;
+        if (isset($_SESSION['flash'])) {
+            $flash = $_SESSION['flash'];
+            unset($_SESSION['flash']);
+        }
+        echo $this->twig->render('index.html.twig', [
+            'offres_emploi' => $offres,
+            'category' => $UniqueCategory,
+            'user' => $user['pseudo'],
+            'user_admin' => $user['admin'] ?? false,
+            'flash' => $flash,
+        ]);
+    }
 }

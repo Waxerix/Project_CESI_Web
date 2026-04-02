@@ -1,64 +1,28 @@
 <!DOCTYPE html>
 <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %}
+                SeSoMate
+            {% endblock %}
+        </title>
+        <link rel="stylesheet" href="../Asset/style/style.css">
+    </head>
+    <body>
+        <header>
+            {% include "header.html.twig" %}
+        </header>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <main class="{% block main_class %}{% endblock %}">
+            {% block content %}{% endblock %}
+        </main>
 
-    <title>{% block title %}SeSoMate{% endblock %}</title>
-
-    {# ✅ Chemin direct au lieu de asset() #}
-    <link rel="stylesheet" href="/Asset/style/style.css">
-</head>
-
-<body>
-
-<header>
-    <div class="logo-container">
-        {# ✅ Chemin direct au lieu de path() et asset() #}
-        <a href="/">
-            <img src="/Asset/img/logo.png" alt="logo" class="logo">
-        </a>
-    </div>
-
-    <div class="container">
-        <div class="titre-container">
-            <h1>SeSoMate</h1>
-            <h2>Trouvez les meilleurs offres du moment</h2>
-        </div>
-
-        <div class="actions-container">
-            <input type="search" placeholder="Rechercher...">
-
-            <select name="filtres">
-                <option value="Entreprise">Entreprise</option>
-                <option value="Offre">Offre</option>
-                <option value="Wishlist">Wishlist</option>
-            </select>
-
-            <select name="tri">
-                <option value="Tri">Tri</option>
-                <option value="Intitulé">Intitulé</option>
-                <option value="Salaire">Salaire</option>
-                <option value="Date">Date</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="login-container">
-    <form action="/?uri=inscription" method="post">
-        <button type="submit">Sign up</button>
-    </form>
-    <form action="/?uri=login" method="post">
-        <button type="submit">Log in</button>
-    </form>
-    </div>
-</header>
-
-
-<main>
-    {% block content %}{% endblock %}
-</main>
-
-</body>
+        <footer>
+            {% include "footer.html.twig" %}
+        </footer>
+    </body>
+    {% block javascripts %}
+    {% endblock %}
 </html>

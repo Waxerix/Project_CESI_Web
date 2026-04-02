@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use App\Core\Model;
-
+use PDO;
 define('COOKIE_DUREE', 7 * 24 * 3600);
 define('COOKIE_NOM', 'remember_token');
 class AccessModel extends Model
@@ -146,17 +146,50 @@ class AccessModel extends Model
         return false;
     }
 
-    public function curentUser(): ?array
+    public function currentUser(): array
     {
-        if (!$this->isConnect()){
-            return null;
-        }
-
+        $this->startSession();
+        
         return [
             'id' => $_SESSION['user_id'],
             'pseudo' => $_SESSION['user_pseudo'],
             'admin' => $_SESSION['user_admin'],
         ];
     }
+    private function createToken(int $userId): void
+    {
+        $tokenBrut = bin2hex(random_bytes(32));   // 64 caractères hex
+        $tokenHash = hash('sha256', $tokenBrut);  // ce qu'on stocke en base
+        $expiration = date('Y-m-d H:i:s', time() + COOKIE_DUREE);
 
+        $stmt = $this->pdo->prepare(
+            'INSERT INTO Remember_tokens (ID_user, token, expires)
+             VALUES (:user, :hash, :exp)'
+        );
+        $stmt->bindValue(':user', $userId, PDO::PARAM_INT);
+        $stmt->bindValue(':hash', $tokenHash);
+        $stmt->bindValue(':exp',  $expiration);
+        $stmt->execute();
+
+        setcookie(COOKIE_NOM, $tokenBrut, [
+            'expires'  => time() + COOKIE_DUREE,
+            'path'     => '/',
+            'secure'   => false,   // ← passer à true en HTTPS
+            'httponly' => true,
+            'samesite' => 'Strict',
+        ]);
+    }
+
+    /**
+     * Supprime le token brut (via son hash) de la base de données.
+     */
+    private function deleteToken(string $tokenBrut): void
+    {
+        $tokenHash = hash('sha256', $tokenBrut);
+        $stmt = $this->pdo->prepare(
+            'DELETE FROM Remember_tokens WHERE token = :hash'
+        );
+        $stmt->bindValue(':hash', $tokenHash);
+        $stmt->execute();
+    }
 }

@@ -1,30 +1,105 @@
-{# Héritage Twig #}
 {% extends 'base.html.twig' %}
-
-{% block title %}Offres du moment{% endblock %}
-
 {% block content %}
-
-<section>
-    <h2>Les offres du moment...</h2>
-
-    {# Boucle pour les offres #}
-    {% for offre in offres %}
-    <article>
-        <h3>{{ offre.entreprise }}</h3>
-        <p>{{ offre.intitule }}</p>
-
-        <div>
-            <h4>{{ offre.niveau }}</h4>
-            <h4>{{ offre.lieu }}</h4>
-            <h4>{{ offre.type_contrat }}</h4>
+    <section class="categories-populaires">
+        <h3>
+            Recherches fréquentes :
+        </h3>
+        {% for category in category %}
+            {% if category %}
+                <div class="tags-container">
+                    <span class="tag">
+                        {{ category }}
+                    </span>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </section>
+    <div class="layout-principal">
+        <section class="liste-offres">
+            <h2>
+                Les offres du moment...
+            </h2>
+            {% for offre in offres_emploi %}
+                <article class="offre-card">
+                    <div class="offre-header">
+                        <h3>
+                            {{ offre.CompanyName|default('Entreprise non précisée') }}
+                        </h3>
+                        <p class="offre-title">
+                            {{ offre.Title }}
+                        </p>
+                    </div>
+                    <div class="offre-details">
+                        {% if offre.Duration %}
+                            <h4>
+                                {{ offre.Duration }}
+                                mois
+                            </h4>
+                        {% endif %}
+                        {% if offre.Salary %}
+                            <h4>
+                                {{ offre.Salary }}
+                                €
+                            </h4>
+                        {% endif %}
+                        {% if offre.Category %}
+                            <h4>
+                                {{ offre.Category }}
+                            </h4>
+                        {% endif %}
+                    </div>
+                    <div class="offre-actions">
+                        <a href="/postuler/{{ offre.ID_offer }}" class="btn-postuler">
+                            Postuler
+                        </a>
+                        {# --- AJOUT DU BOUTON WISHLIST --- #}
+                        <a href="/wishlist/add/{{ offre.ID_offer }}" class="btn-wishlist" style="margin-left: 10px; text-decoration: none; border: 1px solid #e0e0e0; padding: 8px 12px; border-radius: 5px; background-color: #fff;">
+                            ❤️ Favoris
+                        </a>
+                    </div>
+                </article>
+            {% else %}
+                <p>
+                    Aucune offre d'emploi disponible pour le moment.
+                </p>
+            {% endfor %}
+            <button class="btn-load-more">
+                Voir plus d'offres
+            </button>
+        </section>
+        <aside class="sidebar">
+            <div class="widget alert-widget">
+                <h3>
+                    🔔 Alerte Emploi
+                </h3>
+                <p>
+                    Recevez les nouvelles offres correspondant à vos critères directement par e-mail.
+                </p>
+                <input type="email" placeholder="Votre adresse e-mail">
+                    <button class="btn-alerte">
+                        Créer une alerte
+                    </button>
+                </div>
+                <div class="widget info-widget">
+                    <h3>
+                        🚀 Pourquoi SeSoMate ?
+                    </h3>
+                    <ul>
+                        <li>
+                            ✓ Plus de 5 000 offres vérifiées
+                        </li>
+                        <li>
+                            ✓ Mise en relation sans intermédiaire
+                        </li>
+                        <li>
+                            ✓ Des entreprises qui recrutent vraiment
+                        </li>
+                    </ul>
+                </div>
+            </aside>
         </div>
-    </article>
-    {% else %}
-    <p>Aucune offre disponible pour le moment.</p>
-    <a href="/?uri=inscription">Inscrivez-vous pour recevoir les offres en avant-première !</a>
-    {% endfor %}
-
-</section>
-
-{% endblock %}
+        {% if flash %}
+            <script src="../js/message_p.js"></script>
+        {% endif %}
+    {% endblock %}
+    
