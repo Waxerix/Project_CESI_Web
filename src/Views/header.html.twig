@@ -10,22 +10,13 @@
             <h1>SeSoMate</h1>
             <h2>Trouvez les meilleurs offres du moment</h2>
         </div>
-
-        <div class="actions-container">
-            <input type="search" placeholder="Rechercher...">
-            <select name="filtres" id="fil">
-                <option value="Entreprise">Entreprise</option>
-                <option value="Offre">Offre</option>
-                <option value="Wishlist">Wishlist</option>
-            </select>
-
-                <select name="tri" id="tri">
-                <option value="Tri">Tri</option>
-                <option value="Intitulé">Intitulé</option>
-                <option value="Salaire">Salaire</option>
-                <option value="Date">Date</option>
-            </select>
-        </div>
+    <div class="actions-container">
+        <form action="/offer" method="GET">
+            <input type="search" name="q" placeholder="Rechercher une offre, un mot-clé..." required>
+            <button type="submit" class="btn-search">Rechercher</button>      
+        </form>
+    </div>
+    <a href="/offer" class="btn-load-more">Afficher toutes les offres</a>
     </div>
 
     <div class="login-container">
