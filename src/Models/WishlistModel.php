@@ -13,8 +13,8 @@ class WishlistModel extends Model {
     }
     
     public function getAllByUserId($id_user) {
-        $sql = "SELECT o.* FROM Job_offer o 
-                JOIN Wishlist w ON o.ID_offer = w.ID_offer 
+        $sql = "SELECT o.*, c.Name as CompanyName FROM Job_offer o 
+                JOIN Wishlist w ON o.ID_offer = w.ID_offer JOIN Company c ON o.ID_company = c.ID_company
                 WHERE w.ID_user = :id_user";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id_user' => $id_user]);

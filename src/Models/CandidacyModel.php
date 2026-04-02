@@ -10,9 +10,9 @@ class CandidacyModel extends Model
         $this->pdo = $pdo;
         $this->erreur = 0;
     }
-    public function storeFile($file): ?string
+    public function storeFile($file,$companyName): ?string
     {
-        $targetDir = __DIR__ . '/../../public/uploads/' . $_SESSION["user_pseudo"] . '/';
+        $targetDir = __DIR__ . '/../../public/uploads/' . $_SESSION["user_pseudo"] . $companyName . '/';
         if (!file_exists($targetDir)) {
             mkdir($targetDir, 0777, true);
         }

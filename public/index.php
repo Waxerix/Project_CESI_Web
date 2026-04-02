@@ -58,11 +58,11 @@ $router->get('/wishlist', function () use ($twig, $pdo) {
     $controller = new WishlistController($twig, $pdo);
     $controller->index();
 });
-$router->post('/wishlist/add/:id', function ($id) use ($twig, $pdo) {
+$router->get('/wishlist/add/:id', function ($id) use ($twig, $pdo) {
     $controller = new WishlistController($twig, $pdo);
     $controller->add($id);
 });
-$router->post('/wishlist/delete/:id', function ($id) use ($twig, $pdo) {
+$router->get('/wishlist/delete/:id', function ($id) use ($twig, $pdo) {
     $controller = new WishlistController($twig, $pdo);
     $controller->delete($id);
 });

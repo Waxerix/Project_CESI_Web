@@ -15,10 +15,10 @@ class AccountController extends Controller
             header('Location: /connexion');
             exit;
         }
-        $user = $this->Model->curentUser();
+        $user = $this->Model->currentUser();
 
         echo $this->twig->render('espace-compte.html.twig', [
-            'user' => $user
+            'user' => $user,
         ]);
     }
 }

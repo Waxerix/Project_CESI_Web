@@ -149,7 +149,9 @@ class AccessModel extends Model
     public function currentUser(): array
     {
         $this->startSession();
-        
+        if (!$this->isConnect()) {
+            return [];
+        }
         return [
             'id' => $_SESSION['user_id'],
             'pseudo' => $_SESSION['user_pseudo'],

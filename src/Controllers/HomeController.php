@@ -14,7 +14,8 @@ class HomeController
         $this->pdo = $pdo;
 
     }
-    public function index(){
+    public function index()
+    {
 
         $access = new AccessModel($this->pdo);
         $user = $access->currentUser(); // démarre la session proprement
@@ -23,17 +24,17 @@ class HomeController
 
         $offres = $jobOfferModel->getBestOffer();
         $allCategory = array_column($offres, 'Category');
-    $UniqueCategory = array_unique($allCategory);
+        $UniqueCategory = array_unique($allCategory);
         $flash = null;
         if (isset($_SESSION['flash'])) {
             $flash = $_SESSION['flash'];
             unset($_SESSION['flash']);
         }
+        
         echo $this->twig->render('index.html.twig', [
             'offres_emploi' => $offres,
             'category' => $UniqueCategory,
-            'user' => $user['pseudo'],
-            'user_admin' => $user['admin'] ?? false,
+            'user' => $user,
             'flash' => $flash,
         ]);
     }

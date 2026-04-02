@@ -10,13 +10,13 @@ class WishlistController extends Controller {
         $this->twig = $twig;
         $this->pdo = $pdo;
         // On initialise le modèle
-        $this->model = new WishlistModel($this->pdo);
+        $this->Model = new WishlistModel($this->pdo);
     }
 
     public function index() {
         $id_user = 1; 
         // Vérifie bien que la méthode s'appelle getAllByUserId dans le modèle
-        $offres = $this->model->getAllByUserId($id_user);
+        $offres = $this->Model->getAllByUserId($id_user);
 
         echo $this->twig->render('wishlist.html.twig', [
             'offres' => $offres,
@@ -27,7 +27,7 @@ class WishlistController extends Controller {
     public function add($id_offer) {
         $id_user = 1; 
         if ($id_offer) {
-            $this->model->add($id_user, $id_offer);
+            $this->Model->add($id_user, $id_offer);
         }
         header('Location: /wishlist');
         exit();
@@ -36,7 +36,7 @@ class WishlistController extends Controller {
     public function delete($id_offer) {
         $id_user = 1; 
         if ($id_offer) {
-            $this->model->remove($id_user, $id_offer);
+            $this->Model->remove($id_user, $id_offer);
         }
         header('Location: /wishlist');
         exit();
