@@ -29,7 +29,7 @@ class OfferController extends Controller {
 
         $offres = $this->JobOfferModel->searchAndFilterOffers($keyword, $category, $minSalary, $duration);
 
-        echo $this->twig->render('offer.html.twig', [
+        echo $this->twig->render('Offer.html.twig', [
             'offer' => $offres,
             'user' => $user
         ]);

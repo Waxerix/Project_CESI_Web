@@ -9,6 +9,7 @@ use App\Controllers\AccountController;
 use App\Controllers\ApplyFormController;
 use App\Controllers\WishlistController;
 use App\Controllers\OfferController;
+use App\Controllers\CompanyController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -120,31 +121,31 @@ $router->get('/utilisateur/:id', function ($id) use ($twig,$pdo,$ConnexionContro
 
 // 1. 기업 관리 메인 메뉴 (등록/리스트 선택 화면)
 $router->get('/admin/entreprises', function () use ($twig, $pdo) {
-    $controller = new \App\Controllers\CompanyController($twig, $pdo);
+    $controller = new CompanyController($twig, $pdo);
     $controller->index();
 });
 
 // 2. 기업 등록 페이지 표시 (폼 화면)
 $router->get('/admin/entreprises/create', function () use ($twig, $pdo) {
-    $controller = new \App\Controllers\CompanyController($twig, $pdo);
+    $controller = new CompanyController($twig, $pdo);
     $controller->create();
 });
 
 // 3. 기업 데이터 저장 처리 (POST)
 $router->post('/admin/entreprises/store', function () use ($twig, $pdo) {
-    $controller = new \App\Controllers\CompanyController($twig, $pdo);
+    $controller = new CompanyController($twig, $pdo);
     $controller->store();
 });
 
 // 4. 기업 리스트 페이지 표시 (테이블 화면)
 $router->get('/admin/entreprises/list', function () use ($twig, $pdo) {
-    $controller = new \App\Controllers\CompanyController($twig, $pdo);
+    $controller = new CompanyController($twig, $pdo);
     $controller->list();
 });
 
 // 5. 기업 삭제 처리 (ID 파라미터 수신)
 $router->get('/admin/entreprises/delete/:id', function ($id) use ($twig, $pdo) {
-    $controller = new \App\Controllers\CompanyController($twig, $pdo);
+    $controller = new CompanyController($twig, $pdo);
     $controller->delete($id);
 });
 

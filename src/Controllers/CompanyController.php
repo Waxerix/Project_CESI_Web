@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\CompanyModel;
+use App\Models\AccessModel;
 
 class CompanyController extends Controller {
 
@@ -16,6 +17,7 @@ class CompanyController extends Controller {
         $this->pdo = $pdo;
         // 모델 초기화
         $this->companyModel = new CompanyModel($this->pdo);
+        $this->Model = new AccessModel($this->pdo);
     }
 
     /**
@@ -23,7 +25,8 @@ class CompanyController extends Controller {
      * URL: /admin/entreprises
      */
     public function index() {
-        echo $this->twig->render('admin-entreprises-menu.html.twig');
+        $user = $this->Model->currentUser();
+        echo $this->twig->render('admin-entreprises-menu.html.twig',['user'=> $user]);
     }
 
     /**
@@ -31,7 +34,8 @@ class CompanyController extends Controller {
      * URL: /admin/entreprises/create
      */
     public function create() {
-        echo $this->twig->render('creation-entreprise.html.twig');
+        $user = $this->Model->currentUser();
+        echo $this->twig->render('creation-entreprise.html.twig',['user'=> $user]);
     }
 
     /**
@@ -39,9 +43,11 @@ class CompanyController extends Controller {
      * URL: /admin/entreprises/list
      */
     public function list() {
+        $user = $this->Model->currentUser();
         $companies = $this->companyModel->getAll();
         echo $this->twig->render('list-entreprises.html.twig', [
-            'companies' => $companies
+            'companies' => $companies,
+            'user' => $user
         ]);
     }
 
