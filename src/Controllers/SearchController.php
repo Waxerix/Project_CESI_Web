@@ -20,7 +20,7 @@ class UserSearchController extends Controller{
         $this->PiloteModel = new PiloteModel($this->pdo);
     }
 
-    public function search() {
+    public function searchUser() {
         $users = $this->StudentModel->searchStudent('')+$this->PiloteModel->searchPilote('');
         echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
@@ -29,7 +29,7 @@ class UserSearchController extends Controller{
                     ]);
     }
 
-    public function result() {
+    public function resultUser() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['filter']=== 'Etudiant'){
                 try {

@@ -75,11 +75,11 @@ $router->get('/espace-compte', function () use ($twig, $pdo) {
 $router->get('/admin/utilisateurs', function () use ($twig,$pdo,$ConnexionController){
     $ConnexionController->needAdmin();
     $controller=new UserSearchController($twig,$pdo);
-    $controller->search();
+    $controller->searchUser();
 });
 $router->post('/admin/utilisateurs/results', function () use ($twig,$pdo){
     $controller=new UserSearchController($twig,$pdo);
-    $controller->result();
+    $controller->resultUser();
 });
 $router->post('/admin/utilisateurs/delete/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
     $ConnexionController->needAdmin();
