@@ -44,7 +44,7 @@ class UserModel extends Model
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
-}
+
     public function storePhoto($file, $userId) : ?string
     {
         $targetDir = __DIR__ . '/../../public/Photos/' . $userId .'/';
