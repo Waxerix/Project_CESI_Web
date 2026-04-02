@@ -6,8 +6,12 @@
                         <input type="search" name="search" id="search" placeholder="Rechercher...">
 
                             <select name="filter" id="filter">
-                                <option value="Student">Etudiant</option>
-                                <option value="Pilote">Pilote</option>
+                                {% for role in roles %}
+                                    {# ✅ Même casse partout : Status avec S majuscule #}
+                                    <option value="{{ role.Status }}">
+                                    {{ role.Status }}
+                                    </option>
+                                {% endfor %}
                             </select>
                 </form>
             </div>

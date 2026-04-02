@@ -20,14 +20,14 @@ class UserController extends Controller{
         $this->PiloteModel = new PiloteModel($this->pdo);
     }
 
-public function createMenu(){
-    echo $this->twig->render("inscription.html.twig",[
-        'roles' => $this->UserModel->rolesList()
-    ]);
+    public function createMenu(){
+        echo $this->twig->render("inscription.html.twig",[
+            'roles' => $this->UserModel->rolesList()
+        ]);
 }
 
 
-public function userCreate() {
+    public function userCreate() {
         // Imaginons que les données viennent d'un formulaire POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['Role']=='Etudiant'){
@@ -79,5 +79,6 @@ public function userCreate() {
         header('Location: /admin/utilisateurs');
         exit;
     }
+
 
 }

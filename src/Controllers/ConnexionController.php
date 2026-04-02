@@ -39,7 +39,7 @@ class ConnexionController extends Controller
 
     public function needConnexion(string $redirection = '/connexion'): void
     {
-        if (!$this->Model->isConnecte()) {
+        if (!$this->Model->isConnect()) {
             header('Location: ' . $redirection);
             exit;
         }
@@ -48,7 +48,7 @@ class ConnexionController extends Controller
     public function needAdmin(string $redirection = '/'): void
     {
         $this->needConnexion();
-        if (empty($_SESSION['user_admin'])) {
+        if ($_SESSION['user_admin'] !== 3) {
             header('Location: ' . $redirection);
             exit;
         }

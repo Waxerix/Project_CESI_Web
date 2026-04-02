@@ -3,16 +3,19 @@
 namespace App\Controllers;
 
 use App\Core\Controller;
+use App\Models\UserModel;
 use App\Models\StudentModel;
 use App\Models\PiloteModel;
 
 class UserSearchController extends Controller{
     private $StudentModel;
     private $PiloteModel;
+    private $UserModel;
 
     public function __construct($twig, $pdo) {
         $this->twig = $twig;
         $this->pdo = $pdo;
+        $this->UserModel = new UserModel($this->pdo);
         $this->StudentModel = new StudentModel($this->pdo);
         $this->PiloteModel = new PiloteModel($this->pdo);
     }
@@ -21,18 +24,20 @@ class UserSearchController extends Controller{
         $users = $this->StudentModel->searchStudent('')+$this->PiloteModel->searchPilote('');
         echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
+                        'roles' => $this->UserModel->rolesList(),
                         'search'=> ''
                     ]);
     }
 
     public function result() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($_POST['filter']=== 'Student'){
+            if ($_POST['filter']=== 'Etudiant'){
                 try {
                     $users = $this->StudentModel->searchStudent($_POST['search']);
 
                     echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
+                        'roles' => $this->UserModel->rolesList(),
                         'search'=> $_POST['search']
                     ]);
                     exit;
