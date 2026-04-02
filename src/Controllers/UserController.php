@@ -32,12 +32,14 @@ class UserController extends Controller{
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($_POST['Role']=='Etudiant'){
                 try {
+                    $Path = $this->UserModel->storePhoto($_FILES['photo'], $_POST['email']);
                     $this->StudentModel->createStudent(
                         $_POST['email'],
                         $_POST['password'],
                         $_POST['firstname'],
                         $_POST['lastname'],
-                        $_POST['phone']
+                        $_POST['phone'],
+                        $Path
                     );
                     header('Location: /admin/utilisateurs');
                     exit;
@@ -48,12 +50,14 @@ class UserController extends Controller{
             }
             if ($_POST['Role']=='Pilote'){
                 try {
+                    $Path = $this->UserModel->storePhoto($_FILES['photo'], $_POST['email']);
                     $this->PiloteModel->createPilote(
                         $_POST['email'],
                         $_POST['password'],
                         $_POST['firstname'],
                         $_POST['lastname'],
-                        $_POST['phone']
+                        $_POST['phone'],
+                        $Path
                     );
                     header('Location: /admin/utilisateurs');
                     exit;
