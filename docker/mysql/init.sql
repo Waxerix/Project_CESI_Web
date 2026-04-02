@@ -54,8 +54,8 @@ INSERT INTO `Allowed` (`ID_role`, `ID_utility`) VALUES
 CREATE TABLE `Apply` (
   `ID_user` int NOT NULL,
   `ID_offer` int NOT NULL,
-  `CV` blob,
-  `ML` blob,
+  `CV` varchar(255) DEFAULT NULL,
+  `ML` varchar(255) DEFAULT NULL,
   `Comment` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

@@ -25,14 +25,11 @@ class ApplyFormController extends Controller
         $userId = (int) $user['id'];
 
         $companyName = $this->jobModel->getOfferById($offerId)['CompanyName'];
-        
+
         $comment = $_POST['comment'];
         $LM = $_FILES['LM'] ?? null;
         $CV = $_FILES['CV'] ?? null;
-        if ($this->Model->createCandidacy($userId, $offerId, $comment)) {
-            $this->Model->storeFileLM($LM, $companyName);
-            $this->Model->storeFileCV($CV, $companyName);
-
+        if ($this->Model->createCandidacy($userId, $offerId, $comment, $LM, $CV, $companyName)) {
             $_SESSION['flash'] = 'Votre candidature a bien été envoyée !';
             header('Location: /');
             exit;
