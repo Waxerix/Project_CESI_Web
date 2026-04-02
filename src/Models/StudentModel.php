@@ -142,11 +142,12 @@ class StudentModel extends Model{
     public function deleteStudent(int $idUser) {
         try {
             $this->pdo->beginTransaction();
-            $stmt = $this->pdo->prepare("SELECT Photo_path from User_ JOIN Profil ON User_.ID_profil = Profil.ID_profil WHERE User_.ID_user = :id");
+            $stmt = $this->pdo->prepare("SELECT Photo_path, Email from User_ JOIN Profil ON User_.ID_profil = Profil.ID_profil WHERE User_.ID_user = :id");
             $stmt->execute(['id' => $idUser]);
             $photoPath = $stmt->fetchColumn();
             if ($photoPath) {
-                unlink($photoPath); // Supprimer la photo du serveur
+                unlink($photoPath['Photo_path']);// Supprimer la photo du serveur
+                rmdir($photoPath['Email']);
             }
             // 1. Récupérer l'ID_profil avant de supprimer l'utilisateur
             $stmt = $this->pdo->prepare("SELECT ID_profil FROM User_ WHERE ID_user = :id");

@@ -6,6 +6,7 @@ use App\Core\Controller;
 use App\Models\UserModel;
 use App\Models\StudentModel;
 use App\Models\PiloteModel;
+use App\Models\AccessModel;
 
 class UserController extends Controller{
     private $UserModel;
@@ -18,11 +19,14 @@ class UserController extends Controller{
         $this->UserModel = new UserModel($this->pdo);
         $this->StudentModel = new StudentModel($this->pdo);
         $this->PiloteModel = new PiloteModel($this->pdo);
+        $this->Model = new AccessModel($this->pdo);
     }
 
     public function createMenu(){
+        $user = $this->Model->currentUser();
         echo $this->twig->render("inscription.html.twig",[
-            'roles' => $this->UserModel->rolesList()
+            'roles' => $this->UserModel->rolesList(),
+            'user' => $user
         ]);
 }
 

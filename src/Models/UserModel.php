@@ -32,7 +32,7 @@ class UserModel extends Model
         $targetFile = $targetDir . $filename;
 
         if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-            return $targetFile;
+            return '/Photos/' . $filename; // Retourne le chemin relatif pour la base de données
         }
         return NULL;
     }
