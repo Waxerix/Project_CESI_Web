@@ -58,6 +58,7 @@ class SearchController extends Controller{
                     echo $this->twig->render('user-search.html.twig', [
                         'users' => $users,
                         'user' => $Access,
+                        'roles' => $this->UserModel->rolesList(),
                         'search' => $_POST['search']
                     ]);
                     exit;

@@ -2,47 +2,47 @@
 
 {% block content %}
     <main class="main-centered dashboard-container">
-    {% if user.admin == 1 %}
-        <div class="titre-container dashboard-header">
-            <h1>
-                Mon Espace Compte
-            </h1>
-            <h2>
-                Bienvenue,
-                {{ user.pseudo }}
-            </h2>
-        </div>
+        {% if user.admin == 1 %}
+            <div class="titre-container dashboard-header">
+                <h1>
+                    Mon Espace Compte
+                </h1>
+                <h2>
+                    Bienvenue,
+                    {{ user.pseudo }}
+                </h2>
+            </div>
 
-        <h3 class="dashboard-section-title">
-            Mon Profil
-        </h3>
-        <div class="dashboard-grid">
+            <h3 class="dashboard-section-title">
+                Mon Profil
+            </h3>
+            <div class="dashboard-grid">
 
-            <a href="/profil/infos" class="dashboard-card">
-                <div class="card-icon">
-                    👤
-                </div>
-                <h4>
-                    Infos Profil
-                </h4>
-                <p>
-                    Gérer mes informations personnelles et mon mot de passe.
-                </p>
-            </a>
+                <a href="/profil/infos" class="dashboard-card">
+                    <div class="card-icon">
+                        👤
+                    </div>
+                    <h4>
+                        Infos Profil
+                    </h4>
+                    <p>
+                        Gérer mes informations personnelles et mon mot de passe.
+                    </p>
+                </a>
 
-            <a href="/wishlist" class="dashboard-card">
-                <div class="card-icon">
-                    ❤️
-                </div>
-                <h4>
-                    Ma Wishlist
-                </h4>
-                <p>
-                    Retrouver les offres que j'ai sauvegardées.
-                </p>
-            </a>
+                <a href="/wishlist" class="dashboard-card">
+                    <div class="card-icon">
+                        ❤️
+                    </div>
+                    <h4>
+                        Ma Wishlist
+                    </h4>
+                    <p>
+                        Retrouver les offres que j'ai sauvegardées.
+                    </p>
+                </a>
 
-        </div>
+            </div>
         {% endif %}
         {% if user.admin == 3 %}
             <div class="titre-container dashboard-header">
@@ -171,6 +171,17 @@
                     </h4>
                     <p>
                         Gérer les comptes et les droits d'accès.
+                    </p>
+                </a>
+                <a href="/admin/Promotions/{{ user.id }}" class="dashboard-card admin-card">
+                    <div class="card-icon">
+                        👥
+                    </div>
+                    <h4>
+                        Gestion Promotions
+                    </h4>
+                    <p>
+                        Regarder les offres auquelles vos élèves on postuler.
                     </p>
                 </a>
 

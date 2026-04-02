@@ -93,7 +93,7 @@ class PiloteModel extends Model{
     }
 
 
-    public function updatePilote(int $idUser, string $email, string $name, string $lastname, string $phone, ?string $newPassword = null) {
+    public function updatePilote(int $idUser, string $email, string $name, string $lastname, string $phone, ?string $newPassword = null, ?string $photoPath = null) {
         try {
             $this->pdo->beginTransaction();
 
@@ -107,11 +107,12 @@ class PiloteModel extends Model{
             }
 
             // 2. Mettre à jour la table Profil
-            $sqlProfil = "UPDATE Profil SET Name = :name, Lastname = :lastname, Phone_number = :phone WHERE ID_profil = :id_profil";
+            $sqlProfil = "UPDATE Profil SET Name = :name, Lastname = :lastname, Phone_number = :phone, Photo_path = :photoPath WHERE ID_profil = :id_profil";
             $this->pdo->prepare($sqlProfil)->execute([
                 'name'      => $name,
                 'lastname'  => $lastname,
                 'phone'     => $phone,
+                'photoPath' => $photoPath,
                 'id_profil' => $idProfil
             ]);
 
@@ -142,11 +143,12 @@ class PiloteModel extends Model{
     public function deletePilote(int $idUser) {
         try {
             $this->pdo->beginTransaction();
-            $stmt = $this->pdo->prepare("SELECT Photo_path from Profil WHERE ID_user = :id");
+            $stmt = $this->pdo->prepare("SELECT Photo_path, Email from User_ JOIN Profil ON User_.ID_profil = Profil.ID_profil WHERE User_.ID_user = :id");
             $stmt->execute(['id' => $idUser]);
-            $photoPath = $stmt->fetchColumn();
+            $photoPath = $stmt->fetch(\PDO::FETCH_ASSOC);
             if ($photoPath) {
-                unlink($photoPath); // Supprimer la photo du serveur
+                unlink($photoPath['Photo_path']);// Supprimer la photo du serveur
+                rmdir(__DIR__ . '/../../public/Photos/' . $photoPath['Email']);
             }
             // 1. Récupérer l'ID_profil avant de supprimer l'utilisateur
             $stmt = $this->pdo->prepare("SELECT ID_profil FROM User_ WHERE ID_user = :id");
