@@ -2,29 +2,28 @@
 
 {% block content %}
 <main class="main-centered">
-    <section class="form-section" style="max-width: 900px;">
+    <section class="form-section company-list-section">
         <h2 class="page-title">Liste des Entreprises</h2>
 
         <div class="form-card">
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <table class="company-table">
                 <thead>
-                    <tr style="border-bottom: 2px solid #333; background-color: #f9f9f9;">
-                        <th style="padding: 12px; text-align: left;">Nom</th>
-                        <th style="padding: 12px; text-align: left;">Email</th>
-                        <th style="padding: 12px; text-align: left;">Téléphone</th>
-                        <th style="padding: 12px; text-align: center;">Actions</th>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for company in companies %}
-                    <tr style="border-bottom: 1px solid #ddd;">
-                        <td style="padding: 12px;">{{ company.Name }}</td>
-                        <td style="padding: 12px;">{{ company.Email }}</td>
-                        <td style="padding: 12px;">{{ company.Phone_Number }}</td>
-                        <td style="padding: 12px; text-align: center;">
-                            {# 삭제 버튼: 클릭 시 확인 창을 띄움 #}
+                    <tr>
+                        <td>{{ company.Name }}</td>
+                        <td>{{ company.Email }}</td>
+                        <td>{{ company.Phone_Number }}</td>
+                        <td class="text-center">
                             <a href="/admin/entreprises/delete/{{ company.ID_company }}" 
-                               style="color: #e74c3c; text-decoration: none; font-weight: bold;"
+                               class="btn-delete"
                                onclick="return confirm('Voulez-vous vraiment supprimer l\'entreprise {{ company.Name }} ?')">
                                 Supprimer
                             </a>
@@ -32,7 +31,7 @@
                     </tr>
                     {% else %}
                     <tr>
-                        <td colspan="4" style="padding: 20px; text-align: center; color: #888;">
+                        <td colspan="4" class="empty-msg">
                             Aucune entreprise enregistrée.
                         </td>
                     </tr>
@@ -40,8 +39,8 @@
                 </tbody>
             </table>
 
-            <div style="margin-top: 30px;">
-                <a href="/admin/entreprises" style="text-decoration: none; color: #3498db;">← Retour au menu gestion</a>
+            <div class="back-link-container">
+                <a href="/admin/entreprises" class="link-blue">← Retour au menu gestion</a>
             </div>
         </div>
     </section>

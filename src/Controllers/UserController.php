@@ -75,6 +75,59 @@ class UserController extends Controller{
         exit;
     }
 
+    public function userModify($id) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user = $this->UserModel->searchUserByID($id);
+            echo $this->twig->render('user-modify.html.twig', [
+                        'user' => $user,
+                        'roles' => $this->UserModel->rolesList()
+                    ]);
+            exit;
+        }
+    }
+
+    public function userModified($id) {
+        // Imaginons que les données viennent d'un formulaire POST
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if ($_POST['Role']=='Etudiant'){
+                try {
+                    $this->StudentModel->updateStudent(
+                        $id,
+                        $_POST['email'],
+                        $_POST['firstname'],
+                        $_POST['lastname'],
+                        $_POST['phone'],
+                        $_POST['password']
+                    );
+                    header('Location: /admin/utilisateurs');
+                    exit;
+                } catch (Exception $e) {
+                    $error = "Erreur lors de l'inscription : " . $e->getMessage();
+                    // Afficher l'erreur dans ton template Twig
+                }
+            }
+            if ($_POST['Role']=='Pilote'){
+                try {
+                    $this->PiloteModel->updatePilote(
+                        $id,
+                        $_POST['email'],
+                        $_POST['firstname'],
+                        $_POST['lastname'],
+                        $_POST['phone'],
+                        $_POST['password']
+                    );
+                    header('Location: /admin/utilisateurs');
+                    exit;
+                } catch (Exception $e) {
+                    $error = "Erreur lors de l'inscription : " . $e->getMessage();
+                    // Afficher l'erreur dans ton template Twig
+                }
+            }
+        }
+        header('Location: /admin/utilisateurs');
+        exit;
+    }
+
     public function userDelete($id) {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($this->StudentModel->isStudent($id)){
