@@ -115,7 +115,7 @@ class StudentModel extends Model{
             ]);
 
             // 3. Mettre à jour la table User_ (Email)
-            $sqlUser = "UPDATE User_ SET Email = :email";
+            $sqlUser = "UPDATE User_ SET Email = :email , ID_role =1";
             $paramsUser = ['email' => $email, 'id' => $idUser];
 
             // 4. Si un nouveau mot de passe est fourni, on l'ajoute à la requête

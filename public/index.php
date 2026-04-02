@@ -3,7 +3,7 @@
 require_once '../vendor/autoload.php';
 use App\Controllers\HomeController;
 use App\Controllers\ConnexionController;
-use App\Controllers\UserSearchController;
+use App\Controllers\SearchController;
 use App\Controllers\UserController;
 use App\Controllers\AccountController;
 use App\Controllers\ApplyFormController;
@@ -74,17 +74,27 @@ $router->get('/espace-compte', function () use ($twig, $pdo) {
 
 $router->get('/admin/utilisateurs', function () use ($twig,$pdo,$ConnexionController){
     $ConnexionController->needAdmin();
-    $controller=new UserSearchController($twig,$pdo);
+    $controller=new SearchController($twig,$pdo);
     $controller->searchUser();
 });
 $router->post('/admin/utilisateurs/results', function () use ($twig,$pdo){
-    $controller=new UserSearchController($twig,$pdo);
+    $controller=new SearchController($twig,$pdo);
     $controller->resultUser();
 });
 $router->post('/admin/utilisateurs/delete/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
     $ConnexionController->needAdmin();
     $controller=new UserController($twig,$pdo);
     $controller->userDelete($id);
+});
+$router->post('/admin/utlisateur/modify/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
+    $ConnexionController->needAdmin();
+    $controller=new UserController($twig,$pdo);
+    $controller->userModify($id);
+});
+$router->post('/admin/utlisateur/modified/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
+    $ConnexionController->needAdmin();
+    $controller=new UserController($twig,$pdo);
+    $controller->userModified($id);
 });
 $router->get('/admin/utilisateurs/create', function () use ($twig,$pdo,$ConnexionController) {
     $ConnexionController->needAdmin();
@@ -98,7 +108,7 @@ $router->post('/inscription', function () use ($twig,$pdo,$ConnexionController) 
 });
 $router->get('/utilisateur/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
     $ConnexionController->needAdmin();
-    $controller=new UserSearchController($twig,$pdo);
+    $controller=new SearchController($twig,$pdo);
     $controller->showUser($id);
 });
 

@@ -18,4 +18,27 @@ class UserModel extends Model{
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function searchUserByID(string $id){
+        $sql = "
+            SELECT
+                u.ID_user,
+                u.Email,
+                r.Status as status,  -- On récupère le nom du rôle pour l'affichage
+                p.Name,
+                p.Lastname,
+                p.Phone_number
+            FROM User_ u
+            INNER JOIN Profil p ON u.ID_profil = p.ID_profil
+            INNER JOIN Role r ON u.ID_role = r.ID_role  -- Jointure avec la table Role
+            WHERE 
+                u.ID_user = :id
+        ";
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 }

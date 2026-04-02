@@ -7,7 +7,7 @@ use App\Models\UserModel;
 use App\Models\StudentModel;
 use App\Models\PiloteModel;
 
-class UserSearchController extends Controller{
+class SearchController extends Controller{
     private $StudentModel;
     private $PiloteModel;
     private $UserModel;
