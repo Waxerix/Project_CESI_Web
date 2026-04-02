@@ -30,8 +30,9 @@ class ApplyFormController extends Controller
         $LM = $_FILES['LM'] ?? null;
         $CV = $_FILES['CV'] ?? null;
         if ($this->Model->createCandidacy($userId, $offerId, $comment)) {
-            $this->Model->storeFile($LM, $companyName);
-            $this->Model->storeFile($CV, $companyName);
+            $this->Model->storeFileLM($LM, $companyName);
+            $this->Model->storeFileCV($CV, $companyName);
+
             $_SESSION['flash'] = 'Votre candidature a bien été envoyée !';
             header('Location: /');
             exit;

@@ -10,7 +10,7 @@ class CandidacyModel extends Model
         $this->pdo = $pdo;
         $this->erreur = 0;
     }
-    public function storeFile($file,$companyName): ?string
+    public function storeFileCV($file,$companyName): ?string
     {
         $targetDir = __DIR__ . '/../../public/uploads/' . $_SESSION["user_pseudo"] . $companyName . '/';
         if (!file_exists($targetDir)) {
@@ -21,7 +21,30 @@ class CandidacyModel extends Model
         $targetFile = $targetDir . $filename;
 
         if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-            return '/uploads/' . $filename;
+            $stmt = $this->pdo->prepare('INSERT INTO Apply (CV) VALUES (:cv)');
+            $stmt->bindValue(':cv', $targetFile, \PDO::PARAM_STR);
+            $stmt->execute();
+
+            return $targetFile;
+        }
+        return null;
+    }
+    public function storeFileLM($file,$companyName): ?string
+    {
+        $targetDir = __DIR__ . '/../../public/uploads/' . $_SESSION["user_pseudo"] . $companyName . '/';
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        $filename = uniqid() . '_' . basename($file['name']);
+        $targetFile = $targetDir . $filename;
+
+        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
+            $stmt = $this->pdo->prepare('INSERT INTO Apply (LM) VALUES (:lm)');
+            $stmt->bindValue(':lm', $targetFile, \PDO::PARAM_STR);
+            $stmt->execute();
+
+            return $targetFile;
         }
         return null;
     }
