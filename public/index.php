@@ -92,6 +92,16 @@ $router->post('/admin/utilisateurs/delete/:id', function ($id) use ($twig,$pdo,$
     $controller=new UserController($twig,$pdo);
     $controller->userDelete($id);
 });
+$router->post('/admin/utlisateur/modify/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
+    $ConnexionController->needAdmin();
+    $controller=new UserController($twig,$pdo);
+    $controller->userModify($id);
+});
+$router->post('/admin/utlisateur/modified/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
+    $ConnexionController->needAdmin();
+    $controller=new UserController($twig,$pdo);
+    $controller->userModified($id);
+});
 $router->get('/admin/utilisateurs/create', function () use ($twig,$pdo,$ConnexionController) {
     $ConnexionController->needAdmin();
     $controller=new UserController($twig,$pdo);
