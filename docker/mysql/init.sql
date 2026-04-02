@@ -184,6 +184,10 @@ CREATE TABLE `Promotion`(
   `Name` varchar(50) DEFAULT NULL,
   `ID_pilote` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `Promotion` (`ID_promotion`, `Name`, `ID_pilote`) VALUES
+(1, 'CESI 2024', 4),
+(2, 'CESI 2025', 5);
 --
 -- Structure de la table `Remember_tokens`
 --

@@ -10,6 +10,7 @@ use App\Controllers\ApplyFormController;
 use App\Controllers\WishlistController;
 use App\Controllers\OfferController;
 use App\Controllers\CompanyController;
+use App\Controllers\PromotionController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -31,7 +32,10 @@ $router->get('/', function () use ($twig, $pdo) {
     $controller = new HomeController($twig, $pdo);
     $controller->index();
 });
-
+$router->get('/admin/Promotions/:id', function ($id) use ($twig, $pdo) {
+    $controller = new PromotionController($twig, $pdo);
+    $controller->index($id);
+});
 $router->get('/offer', function () use ($twig, $pdo) {
     $controller = new OfferController($twig, $pdo);
     $controller->index();
