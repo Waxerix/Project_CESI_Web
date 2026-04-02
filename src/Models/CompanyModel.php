@@ -24,7 +24,7 @@ class CompanyModel extends Model
     {
         // Préparation de la requête SQL
         // On utilise CURDATE() pour la colonne Create_date afin d'avoir la date du jour
-        $sql = "INSERT INTO Company (Name, Email, Phone_Number, Description, Create_date) 
+        $sql = "INSERT INTO Company (Name, Email, Phone_Number, Description, Creation_date) 
                 VALUES (:name, :email, :phone, :description, CURDATE())";
 
         $stmt = $this->pdo->prepare($sql);
