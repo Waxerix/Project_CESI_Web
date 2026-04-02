@@ -1070,3 +1070,134 @@ footer {
 .btn-heart.active {
     animation: heartPulse 0.3s forwards;
 }
+
+.link-blue {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.link-blue:hover {
+    text-decoration: underline;
+}
+
+.btn-delete {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-delete:hover {
+    text-decoration: underline;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.info-value {
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #333;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.profile-view .input-group {
+    margin-bottom: 15px;
+}
+
+.back-link-container {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    text-align: center;
+}
+
+/* 기업 리스트 액션 링크 공통 */
+.link-action {
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 15px;
+    transition: opacity 0.2s;
+}
+
+.link-action:hover {
+    opacity: 0.7;
+}
+
+.link-edit {
+    color: #3498db;
+}
+
+.link-avis {
+    color: #f39c12;
+}
+
+.company-table td {
+    vertical-align: middle;
+    padding: 12px 8px;
+}
+
+.btn-delete {
+    color: #e74c3c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-delete:hover {
+    text-decoration: underline;
+}
+
+.back-link-container {
+    margin-top: 25px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.average-rating-box {
+    margin-bottom: 25px;
+    font-size: 1.2em;
+    padding: 15px;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    border-left: 5px solid #f1c40f; 
+}
+
+.rating-score {
+    color: #f1c40f;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.user-fullname {
+    color: #2c3e50;
+}
+
+.user-email {
+    color: #7f8c8d;
+}
+
+.rating-cell {
+    color: #f1c40f;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.comment-cell {
+    font-style: italic;
+    color: #333;
+}
+
+.link-back-bold {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-back-bold:hover {
+    text-decoration: underline;
+}

@@ -2,25 +2,33 @@
 namespace App\Models;
 use App\Core\Model;
 use PDO;
+
 class JobOfferModel extends Model{
     
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
+
+    /**
+     * Récupère toutes les offres avec l'ID de l'entreprise
+     */
     public function getAllOffers() {
-        
-        $sql = "SELECT j.ID_offer, j.Category, j.Title, j.Duration, j.Salary, c.Name as CompanyName 
+        // Ajout de j.ID_company pour le lien d'évaluation
+        $sql = "SELECT j.ID_offer, j.ID_company, j.Category, j.Title, j.Duration, j.Salary, c.Name as CompanyName 
                 FROM Job_offer j 
                 LEFT JOIN Company c ON j.ID_company = c.ID_company 
                 ORDER BY j.ID_offer DESC"; 
 
         $stmt = $this->pdo->query($sql);
-        
-       
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     * Récupère une offre par son ID
+     */
     public function getOfferById($id) {
-        $sql = "SELECT j.ID_offer, j.Title, j.Description, j.Duration, j.Salary, c.Name as CompanyName 
+        // Ajout de j.ID_company
+        $sql = "SELECT j.ID_offer, j.ID_company, j.Title, j.Description, j.Duration, j.Salary, c.Name as CompanyName 
                 FROM Job_offer j 
                 LEFT JOIN Company c ON j.ID_company = c.ID_company 
                 WHERE j.ID_offer = :id";
@@ -30,29 +38,32 @@ class JobOfferModel extends Model{
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Récupère les meilleures offres basées sur les notes
+     */
     public function getBestOffer($limit = 5){
-
-        $sql = "SELECT j.ID_offer, j.Category, j.Title, j.Duration, j.Salary, c.Name as CompanyName, AVG(e.Rate) as average_rating
+        // Ajout de j.ID_company dans le SELECT et le GROUP BY
+        $sql = "SELECT j.ID_offer, j.ID_company, j.Category, j.Title, j.Duration, j.Salary, c.Name as CompanyName, AVG(e.Rate) as average_rating
                 FROM Job_offer j
                 JOIN Company c ON j.ID_company = c.ID_company
                 JOIN Evaluate e ON c.ID_company = e.ID_company
-                GROUP BY j.ID_offer, j.Category, j.Title, j.Duration, j.Salary, c.Name 
+                GROUP BY j.ID_offer, j.ID_company, j.Category, j.Title, j.Duration, j.Salary, c.Name 
                 ORDER BY average_rating DESC
                 LIMIT :limit";
 
         $stmt = $this->pdo->prepare($sql);
-        
         $stmt->bindValue(':limit', (int) $limit, PDO::PARAM_INT);
         $stmt->execute();
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-
     }
 
+    /**
+     * Recherche et filtrage des offres
+     */
     public function searchAndFilterOffers(string $keyword = '', string $category = '', string $minSalary = '', string $duration = '') {
-        
-        $sql = "SELECT j.ID_offer, j.Category, j.Title, j.Duration, j.Salary, c.Name as CompanyName 
+        // Ajout de j.ID_company
+        $sql = "SELECT j.ID_offer, j.ID_company, j.Category, j.Title, j.Duration, j.Salary, c.Name as CompanyName 
                 FROM Job_offer j 
                 LEFT JOIN Company c ON j.ID_company = c.ID_company 
                 WHERE 1=1"; 
@@ -87,4 +98,3 @@ class JobOfferModel extends Model{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-

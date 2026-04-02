@@ -17,19 +17,14 @@ class CompanyModel extends Model
 
     /**
      * Insère une nouvelle entreprise dans la table 'Company'
-     * @param array $data Les données provenant du formulaire
-     * @return bool Succès ou échec de l'insertion
      */
     public function create($data)
     {
-        // Préparation de la requête SQL
-        // On utilise CURDATE() pour la colonne Create_date afin d'avoir la date du jour
-        $sql = "INSERT INTO Company (Name, Email, Phone_Number, Description, Creation_date) 
-                VALUES (:name, :email, :phone, :description, CURDATE())";
+        $sql = "INSERT INTO Company (Name, Email, Phone_Number, Description) 
+                VALUES (:name, :email, :phone, :description)";
 
         $stmt = $this->pdo->prepare($sql);
 
-        // Exécution avec protection contre les injections SQL
         return $stmt->execute([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -43,15 +38,13 @@ class CompanyModel extends Model
      */
     public function getAll()
     {
-        $sql = "SELECT * FROM Company ORDER BY Creation_date DESC";
+        $sql = "SELECT * FROM Company ORDER BY ID_company DESC"; 
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
      * Supprime une entreprise par son ID
-     * @param int $id L'identifiant de l'entreprise
-     * @return bool Succès ou échec de la suppression
      */
     public function delete($id)
     {
@@ -65,9 +58,11 @@ class CompanyModel extends Model
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute(['id' => $jobOffer['ID_offer']]);
         }
+        
         $sql = "DELETE FROM Evaluate WHERE ID_company = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
+        
         $sql = "DELETE FROM Job_offer WHERE ID_company = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['id' => $id]);
@@ -75,5 +70,31 @@ class CompanyModel extends Model
         $sql = "DELETE FROM Company WHERE ID_company = :id";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute(['id' => $id]);
+    }
+
+    /**
+     * Récupérer les informations de l'entreprise pour un identifiant spécifique.
+     */
+    public function getById($id) {
+        $sql = "SELECT * FROM Company WHERE ID_company = :id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Mettre à jours les informations d'entreprise
+     */
+    public function update($id, $data) {
+        $sql = "UPDATE Company SET Name = :name, Email = :email, Phone_Number = :phone, Description = :description 
+                WHERE ID_company = :id";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            'id' => $id,
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'phone' => $data['phone'],
+            'description' => $data['description']
+        ]);
     }
 }
