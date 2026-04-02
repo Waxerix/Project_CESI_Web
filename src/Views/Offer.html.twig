@@ -45,21 +45,31 @@
             {{ offer|length }} offres trouvées
         </p>
 
-        {% for offer in offer %}
-            <article>
+        {% for item in offer %} 
+            <article class="offre-card"> 
                 <div class="offre-header">
-                    <h3>{{ offer.CompanyName|default('Entreprise non précisée') }}</h3>
-                    <p class="offre-title-text">{{ offer.Title }}</p>
+                    <h3>{{ item.CompanyName|default('Entreprise non précisée') }}</h3>
+                    <p class="offre-title-text">{{ item.Title }}</p>
                 </div>
 
                 <div class="tags-container">
-                    <span class="tag">{{ offer.Category }}</span>
-                    <span class="tag">{{ offer.Duration }} mois</span>
-                    <span class="tag">{{ offer.Salary }} €</span>
+                    <span class="tag">{{ item.Category }}</span>
+                    <span class="tag">{{ item.Duration }} mois</span>
+                    <span class="tag">{{ item.Salary }} €</span>
                 </div>
                 
                 <div class="offre-actions">
-                    <a href="/postuler/{{ offer.ID_offer }}" class="btn-postuler">Voir l'offre</a>
+                    {# 
+                       Bouton d'évaluation : 
+                       Utilise le même style que le bouton de postulation mais en jaune.
+                    #}
+                    {% if item.ID_company %}
+                        <a href="/evaluate/{{ item.ID_company }}" class="btn-postuler" style="background-color: #f1c40f; margin-right: 10px; border-color: #f1c40f;">
+                            Évaluer
+                        </a>
+                    {% endif %}
+
+                    <a href="/postuler/{{ item.ID_offer }}" class="btn-postuler">Voir l'offre</a>
                 </div>
             </article>
         {% else %}
