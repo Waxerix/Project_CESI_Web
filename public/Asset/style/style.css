@@ -948,3 +948,77 @@ footer {
     color: var(--text-muted);
     line-height: 1.4;
 }
+
+/* 기업 관리 공통 스타일 */
+.company-menu-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 40px;
+}
+
+.btn-secondary {
+    background-color: #555 !important;
+}
+
+.btn-text-link {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+/* 리스트 테이블 스타일 */
+.company-list-section {
+    max-width: 900px;
+}
+
+.company-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.company-table thead tr {
+    border-bottom: 2px solid #333;
+    background-color: #f9f9f9;
+}
+
+.company-table th, .company-table td {
+    padding: 12px;
+    text-align: left;
+}
+
+.company-table td {
+    border-bottom: 1px solid #ddd;
+}
+
+.company-table th.text-center, .company-table td.text-center {
+    text-align: center;
+}
+
+.btn-delete {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.empty-msg {
+    padding: 20px;
+    text-align: center;
+    color: #888;
+}
+
+.back-link-container {
+    margin-top: 30px;
+}
+
+.link-blue {
+    text-decoration: none;
+    color: #3498db;
+}
+
+.link-gray {
+    text-decoration: none;
+    color: #666;
+    font-size: 0.9em;
+}
