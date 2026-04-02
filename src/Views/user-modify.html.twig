@@ -5,7 +5,7 @@
         <form action="/admin/utlisateur/modified/{{user.ID_user}}" method="post" enctype="multipart/form-data" class="register-split-container">
             <div class="split-left-upload">
                 {# Image existante ou par défaut #}
-                <img src="{{ user.photo ?? 'Asset/img/user.png' }}" alt="Photo de profil" id="profile-preview" class="default-user-icon">
+                <img src="{{ users.Photo_path }}" alt="Photo de profil" id="profile-preview" class="default-user-icon">
                 <h3>Modifier la photo de profil</h3>
                 <input type="file" id="photo" name="photo" accept="image/*" class="standard-file-input">
             </div>
@@ -63,9 +63,9 @@
             </div>
         </form>
     </main>
+<script src="/js/preview.js" defer></script>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    <script src="preview.js" defer></script>
 {% endblock %}
