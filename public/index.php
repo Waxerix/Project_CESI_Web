@@ -149,12 +149,12 @@ $router->get('/admin/entreprises/delete/:id', function ($id) use ($twig, $pdo) {
 });
 
 $router->get('/admin/entreprises/edit/:id', function ($id) use ($twig, $pdo) {
-    $controller = new \App\Controllers\CompanyController($twig, $pdo);
+    $controller = new CompanyController($twig, $pdo);
     $controller->edit($id);
 });
 
 $router->post('/admin/entreprises/update/:id', function ($id) use ($twig, $pdo) {
-    $controller = new \App\Controllers\CompanyController($twig, $pdo);
+    $controller = new CompanyController($twig, $pdo);
     $controller->update($id);
 });
 
@@ -175,7 +175,7 @@ $router->post('/evaluate/:id', function ($id) use ($twig, $pdo) {
 
 // Voir les évaluations d'une entreprise (Admin)
 $router->get('/admin/entreprises/evaluations/:id', function ($id) use ($twig, $pdo) {
-    $controller = new \App\Controllers\CompanyController($twig, $pdo);
+    $controller = new CompanyController($twig, $pdo);
     $controller->showEvaluations($id);
 });
 
