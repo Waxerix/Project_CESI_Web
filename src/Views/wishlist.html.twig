@@ -1,92 +1,81 @@
 {% extends "base.html.twig" %}
+
 {% block title %}
     {{ page_title }}
 {% endblock %}
-{% block content %}
-    <section class="layout-principal">
-        <div class="liste-offres">
-            <h1>
-                Ma Wish-list
-            </h1>
-            <div class="wishlist-container">
-                {% if offres is empty %}
-                    <p>
-                        Votre wish-list est vide pour le moment.
-                    </p>
-                    <a href="/" class="btn" style="display: inline-block; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">
-                        Parcourir les offres
-                    </a>
-                {% else %}
-                    <div class="offres-grid">
-                        {# Setup pagination #}
-                        {% set per_page = 10 %}
-                        {% set total_pages = (offres|length / per_page)|round(0, 'ceil') %}
-                        {% set current_page = current_page is defined ? current_page : 1 %}
-                        {% set paged_offres = offres|slice((current_page - 1) * per_page, per_page) %}
 
-                        {% for offre in paged_offres %}
-                            {# ... ton code de carte existant ... #}
+{% block content %}
+<section class="layout-principal">
+    <div class="liste-offres">
+        <h1>Ma Wish-list</h1>
+
+        <div class="wishlist-container">
+            {% if offres is empty %}
+                <p>Votre wish-list est vide pour le moment.</p>
+                <a href="/" class="btn" style="display: inline-block; padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+                    Parcourir les offres
+                </a>
+            {% else %}
+                {# Setup pagination #}
+                {% set per_page = 10 %}
+                {% set total_pages = (offres|length / per_page)|round(0, 'ceil') %}
+                {% set current_page = current_page is defined ? current_page : 1 %}
+                {% set paged_offres = offres|slice((current_page - 1) * per_page, per_page) %}
+
+                <div class="offres-grid">
+                    {% for offre in paged_offres %}
+                        <div class="offre-card">
+                            {% if offre.Salary %}
+                                <h4>{{ offre.Salary }} €</h4>
+                            {% endif %}
+
+                            {% if offre.Category %}
+                                <h4>{{ offre.Category }}</h4>
+                            {% endif %}
+
+                            <div class="offre-actions">
+                                <a href="/postuler/{{ offre.ID_offer }}" class="btn-postuler">
+                                    Postuler
+                                </a>
+                                <a href="/wishlist/delete/{{ offre.ID_offer }}" class="btn-delete" style="color: #dc3545; text-decoration: none; border: 1px solid #dc3545; padding: 5px 10px; border-radius: 4px; font-size: 0.9em;">
+                                    🗑️ Retirer de la liste
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {# Pagination #}
+                {% if total_pages > 1 %}
+                    <nav class="pagination">
+                        {% if current_page > 1 %}
+                            <a href="?page={{ current_page - 1 }}" class="pagination-btn">&laquo; Précédent</a>
+                        {% else %}
+                            <span class="pagination-btn disabled">&laquo; Précédent</span>
+                        {% endif %}
+
+                        {% for page in 1..total_pages %}
+                            {% if page == current_page %}
+                                <span class="pagination-btn active">{{ page }}</span>
+                            {% else %}
+                                <a href="?page={{ page }}" class="pagination-btn">{{ page }}</a>
+                            {% endif %}
                         {% endfor %}
 
-                        {# Pagination #}
-                        {% if total_pages > 1 %}
-                            <nav class="pagination">
-                                {% if current_page > 1 %}
-                                    <a href="?page={{ current_page - 1 }}" class="pagination-btn">&laquo; Précédent</a>
-                                {% else %}
-                                    <span class="pagination-btn disabled">&laquo; Précédent</span>
-                                {% endif %}
-
-                                {% for page in 1..total_pages %}
-                                    {% if page == current_page %}
-                                        <span class="pagination-btn active">{{ page }}</span>
-                                    {% else %}
-                                        <a href="?page={{ page }}" class="pagination-btn">{{ page }}</a>
-                                    {% endif %}
-                                    {% if offre.Salary %}
-                                        <h4>
-                                            {{ offre.Salary }}
-                                            €
-                                        </h4>
-                                    {% endif %}
-                                    {% if offre.Category %}
-                                        <h4>
-                                            {{ offre.Category }}
-                                        </h4>
-                                    {% endif %}
-                                </div>
-                                 <div class="offre-actions">
-                                    <a href="/postuler/{{ offre.ID_offer }}" class="btn-postuler">
-                                        Postuler
-                                    </a>
-                                    {# --- AJOUT DU BOUTON WISHLIST --- #}
-                                    <div class="offre-actions" style="margin-top: 10px;">
-                                        {# Bouton pour retirer l'offre (SFx 25) #}
-                                        <a href="/wishlist/delete/{{ offre.ID_offer }}" class="btn-delete" style="color: #dc3545; text-decoration: none; border: 1px solid #dc3545; padding: 5px 10px; border-radius: 4px; font-size: 0.9em;">
-                                            🗑️ Retirer de la liste
-                                        </a>
-                                    </div>
-                                </article>
-                            {% else %}
-                                <p>
-                                    Votre Wishlist est vide.
-                                </p>
-                            {% endfor %}
-                                {% endfor %}
-
-                                {% if current_page < total_pages %}
-                                    <a href="?page={{ current_page + 1 }}" class="pagination-btn">Suivant &raquo;</a>
-                                {% else %}
-                                    <span class="pagination-btn disabled">Suivant &raquo;</span>
-                                {% endif %}
-                            </nav>
+                        {% if current_page < total_pages %}
+                            <a href="?page={{ current_page + 1 }}" class="pagination-btn">Suivant &raquo;</a>
+                        {% else %}
+                            <span class="pagination-btn disabled">Suivant &raquo;</span>
                         {% endif %}
-                        </div>
-                    {% endif %}
-                </div>
-            </div>
-        </section>
-    {% endblock %}
-    {% block javascripts %}
-        <script src="../js/wishlist.js"></script>
-    {% endblock %}
+                    </nav>
+                {% endif %}
+
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="../js/wishlist.js"></script>
+{% endblock %}
