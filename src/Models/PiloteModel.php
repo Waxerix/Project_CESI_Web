@@ -48,17 +48,18 @@ class PiloteModel extends Model{
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function createPilote(string $email, string $password, string $name, string $lastname, string $phone) {
+    public function createPilote(string $email, string $password, string $name, string $lastname, string $phone, string $photoPath) {
         try {
             // 1. Démarrer une transaction pour garantir l'intégrité des données
             $this->pdo->beginTransaction();
 
             // 2. Insérer d'abord dans la table Profil pour obtenir l'ID_profil
-            $stmtProfil = $this->pdo->prepare("INSERT INTO Profil (Name, Lastname, Phone_number) VALUES (:name, :lastname, :phone)");
+            $stmtProfil = $this->pdo->prepare("INSERT INTO Profil (Name, Lastname, Phone_number, Photo_path) VALUES (:name, :lastname, :phone, :photoPath)");
             $stmtProfil->execute([
                 'name'     => $name,
                 'lastname' => $lastname,
-                'phone'    => $phone
+                'phone'    => $phone,
+                'photoPath' => $photoPath
             ]);
 
             // Récupérer l'ID du profil qui vient d'être créé
@@ -92,7 +93,7 @@ class PiloteModel extends Model{
     }
 
 
-    public function updatePilote(int $idUser, string $email, string $name, string $lastname, string $phone, ?string $newPassword = null) {
+    public function updatePilote(int $idUser, string $email, string $name, string $lastname, string $phone, ?string $newPassword = null, ?string $photoPath = null) {
         try {
             $this->pdo->beginTransaction();
 
@@ -106,16 +107,17 @@ class PiloteModel extends Model{
             }
 
             // 2. Mettre à jour la table Profil
-            $sqlProfil = "UPDATE Profil SET Name = :name, Lastname = :lastname, Phone_number = :phone WHERE ID_profil = :id_profil";
+            $sqlProfil = "UPDATE Profil SET Name = :name, Lastname = :lastname, Phone_number = :phone, Photo_path = :photoPath WHERE ID_profil = :id_profil";
             $this->pdo->prepare($sqlProfil)->execute([
                 'name'      => $name,
                 'lastname'  => $lastname,
                 'phone'     => $phone,
+                'photoPath' => $photoPath,
                 'id_profil' => $idProfil
             ]);
 
             // 3. Mettre à jour la table User_ (Email)
-            $sqlUser = "UPDATE User_ SET Email = :email";
+            $sqlUser = "UPDATE User_ SET Email = :email , ID_role = 2";
             $paramsUser = ['email' => $email, 'id' => $idUser];
 
             // 4. Si un nouveau mot de passe est fourni, on l'ajoute à la requête
@@ -141,7 +143,13 @@ class PiloteModel extends Model{
     public function deletePilote(int $idUser) {
         try {
             $this->pdo->beginTransaction();
-
+            $stmt = $this->pdo->prepare("SELECT Photo_path, Email from User_ JOIN Profil ON User_.ID_profil = Profil.ID_profil WHERE User_.ID_user = :id");
+            $stmt->execute(['id' => $idUser]);
+            $photoPath = $stmt->fetch(\PDO::FETCH_ASSOC);
+            if ($photoPath) {
+                unlink($photoPath['Photo_path']);// Supprimer la photo du serveur
+                rmdir(__DIR__ . '/../../public/Photos/' . $photoPath['Email']);
+            }
             // 1. Récupérer l'ID_profil avant de supprimer l'utilisateur
             $stmt = $this->pdo->prepare("SELECT ID_profil FROM User_ WHERE ID_user = :id");
             $stmt->execute(['id' => $idUser]);

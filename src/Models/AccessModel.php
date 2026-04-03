@@ -112,10 +112,10 @@ class AccessModel extends Model
 
             $stmt = $this->pdo->prepare(
                 'SELECT u.ID_user, u.Email, u.ID_role
-                 FROM remember_tokens rt
+                 FROM Remember_tokens rt
                  JOIN User_ u ON u.ID_user = rt.ID_user
-                 WHERE rt.token_hash = :hash
-                   AND rt.expires_at > NOW()'
+                 WHERE rt.token = :hash
+                   AND rt.expires > NOW()'
             );
             $stmt->bindValue(':hash', $tokenHash);
             $stmt->execute();

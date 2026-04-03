@@ -10,22 +10,7 @@ class CandidacyModel extends Model
         $this->pdo = $pdo;
         $this->erreur = 0;
     }
-    public function storeFile($file,$companyName): ?string
-    {
-        $targetDir = __DIR__ . '/../../public/uploads/' . $_SESSION["user_pseudo"] . $companyName . '/';
-        if (!file_exists($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
-
-        $filename = uniqid() . '_' . basename($file['name']);
-        $targetFile = $targetDir . $filename;
-
-        if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-            return '/uploads/' . $filename;
-        }
-        return null;
-    }
-    public function createCandidacy(int $userId, int $offerId, string $comment): bool
+    public function createCandidacy(int $userId, int $offerId, string $comment, $LM, $CV, $companyName): bool
     {
 
         $verif = $this->pdo->prepare(
@@ -40,15 +25,30 @@ class CandidacyModel extends Model
             $this->erreur = 1;
             return false; // L'utilisateur a déjà postulé à cette offre
         }
+        $targetDir = __DIR__ . '/../../public/uploads/' . $_SESSION["user_pseudo"] . $companyName . '/';
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
 
-        $stmt = $this->pdo->prepare(
-            'INSERT INTO Apply (ID_user, ID_offer, Comment)
-             VALUES (:userId, :offerId, :comment)'
-        );
-        $stmt->bindValue(':userId', $userId, \PDO::PARAM_INT);
-        $stmt->bindValue(':offerId', $offerId, \PDO::PARAM_INT);
-        $stmt->bindValue(':comment', $comment, \PDO::PARAM_STR);
-        return $stmt->execute();
+        $filename = uniqid() . '_' . basename($LM['name']);
+        $targetFileLM = $targetDir . $filename;
+
+        $filename = uniqid() . '_' . basename($CV['name']);
+        $targetFileCV = $targetDir . $filename;
+
+        if (move_uploaded_file($LM['tmp_name'], $targetFileLM) && move_uploaded_file($CV['tmp_name'], $targetFileCV)) {
+            $stmt = $this->pdo->prepare(
+                'INSERT INTO Apply (ID_user, ID_offer, Comment, ML, CV)
+             VALUES (:userId, :offerId, :comment, :lm, :cv)'
+            );
+            $stmt->bindValue(':lm', $targetFileLM);
+            $stmt->bindValue(':cv', $targetFileCV);
+            $stmt->bindValue(':userId', $userId);
+            $stmt->bindValue(':offerId', $offerId);
+            $stmt->bindValue(':comment', $comment);
+            return $stmt->execute();
+        }
+        return false;
     }
     public function getErreur(): int
     {

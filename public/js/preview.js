@@ -1,24 +1,24 @@
-const fileInput = document.getElementById('file-upload');
-  const uploadCircle = document.querySelector('.upload-circle');
-  const plusSign = document.querySelector('.plus-sign');
-  const uploadText = document.querySelector('.upload-text');
- 
-  fileInput.addEventListener('change', function () {
-    const file = this.files[0];
- 
-    if (!file || !file.type.startsWith('image/')) {
-      alert('Veuillez sélectionner un fichier image valide (jpg, png, gif...)');
-      this.value = '';
-      return;
+document.addEventListener('DOMContentLoaded', function() {
+    const photoInput = document.getElementById('photo'); // fenêtre de sélection de fichiers
+    const profilePreview = document.getElementById('profile-preview'); // image circulaire
+
+    if (photoInput && profilePreview) {
+        photoInput.addEventListener('change', function() {
+            // Récupérer le fichier sélectionné par l'utilisateur dans l'Explorateur de fichiers.
+            const file = this.files[0]; 
+
+            if (file) {
+                const reader = new FileReader();
+
+                // Fonction à exécuter une fois la lecture du fichier terminée.
+                reader.onload = function(e) {
+                    // Insèrer les données du fichier sélectionné dans l'attribut src de l'image (le nom n'a pas d'importance).
+                    profilePreview.src = e.target.result;
+                };
+
+                // Lire le fichier dans une URL virtuelle (DataURL)
+                reader.readAsDataURL(file);
+            }
+        });
     }
- 
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      uploadCircle.style.backgroundImage = `url('${e.target.result}')`;
-      uploadCircle.style.backgroundSize = 'cover';
-      uploadCircle.style.backgroundPosition = 'center';
-      plusSign.style.display = 'none';
-      uploadText.textContent = 'Modifier la photo';
-    };
-    reader.readAsDataURL(file);
-  });
+});
