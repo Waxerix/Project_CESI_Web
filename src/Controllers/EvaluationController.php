@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\EvaluationModel;
 use App\Models\CompanyModel;
+use App\Models\AccessModel;
 
 class EvaluationController extends Controller
 {
@@ -23,6 +24,7 @@ class EvaluationController extends Controller
         
         $this->evaluationModel = new EvaluationModel($pdo);
         $this->companyModel = new CompanyModel($pdo);
+        $this->Model = new AccessModel($pdo);
     }
 
     /**
@@ -30,6 +32,7 @@ class EvaluationController extends Controller
      */
     public function create($id_company)
     {
+        $user = $this->Model->currentUser();
         // Vérification de la session utilisateur
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
@@ -48,7 +51,8 @@ class EvaluationController extends Controller
         }
 
         echo $this->twig->render('evaluation.html.twig', [
-            'company' => $company
+            'company' => $company,
+            'user' => $user
         ]);
     }
 
