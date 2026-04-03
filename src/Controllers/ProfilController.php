@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Models\ProfilModel;
+use App\Models\AccessModel;
 
 class ProfilController extends Controller {
     protected $twig;
@@ -11,6 +12,8 @@ class ProfilController extends Controller {
     public function __construct($twig, $pdo) {
         $this->twig = $twig;
         $this->pdo = $pdo;
+        $this->Model = new AccessModel($pdo);
+
     }
 
     public function showInfos() {
@@ -19,9 +22,10 @@ class ProfilController extends Controller {
 
         $model = new ProfilModel($this->pdo); 
         $user = $model->getUserFullInfo($_SESSION['user_id']);
-
+        $Access = $this->Model->currentUser();
         echo $this->twig->render('profil-infos.html.twig', [
-            'user' => $user
+            'users' => $user,
+            'user' => $Access
         ]);
     }
 
