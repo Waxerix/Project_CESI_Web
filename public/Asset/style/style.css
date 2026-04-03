@@ -1201,3 +1201,131 @@ footer {
 .link-back-bold:hover {
     text-decoration: underline;
 }
+
+/* ==========================================================================
+   ADMINISTRATION & TABLEAUX
+   ========================================================================== */
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform var(--transition-speed), background-color var(--transition-speed);
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-table thead {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.admin-table th, 
+.admin-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.btn-edit {
+    display: inline-block;
+    background-color: var(--secondary-blue);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-right: 5px;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-edit:hover {
+    background-color: var(--primary-blue);
+}
+
+.btn-delete-bg {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-delete-bg:hover {
+    background-color: #c0392b;
+}
+
+.btn-cancel {
+    display: inline-block;
+    background-color: #95a5a6;
+    color: white;
+    padding: 15px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.btn-cancel:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+.form-actions {
+    margin-top: 30px;
+    align-items: center;
+}
+
+/* Ajustements pour les nouveaux types d'inputs */
+.form-input-number,
+.form-input-date {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    background-color: #fafafa;
+    transition: border-color var(--transition-speed);
+}
+
+.form-input-number:focus,
+.form-input-date:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    background-color: white;
+}

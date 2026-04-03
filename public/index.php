@@ -185,4 +185,31 @@ $router->get('/profil/infos', function () use ($twig, $pdo) {
     $controller->showInfos();
 });
 
+$router->get('/admin/offer', function () use ($twig, $pdo, $ConnexionController) {
+    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller->index();
+});
+
+$router->get('/admin/offer/create', function () use ($twig, $pdo, $ConnexionController) {
+    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller->form();
+});
+
+
+$router->get('/admin/offer/edit/:id', function ($id) use ($twig, $pdo, $ConnexionController) {
+    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller->form($id);
+});
+
+
+$router->post('/admin/offer/save', function () use ($twig, $pdo, $ConnexionController) {
+    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller->save();
+});
+
+$router->get('/admin/offer/delete/:id', function ($id) use ($twig, $pdo, $ConnexionController) {
+    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller->delete($id);
+});
+
 $router->run();
