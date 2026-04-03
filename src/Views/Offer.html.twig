@@ -51,7 +51,7 @@
         {% set current_page = current_page is defined ? current_page : 1 %}
         {% set paged_offers = offers|slice((current_page - 1) * per_page, per_page) %}
 
-        {% for offer in paged_offers %}
+        {% for item in paged_offers %}
             <article>
                 <div class="offre-header">
                     <h3>{{ item.CompanyName|default('Entreprise non précisée') }}</h3>
