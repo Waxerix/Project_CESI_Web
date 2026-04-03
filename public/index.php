@@ -11,6 +11,9 @@ use App\Controllers\WishlistController;
 use App\Controllers\OfferController;
 use App\Controllers\CompanyController;
 use App\Controllers\PromotionController;
+use App\Controllers\EvaluationController;
+use App\Controllers\ProfilController;
+use App\Controllers\ManageOfferController;
 use App\Core\Router;
 use App\Core\Database;
 
@@ -164,12 +167,12 @@ $router->get('/mentions', function () use ($twig) {
 });
 
 $router->get('/evaluate/:id', function ($id) use ($twig, $pdo) {
-    $controller = new \App\Controllers\EvaluationController($twig, $pdo);
+    $controller = new EvaluationController($twig, $pdo);
     $controller->create($id);
 });
 
 $router->post('/evaluate/:id', function ($id) use ($twig, $pdo) {
-    $controller = new \App\Controllers\EvaluationController($twig, $pdo);
+    $controller = new EvaluationController($twig, $pdo);
     $controller->store($id);
 });
 
@@ -181,34 +184,34 @@ $router->get('/admin/entreprises/evaluations/:id', function ($id) use ($twig, $p
 
 // Infos profil
 $router->get('/profil/infos', function () use ($twig, $pdo) {
-    $controller = new \App\Controllers\ProfilController($twig, $pdo);
+    $controller = new ProfilController($twig, $pdo);
     $controller->showInfos();
 });
 
 $router->get('/admin/offer', function () use ($twig, $pdo, $ConnexionController) {
-    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller = new ManageOfferController($twig, $pdo);
     $controller->index();
 });
 
 $router->get('/admin/offer/create', function () use ($twig, $pdo, $ConnexionController) {
-    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller = new ManageOfferController($twig, $pdo);
     $controller->form();
 });
 
 
 $router->get('/admin/offer/edit/:id', function ($id) use ($twig, $pdo, $ConnexionController) {
-    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller = new ManageOfferController($twig, $pdo);
     $controller->form($id);
 });
 
 
 $router->post('/admin/offer/save', function () use ($twig, $pdo, $ConnexionController) {
-    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller = new ManageOfferController($twig, $pdo);
     $controller->save();
 });
 
 $router->get('/admin/offer/delete/:id', function ($id) use ($twig, $pdo, $ConnexionController) {
-    $controller = new \App\Controllers\ManageOfferController($twig, $pdo);
+    $controller = new ManageOfferController($twig, $pdo);
     $controller->delete($id);
 });
 
