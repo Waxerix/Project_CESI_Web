@@ -15,13 +15,12 @@ class CompanyController extends Controller {
     public function __construct($twig, $pdo) {
         $this->twig = $twig;
         $this->pdo = $pdo;
-        // 모델 초기화
         $this->companyModel = new CompanyModel($this->pdo);
         $this->Model = new AccessModel($this->pdo);
     }
 
     /**
-     * 기업 관리 메인 메뉴 (두 가지 옵션 선택 화면)
+     * Menu principal de la gestion d'entreprise (écran de sélection de deux options)
      * URL: /admin/entreprises
      */
     public function index() {
@@ -31,7 +30,7 @@ class CompanyController extends Controller {
     }
 
     /**
-     * 기업 생성 폼 표시
+     * Formulaire de création d'entreprise à afficher
      * URL: /admin/entreprises/create
      */
     public function create() {
@@ -40,7 +39,7 @@ class CompanyController extends Controller {
     }
 
     /**
-     * 기업 리스트 표시
+     * Liste des entreprises
      * URL: /admin/entreprises/list
      */
     public function list() {
@@ -56,7 +55,7 @@ class CompanyController extends Controller {
     }
 
     /**
-     * 기업 저장 로직
+     * Enregistrer l'entreprise
      * URL: /admin/entreprises/store
      */
     public function store() {
@@ -72,7 +71,7 @@ class CompanyController extends Controller {
                 $success = $this->companyModel->create($data);
 
                 if ($success) {
-                    // 저장 성공 시 리스트 페이지로 이동
+                    // Redigier aux pages listes si réussir à créer
                     header('Location: /admin/entreprises/list?success=created');
                     exit();
                 } else {
@@ -85,7 +84,7 @@ class CompanyController extends Controller {
     }
 
     /**
-     * 기업 삭제 로직
+     * Supprimer l'entreprise
      * URL: /admin/entreprises/delete/:id
      */
     public function delete($id) {
@@ -97,5 +96,46 @@ class CompanyController extends Controller {
         } else {
             echo "Erreur lors de la suppression.";
         }
+    }
+
+    /**
+     * Modifier l'entreprise
+     */
+    public function edit($id) {
+        $company = $this->companyModel->getById($id);
+        echo $this->twig->render('edit-entreprise.html.twig', ['company' => $company]);
+    }
+
+    /**
+     * Mettre à jour après la modification
+     */
+    public function update($id) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'phone' => $_POST['phone'],
+                'description' => $_POST['description']
+            ];
+            $this->companyModel->update($id, $data);
+            header('Location: /admin/entreprises/list?success=updated');
+            exit();
+        }
+    }
+
+    public function showEvaluations($id_company) {
+        // On récupère les infos de l'entreprise (nom, etc.)
+        $company = $this->companyModel->getById($id_company);
+        
+        // On utilise le modèle d'évaluation pour récupérer les avis
+        $evaluationModel = new \App\Models\EvaluationModel($this->pdo);
+        $evaluations = $evaluationModel->getEvaluationsByCompany($id_company);
+        $average = $evaluationModel->getAverageRate($id_company);
+
+        echo $this->twig->render('view-evaluations.html.twig', [
+            'company' => $company,
+            'evaluations' => $evaluations,
+            'average' => $average
+        ]);
     }
 }

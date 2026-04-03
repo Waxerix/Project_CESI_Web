@@ -1070,3 +1070,262 @@ footer {
 .btn-heart.active {
     animation: heartPulse 0.3s forwards;
 }
+
+.link-blue {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.link-blue:hover {
+    text-decoration: underline;
+}
+
+.btn-delete {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-delete:hover {
+    text-decoration: underline;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.info-value {
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #333;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.profile-view .input-group {
+    margin-bottom: 15px;
+}
+
+.back-link-container {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    text-align: center;
+}
+
+/* 기업 리스트 액션 링크 공통 */
+.link-action {
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 15px;
+    transition: opacity 0.2s;
+}
+
+.link-action:hover {
+    opacity: 0.7;
+}
+
+.link-edit {
+    color: #3498db;
+}
+
+.link-avis {
+    color: #f39c12;
+}
+
+.company-table td {
+    vertical-align: middle;
+    padding: 12px 8px;
+}
+
+.btn-delete {
+    color: #e74c3c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.btn-delete:hover {
+    text-decoration: underline;
+}
+
+.back-link-container {
+    margin-top: 25px;
+    text-align: center;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.average-rating-box {
+    margin-bottom: 25px;
+    font-size: 1.2em;
+    padding: 15px;
+    background-color: #fcfcfc;
+    border-radius: 8px;
+    border-left: 5px solid #f1c40f; 
+}
+
+.rating-score {
+    color: #f1c40f;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.user-fullname {
+    color: #2c3e50;
+}
+
+.user-email {
+    color: #7f8c8d;
+}
+
+.rating-cell {
+    color: #f1c40f;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.comment-cell {
+    font-style: italic;
+    color: #333;
+}
+
+.link-back-bold {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-back-bold:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   ADMINISTRATION & TABLEAUX
+   ========================================================================== */
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform var(--transition-speed), background-color var(--transition-speed);
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.admin-table thead {
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.admin-table th, 
+.admin-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.admin-table tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.btn-edit {
+    display: inline-block;
+    background-color: var(--secondary-blue);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    margin-right: 5px;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-edit:hover {
+    background-color: var(--primary-blue);
+}
+
+.btn-delete-bg {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: background-color var(--transition-speed);
+}
+
+.btn-delete-bg:hover {
+    background-color: #c0392b;
+}
+
+.btn-cancel {
+    display: inline-block;
+    background-color: #95a5a6;
+    color: white;
+    padding: 15px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+
+.btn-cancel:hover {
+    background-color: #7f8c8d;
+    transform: translateY(-2px);
+}
+
+.form-actions {
+    margin-top: 30px;
+    align-items: center;
+}
+
+/* Ajustements pour les nouveaux types d'inputs */
+.form-input-number,
+.form-input-date {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 15px;
+    background-color: #fafafa;
+    transition: border-color var(--transition-speed);
+}
+
+.form-input-number:focus,
+.form-input-date:focus {
+    border-color: var(--primary-blue);
+    outline: none;
+    background-color: white;
+}

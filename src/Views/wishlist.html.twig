@@ -43,6 +43,35 @@
                                     {% else %}
                                         <a href="?page={{ page }}" class="pagination-btn">{{ page }}</a>
                                     {% endif %}
+                                    {% if offre.Salary %}
+                                        <h4>
+                                            {{ offre.Salary }}
+                                            €
+                                        </h4>
+                                    {% endif %}
+                                    {% if offre.Category %}
+                                        <h4>
+                                            {{ offre.Category }}
+                                        </h4>
+                                    {% endif %}
+                                </div>
+                                 <div class="offre-actions">
+                                    <a href="/postuler/{{ offre.ID_offer }}" class="btn-postuler">
+                                        Postuler
+                                    </a>
+                                    {# --- AJOUT DU BOUTON WISHLIST --- #}
+                                    <div class="offre-actions" style="margin-top: 10px;">
+                                        {# Bouton pour retirer l'offre (SFx 25) #}
+                                        <a href="/wishlist/delete/{{ offre.ID_offer }}" class="btn-delete" style="color: #dc3545; text-decoration: none; border: 1px solid #dc3545; padding: 5px 10px; border-radius: 4px; font-size: 0.9em;">
+                                            🗑️ Retirer de la liste
+                                        </a>
+                                    </div>
+                                </article>
+                            {% else %}
+                                <p>
+                                    Votre Wishlist est vide.
+                                </p>
+                            {% endfor %}
                                 {% endfor %}
 
                                 {% if current_page < total_pages %}

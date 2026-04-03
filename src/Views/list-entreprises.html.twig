@@ -28,6 +28,17 @@
                         <td>{{ company.Email }}</td>
                         <td>{{ company.Phone_Number }}</td>
                         <td class="text-center">
+                            {# Modifier #}
+                            <a href="/admin/entreprises/edit/{{ company.ID_company }}" class="link-action link-edit">
+                                Modifier
+                            </a>
+
+                            {# Avis  #}
+                            <a href="/admin/entreprises/evaluations/{{ company.ID_company }}" class="link-action link-avis">
+                                Avis
+                            </a>
+
+                            {# Supprimer  #}
                             <a href="/admin/entreprises/delete/{{ company.ID_company }}" 
                                class="btn-delete"
                                onclick="return confirm('Voulez-vous vraiment supprimer l\'entreprise {{ company.Name }} ?')">
