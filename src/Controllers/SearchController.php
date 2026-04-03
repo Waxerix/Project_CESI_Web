@@ -34,41 +34,36 @@ class SearchController extends Controller{
     }
 
     public function resultUser() {
-        $Access = $this->Model->currentUser();
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($_POST['filter']=== 'Etudiant'){
-                try {
-                    $users = $this->StudentModel->searchStudent($_POST['search']);
+    $Access = $this->Model->currentUser();
 
-                    echo $this->twig->render('user-search.html.twig', [
-                        'users' => $users,
-                        'user' => $Access,
-                        'roles' => $this->UserModel->rolesList(),
-                        'search'=> $_POST['search']
-                    ]);
-                    exit;
-                } catch (Exception $e) {
-                    $error = "Erreur lors de l'inscription : " . $e->getMessage();
-                    // Afficher l'erreur dans ton template Twig
-                }
-            }else if ($_POST['filter']==='Pilote'){
-                try {
-                    $users = $this->PiloteModel->searchPilote($_POST['search']);
+    // On lit search et filter depuis POST (formulaire) ou GET (pagination)
+    $search = $_POST['search'] ?? $_GET['search'] ?? '';
+    $filter = $_POST['filter'] ?? $_GET['filter'] ?? '';
 
-                    echo $this->twig->render('user-search.html.twig', [
-                        'users' => $users,
-                        'user' => $Access,
-                        'roles' => $this->UserModel->rolesList(),
-                        'search' => $_POST['search']
-                    ]);
-                    exit;
-                } catch (Exception $e) {
-                    $error = "Erreur lors de l'inscription : " . $e->getMessage();
-                    // Afficher l'erreur dans ton template Twig
-                }
-            }
+    $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+    try {
+        if ($filter === 'Etudiant') {
+            $users = $this->StudentModel->searchStudent($search);
+        } else if ($filter === 'Pilote') {
+            $users = $this->PiloteModel->searchPilote($search);
+        } else {
+            $users = [];
         }
+
+        echo $this->twig->render('user-search.html.twig', [
+            'users'  => $users,
+            'user'   => $Access,
+            'roles'  => $this->UserModel->rolesList(),
+            'search' => $search,
+            'filter' => $filter,
+            'current_page' => $currentPage 
+        ]);
+
+    } catch (Exception $e) {
+        $error = "Erreur : " . $e->getMessage();
     }
+}
 
     public function showUser($id){
         $Access = $this->Model->currentUser();

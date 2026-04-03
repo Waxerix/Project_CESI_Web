@@ -95,6 +95,10 @@ $router->post('/admin/utilisateurs/results', function () use ($twig,$pdo){
     $controller=new SearchController($twig,$pdo);
     $controller->resultUser();
 });
+$router->get('/admin/utilisateurs/results', function () use ($twig,$pdo){
+    $controller=new SearchController($twig,$pdo);
+    $controller->resultUser();
+});
 $router->post('/admin/utilisateurs/delete/:id', function ($id) use ($twig,$pdo,$ConnexionController) {
     $ConnexionController->needAdmin();
     $controller=new UserController($twig,$pdo);

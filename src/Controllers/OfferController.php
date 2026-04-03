@@ -39,12 +39,14 @@ class OfferController extends Controller {
         $duration = $_GET['duration'] ?? '';
 
         $offres = $this->JobOfferModel->searchAndFilterOffers($keyword, $category, $minSalary, $duration);
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
         echo $this->twig->render('Offer.html.twig', [
-            'offer'       => $offres,      
-            'user'         => $user,
             'wishlist_ids' => $wishlistIds, 
             'keyword'      => $keyword, 
+            'offers' => $offres,
+            'user' => $user,
+            'current_page' => $currentPage
         ]);
     }
 }

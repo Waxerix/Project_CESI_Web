@@ -26,11 +26,13 @@ class WishlistController extends Controller {
         $id_user = is_array($user) ? $user['id'] : $user->id; 
         
         $offres = $this->Model->getAllByUserId($id_user);
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
         echo $this->twig->render('wishlist.html.twig', [
             'offres' => $offres,
             'user' => $user,
-            'page_title' => 'Ma Wish-list'
+            'page_title' => 'Ma Wish-list',
+            'current_page' => $currentPage
         ]);
     }
 

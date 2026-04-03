@@ -25,6 +25,7 @@ class CompanyController extends Controller {
      */
     public function index() {
         $user = $this->Model->currentUser();
+
         echo $this->twig->render('admin-entreprises-menu.html.twig',['user'=> $user]);
     }
 
@@ -44,9 +45,12 @@ class CompanyController extends Controller {
     public function list() {
         $user = $this->Model->currentUser();
         $companies = $this->companyModel->getAll();
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
         echo $this->twig->render('list-entreprises.html.twig', [
             'companies' => $companies,
-            'user' => $user
+            'user' => $user,
+            'current_page' => $currentPage
         ]);
     }
 
