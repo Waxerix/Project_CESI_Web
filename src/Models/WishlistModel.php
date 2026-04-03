@@ -3,11 +3,8 @@ namespace App\Models;
 use App\Core\Model;
 use PDO;
 
-// On ajoute "extends Model" pour la cohérence
 class WishlistModel extends Model {
     
-    // On utilise $db pour la connexion
-
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
@@ -37,5 +34,14 @@ class WishlistModel extends Model {
             'id_user' => $id_user, 
             'id_offer' => $id_offer
         ]);
+    }
+
+    public function getUserWishlistIds($id_user) {
+        $sql = "SELECT ID_offer FROM Wishlist WHERE ID_user = :id_user";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(['id_user' => $id_user]);
+        $ids = $stmt->fetchAll(\PDO::FETCH_COLUMN);
+        
+        return array_map('intval', $ids);
     }
 }

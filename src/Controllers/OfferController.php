@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Models\JobOfferModel;
 use App\Models\AccessModel;
+use App\Models\WishlistModel; 
 
 class OfferController extends Controller {
     
@@ -21,6 +22,16 @@ class OfferController extends Controller {
         $access = new AccessModel($this->pdo);
         $user = $access->currentUser();
 
+        $wishlistIds = [];
+        if ($user) {
+           
+            $userId = is_array($user) ? ($user['id'] ?? null) : ($user->id ?? null);
+            
+            if ($userId) {
+                $wishlistModel = new WishlistModel($this->pdo);
+                $wishlistIds = $wishlistModel->getUserWishlistIds($userId);
+            }
+        }
    
         $keyword = $_GET['q'] ?? '';
         $category = $_GET['category'] ?? '';
@@ -30,8 +41,10 @@ class OfferController extends Controller {
         $offres = $this->JobOfferModel->searchAndFilterOffers($keyword, $category, $minSalary, $duration);
 
         echo $this->twig->render('Offer.html.twig', [
-            'offer' => $offres,
-            'user' => $user
+            'offer'       => $offres,      
+            'user'         => $user,
+            'wishlist_ids' => $wishlistIds, 
+            'keyword'      => $keyword, 
         ]);
     }
 }
